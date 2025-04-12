@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "../ThemeToggle";
 
 export default function Hero() {
   return (
@@ -18,7 +17,6 @@ export default function Hero() {
           <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-6 py-3 text-lg rounded-xl transition">
             Learn More
           </Button>
-          <ThemeToggle/>
         </div>
       </div>
     </section>
