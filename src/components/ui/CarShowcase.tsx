@@ -1,3 +1,4 @@
+import { WebsiteHeading } from "./WebsiteHeading/WebsiteHeading";
 import SectionWrapper from "./wrapper/SectionWrapper";
 
 type Car = {
@@ -33,9 +34,7 @@ export default function CarShowcase() {
   return (
     <section className="w-full py-16 bg-zinc-50 dark:bg-zinc-950">
       <SectionWrapper>
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-12">
-          Popular Cars
-        </h2>
+        <WebsiteHeading title="Popular Cars" />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
           {mockCars.map((car, i) => (
             <div

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import carGroup from '@/assets/carGroup.png';
+import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
 const faqs = [
   {
     question: "What is CarSure?",
@@ -45,9 +46,7 @@ export default function FaqSection() {
 
   return (
     <section className="max-w-4xl mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">
-        Frequently Asked Questions
-      </h2>
+      <WebsiteHeading title="Frequently Asked Questions" />
       <div className="w-full">
         <img src={carGroup} alt="" />
       </div>

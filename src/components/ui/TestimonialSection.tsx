@@ -1,3 +1,4 @@
+import { WebsiteHeading } from "./WebsiteHeading/WebsiteHeading";
 import SectionWrapper from "./wrapper/SectionWrapper";
 
 type Testimonial = {
@@ -42,9 +43,7 @@ export default function TestimonialSection() {
   return (
     <section className="py-16 bg-white dark:bg-zinc-950">
       <SectionWrapper>
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-12">
-          What Our Customers Say
-        </h2>
+       <WebsiteHeading title="What Our Customers Say"  />
         <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
           {testimonials.map((testimonial, index) => (
             <div

@@ -1,6 +1,7 @@
 import { LucideShieldCheck, LucideWallet, Layers } from "lucide-react";
 import { FaCar } from "react-icons/fa";
 import SectionWrapper from "./wrapper/SectionWrapper";
+import { WebsiteHeading } from "./WebsiteHeading/WebsiteHeading";
 
 const features = [
   {
@@ -32,9 +33,7 @@ export default function FeatureSection() {
   return (
     <section className="w-full py-16 bg-white dark:bg-black">
       <SectionWrapper>
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-12">
-          Why Choose CarSure?
-        </h2>
+        <WebsiteHeading title="Why Choose CarSure?" />
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {features.map((feature, index) => (
             <div
