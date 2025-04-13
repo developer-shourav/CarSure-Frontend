@@ -1,55 +1,62 @@
+import SectionWrapper from "./wrapper/SectionWrapper";
+
 type Car = {
-    name: string;
-    image: string;
-    price: string;
-  };
-  
-  const mockCars: Car[] = [
-    {
-      name: "Tesla Model S",
-      image: "/cars/tesla-model-s.jpg",
-      price: "$69,420",
-    },
-    {
-      name: "Toyota Corolla",
-      image: "/cars/toyota-corolla.jpg",
-      price: "$19,990",
-    },
-    {
-      name: "BMW M4",
-      image: "/cars/bmw-m4.jpg",
-      price: "$74,999",
-    },
-    {
-      name: "Tesla Model S",
-      image: "/cars/tesla-model-s.jpg",
-      price: "$69,420",
-    },
-  ];
-  
-  export default function CarShowcase() {
-    return (
-      <section className="w-full py-16 bg-zinc-50 dark:bg-zinc-950">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-12">
-            Popular Cars
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
-            {mockCars.map((car, i) => (
-              <div
-                key={i}
-                className="bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow hover:shadow-xl transition"
-              >
-                <img src={car.image} alt={car.name} className="w-full h-52 object-cover" />
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold text-black dark:text-white mb-2">{car.name}</h3>
-                  <p className="text-red-600 font-bold text-lg">{car.price}</p>
-                </div>
+  name: string;
+  image: string;
+  price: string;
+};
+
+const mockCars: Car[] = [
+  {
+    name: "Tesla Model S",
+    image: "/cars/tesla-model-s.jpg",
+    price: "$69,420",
+  },
+  {
+    name: "Toyota Corolla",
+    image: "/cars/toyota-corolla.jpg",
+    price: "$19,990",
+  },
+  {
+    name: "BMW M4",
+    image: "/cars/bmw-m4.jpg",
+    price: "$74,999",
+  },
+  {
+    name: "Tesla Model S",
+    image: "/cars/tesla-model-s.jpg",
+    price: "$69,420",
+  },
+];
+
+export default function CarShowcase() {
+  return (
+    <section className="w-full py-16 bg-zinc-50 dark:bg-zinc-950">
+      <SectionWrapper>
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-12">
+          Popular Cars
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
+          {mockCars.map((car, i) => (
+            <div
+              key={i}
+              className="bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow hover:shadow-xl transition"
+            >
+              <img
+                src={car.image}
+                alt={car.name}
+                className="w-full h-52 object-cover"
+              />
+              <div className="p-5">
+                <h3 className="text-xl font-semibold text-black dark:text-white mb-2">
+                  {car.name}
+                </h3>
+                <p className="text-red-600 font-bold text-lg">{car.price}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </section>
-    );
-  }
-  
+      </SectionWrapper>
+    </section>
+  );
+}
