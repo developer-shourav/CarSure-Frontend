@@ -66,7 +66,7 @@ export default function FaqSection() {
             >
               <button
                 onClick={() => toggle(index)}
-                className="w-full flex justify-between items-center p-4 text-left text-gray-800 dark:text-gray-100  border-transparent "
+                className="w-full flex justify-between items-center p-4  text-left text-gray-800 dark:text-gray-100  border-transparent "
               >
                 <span className="text-base font-medium">{faq.question}</span>
                 {isOpen ? (
@@ -86,7 +86,7 @@ export default function FaqSection() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="px-4 pt-3 pb-4 text-sm text-gray-600 dark:text-gray-300">
+                    <div className="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300">
                       {faq.answer}
                     </div>
                   </motion.div>
