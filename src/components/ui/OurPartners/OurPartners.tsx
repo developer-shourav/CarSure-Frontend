@@ -2,18 +2,18 @@ import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
 import SectionWrapper from "../wrapper/SectionWrapper";
 
 const brandLogos = [
-  { name: "Tesla", src: "/public/brands/brand1.png" },
-  { name: "Nishan", src: "/public/brands/brand2.png" },
-  { name: "Toyota", src: "/public/brands/brand3.png" },
-  { name: "Ford", src: "/public/brands/brand4.png" },
-  { name: "Ferary", src: "/public/brands/brand5.png" },
-  { name: "Audi", src: "/public/brands/brand6.png" },
-  { name: "BMW", src: "/public/brands/brand7.png" },
-  { name: "Mazda", src: "/public/brands/brand8.png" },
-  { name: "Marsidis", src: "/public/brands/brand9.png" },
-  { name: "Nishanx1", src: "/public/brands/brand10.png" },
-  { name: "Suzuki", src: "/public/brands/brand11.png" },
-  { name: "znina", src: "/public/brands/brand12.png" },
+  { name: "Tesla", src: "/brands/brand1.png" },
+  { name: "Nishan", src: "/brands/brand2.png" },
+  { name: "Toyota", src: "/brands/brand3.png" },
+  { name: "Ford", src: "/brands/brand4.png" },
+  { name: "Ferary", src: "/brands/brand5.png" },
+  { name: "Audi", src: "/brands/brand6.png" },
+  { name: "BMW", src: "/brands/brand7.png" },
+  { name: "Mazda", src: "/brands/brand8.png" },
+  { name: "Marsidis", src: "/brands/brand9.png" },
+  { name: "Nishanx1", src: "/brands/brand10.png" },
+  { name: "Suzuki", src: "/brands/brand11.png" },
+  { name: "znina", src: "/brands/brand12.png" },
 ];
 
 export function OurPartners() {
