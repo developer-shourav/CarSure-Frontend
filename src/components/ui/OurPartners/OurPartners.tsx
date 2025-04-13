@@ -1,4 +1,5 @@
 import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
+import SectionWrapper from "../wrapper/SectionWrapper";
 
 const brandLogos = [
   { name: "Tesla", src: "/public/brands/brand1.png" },
@@ -13,25 +14,29 @@ const brandLogos = [
   { name: "Nishanx1", src: "/public/brands/brand10.png" },
   { name: "Suzuki", src: "/public/brands/brand11.png" },
   { name: "znina", src: "/public/brands/brand12.png" },
- 
 ];
 
 export function OurPartners() {
   return (
-    <section className="py-8 sm:py-10 md:py-16">
-      <WebsiteHeading title="Our Partners" />
+    <SectionWrapper>
+      <section className="py-8  md:py-16">
+        <WebsiteHeading title="Our Partners" />
 
-      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 gap-y-8 place-items-center ">
-        {brandLogos.map((brand) => (
-          <div key={brand.name} className="transition-all grayscale hover:grayscale-0">
-            <img
-              src={brand.src}
-              alt={`${brand.name} Logo`}
-              className="h-12 md:h-16 lg:h-20 object-contain"
-            />
-          </div>
-        ))}
-      </div>
-    </section>
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 gap-y-8 place-items-center ">
+          {brandLogos.map((brand) => (
+            <div
+              key={brand.name}
+              className="transition-all grayscale hover:grayscale-0"
+            >
+              <img
+                src={brand.src}
+                alt={`${brand.name} Logo`}
+                className="h-12 md:h-16 lg:h-20 object-contain"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+    </SectionWrapper>
   );
 }
