@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
-
+import carGroup from '@/assets/carGroup.png';
 const faqs = [
   {
     question: "What is CarSure?",
@@ -48,6 +48,9 @@ export default function FaqSection() {
       <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">
         Frequently Asked Questions
       </h2>
+      <div className="w-full">
+        <img src={carGroup} alt="" />
+      </div>
       <div className="space-y-4">
         {faqs.map((faq, index) => {
           const isOpen = openIndex === index;

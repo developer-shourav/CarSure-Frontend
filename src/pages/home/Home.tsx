@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <main className="w-full">
       <CustomSlider />
-      <CarShowcase />
       <FeatureSection />
+      <CarShowcase />
       <TestimonialSection />
       <FaqSection/>
     </main>
