@@ -27,6 +27,13 @@ type Testimonial = {
       image: "/testimonials/sadia.jpg",
       designation: "Business Owner",
     },
+    {
+      name: "Devid Salman",
+      feedback:
+        "I personally like CarSure. There Service is too good. They have nice super cars collection.",
+      image: "/testimonials/don.jpg",
+      designation: "Doctor",
+    },
   ];
   
   export default function TestimonialSection() {
@@ -36,7 +43,7 @@ type Testimonial = {
           <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-12">
             What Our Customers Say
           </h2>
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
