@@ -141,7 +141,7 @@ export default function CustomSlider() {
           {carDetails.map((car, index) => (
             <div
               key={index}
-              className="relative w-[100px] h-[180px] xl:w-[140px] xl:h-[220px] overflow-hidden rounded-2xl cursor-pointer border-2 hover:border-white  shadow-xl"
+              className="relative w-[100px] h-[180px] xl:w-[140px] xl:h-[220px] overflow-hidden rounded-2xl cursor-pointer border-2 border-[#00000056] hover:border-white  shadow-xl"
               onClick={() => setCurrentIndex(index)}
             >
               <img
