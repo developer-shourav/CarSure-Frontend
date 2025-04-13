@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <main className="w-full">
       <CustomSlider />
-      <FeatureSection />
       <CarShowcase />
+      <FeatureSection />
       <TestimonialSection />
     </main>
   );
