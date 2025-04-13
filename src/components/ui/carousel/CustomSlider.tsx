@@ -4,28 +4,28 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 const carDetails = [
   {
-    src: "/src/assets/slider/car1.jpg",
+    src: "/slider/car1.jpg",
     title: "Lamborghini Aventador",
     author: "Lamborghini",
     topic: "Luxury",
     description: "A mid-engine V12 supercar known for its aggressive styling and powerful performance. Top speed over 217 mph, 0-62 mph in under 3 seconds."
   },
   {
-    src: "/src/assets/slider/car2.jpg",
+    src: "/slider/car2.jpg",
     title: "Ferrari 488 GTB",
     author: "Ferrari",
     topic: "Sports Car",
     description: "A twin-turbocharged V8 marvel delivering exhilarating speed and precise handling. 0-62 mph in 3 seconds, with a top speed of 205 mph."
   },
   {
-    src: "/src/assets/slider/car5.jpg",
+    src: "/slider/car5.jpg",
     title: "McLaren 720S",
     author: "McLaren",
     topic: "Performance",
     description: "A lightweight, carbon-fiber supercar with a potent twin-turbo V8. Reaches 0-62 mph in 2.9 seconds and boasts a top speed of 212 mph."
   },
   {
-    src: "/src/assets/slider/car4.jpg",
+    src: "/slider/car4.jpg",
     title: "Porsche 911 Turbo S",
     author: "Porsche",
     topic: "Sports Car",
