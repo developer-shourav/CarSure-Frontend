@@ -5,6 +5,7 @@ import CustomSlider from "@/components/ui/carousel/CustomSlider";
 import FaqSection from "@/components/ui/FAQ/FaqSection";
 import { CustomCarSection } from "@/components/ui/CustomCarSection/CustomCarSection";
 import { OurPartners } from "@/components/ui/OurPartners/OurPartners";
+import { PhotoCollage } from "@/components/ui/PhotoCollage/PhotoCollage";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <CarShowcase />
       <CustomCarSection />
       <OurPartners />
+      <PhotoCollage />
       <TestimonialSection />
       <FaqSection />
     </main>

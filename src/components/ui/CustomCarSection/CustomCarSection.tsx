@@ -9,6 +9,7 @@ export function CustomCarSection() {
         <div className="w-full md:w-1/2">
           <img
             src={carSketch}
+            loading="lazy"
             alt="Custom car from sketch"
             className="w-full h-auto object-cover"
           />

@@ -19,7 +19,7 @@ const brandLogos = [
 export function OurPartners() {
   return (
     <SectionWrapper>
-      <section className="py-8  md:py-16">
+      <section className="py-8  md:py-16 mb-20 lg:mb-30">
         <WebsiteHeading title="Our Partners" />
 
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 gap-y-8 place-items-center ">
@@ -31,6 +31,7 @@ export function OurPartners() {
               <img
                 src={brand.src}
                 alt={`${brand.name} Logo`}
+                loading="lazy"
                 className="h-12 md:h-16 lg:h-20 object-contain"
               />
             </div>

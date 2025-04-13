@@ -51,8 +51,9 @@ export default function TestimonialSection() {
               className="bg-zinc-100 dark:bg-zinc-900 p-6 rounded-2xl shadow hover:shadow-xl transition"
             >
               <div className="flex items-center gap-4 mb-4">
-                <img
+                <img 
                   src={testimonial.image}
+                  loading="lazy"
                   alt={testimonial.name}
                   className="w-14 h-14 rounded-full object-cover"
                 />

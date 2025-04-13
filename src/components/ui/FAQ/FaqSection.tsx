@@ -48,7 +48,7 @@ export default function FaqSection() {
     <section className="max-w-4xl mx-auto px-4 py-12">
       <WebsiteHeading title="Frequently Asked Questions" />
       <div className="w-full">
-        <img src={carGroup} alt="" />
+        <img src={carGroup} loading="lazy" alt="" />
       </div>
       <div className="space-y-4">
         {faqs.map((faq, index) => {

@@ -17,7 +17,7 @@ const Footer = () => {
           <div className="w-full md:hidden lg:block lg:w-1/4  px-4 mb-8 md:mb-0">
             <div className="mb-6">
               <a href="https://car-sure.vercel.app" target="_blank">
-                <img className="w-[100px] rounded-2xl" src={carSureLogo} alt="carSureLogo Logo" />
+                <img className="w-[100px] rounded-2xl" loading="lazy" src={carSureLogo} alt="carSureLogo Logo" />
               </a>
             </div>
             <div>
@@ -211,7 +211,7 @@ const Footer = () => {
         <div className="hidden md:block lg:hidden p-2 mt-5 md:mb-0">
             <div className="mb-6">
               <a href="https://car-sure.vercel.app" target="_blank">
-                <img className="w-[100px] rounded-2xl" src={carSureLogo} alt="carSureLogo Logo" />
+                <img className="w-[100px] rounded-2xl" src={carSureLogo} loading="lazy" alt="carSureLogo Logo" />
               </a>
             </div>
             <div>

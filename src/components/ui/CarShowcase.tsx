@@ -32,7 +32,7 @@ const mockCars: Car[] = [
 
 export default function CarShowcase() {
   return (
-    <section className="w-full py-16 bg-zinc-50 dark:bg-zinc-950">
+    <section className="w-full py-16 bg-zinc-50 dark:bg-zinc-950 mb-12 lg:mb-20">
       <SectionWrapper>
         <WebsiteHeading title="Popular Cars" />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
@@ -44,6 +44,7 @@ export default function CarShowcase() {
               <img
                 src={car.image}
                 alt={car.name}
+                loading="lazy"
                 className="w-full h-52 object-cover"
               />
               <div className="p-5">
