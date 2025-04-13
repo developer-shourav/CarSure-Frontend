@@ -1,20 +1,20 @@
-import { LucideShieldCheck, LucideWallet, LucideCar } from "lucide-react";
+import { LucideShieldCheck, LucideWallet, Layers   } from "lucide-react";
 
 const features = [
   {
     title: "Secure Transactions",
     description: "Integrated with SurjoPay to ensure every payment is fast, secure, and seamless.",
-    icon: <LucideShieldCheck className="h-8 w-8 text-red-600" />,
+    icon: <LucideShieldCheck className="size-12 lg:size-16 text-red-600" />,
   },
   {
     title: "Wide Car Selection",
     description: "Explore a massive inventory of new and used cars from trusted dealers.",
-    icon: <LucideCar className="h-8 w-8 text-red-600" />,
+    icon: <Layers  className="size-12 lg:size-16 text-red-600" />,
   },
   {
     title: "Easy Financing",
     description: "Flexible payment and financing options tailored to your needs.",
-    icon: <LucideWallet className="h-8 w-8 text-red-600" />,
+    icon: <LucideWallet className="size-12 lg:size-16 text-red-600" />,
   },
 ];
 

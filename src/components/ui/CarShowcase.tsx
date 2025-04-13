@@ -20,6 +20,11 @@ type Car = {
       image: "/cars/bmw-m4.jpg",
       price: "$74,999",
     },
+    {
+      name: "Tesla Model S",
+      image: "/cars/tesla-model-s.jpg",
+      price: "$69,420",
+    },
   ];
   
   export default function CarShowcase() {
@@ -29,7 +34,7 @@ type Car = {
           <h2 className="text-3xl md:text-4xl font-bold text-center text-black dark:text-white mb-12">
             Popular Cars
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
             {mockCars.map((car, i) => (
               <div
                 key={i}
