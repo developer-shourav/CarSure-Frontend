@@ -15,7 +15,7 @@ const productManagementApi = baseApi.injectEndpoints({
         }
 
         return {
-          url: '/students',
+          url: '/car',
           method: 'GET',
           params: params,
         };

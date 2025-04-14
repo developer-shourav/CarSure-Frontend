@@ -11,7 +11,7 @@ import { logout, setUser } from '../features/auth/authSlice';
 import { toast } from 'sonner';
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/v1',
+    baseUrl: 'https://car-sure-backend.vercel.app/api',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
@@ -38,7 +38,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     if (result?.error?.status === 401) {
         //* Send Refresh
 
-        const res = await fetch('http://localhost:5000/api/v1/auth/refresh-token', {
+        const res = await fetch('https://car-sure-backend.vercel.app/api/auth/refresh-token', {
             method: 'POST',
             credentials: 'include',
         });
