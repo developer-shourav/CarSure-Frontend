@@ -3,29 +3,35 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import navLogo from "../../assets/logo/logo.png";
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Cars", href: "/cars" },
-    { label: "Features", href: "/features" },
-    { label: "Contact", href: "/contact" },
+    { label: "About Us", href: "/about" },
   ];
+
+  const isActive = (path: string) =>
+    location.pathname === path ||
+    (path !== "/" && location.pathname.startsWith(path));
 
   return (
     <header className="w-full border-b border-border bg-background">
       <div className="max-w-screen-xl mx-auto flex h-16 items-center justify-between px-4">
         {/* ----------------Logo & Site Name ----------------*/}
-        <div className="flex items-center gap-2">
-          <img src={navLogo} alt="Logo" className="h-10 w-10" />
-          <span className="text-xl font-bold text-primary">
-            Car<span className="text-red-500">Sure</span>
+        <Link to="/">
+          <span className="flex items-center gap-2">
+            <img src={navLogo} alt="Logo" className="h-10 w-10" />
+            <span className="text-xl font-bold text-primary">
+              Car<span className="text-red-500">Sure</span>
+            </span>
           </span>
-        </div>
+        </Link>
 
         {/* ----------------Desktop Nav Links----------------*/}
         <nav className="hidden md:flex gap-6">
@@ -33,7 +39,11 @@ export function Navbar() {
             <Link
               key={link.href}
               to={link.href}
-              className="text-sm font-medium  hover:text-red-500 transition-colors"
+              className={`text-sm font-medium transition-colors ${
+                isActive(link.href)
+                  ? "text-red-600 font-semibold"
+                  : "hover:text-red-500"
+              }`}
             >
               {link.label}
             </Link>
@@ -78,7 +88,11 @@ export function Navbar() {
                     key={link.href}
                     to={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    className={`text-sm font-medium transition-colors ${
+                      isActive(link.href)
+                        ? "text-red-600 font-semibold"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
                   >
                     {link.label}
                   </Link>

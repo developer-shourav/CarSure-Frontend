@@ -3,6 +3,7 @@ import SectionWrapper from "../wrapper/SectionWrapper";
 import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export default function CarShowcase() {
   const {
@@ -72,9 +73,13 @@ export default function CarShowcase() {
                 </div>
               ))}
         </div>
-        {cars && <div className="w-[120px] md:w-[160px] my-10 lg:my-16 mx-auto">
-           <Button className="w-full bg-red-600">View All </Button>
-          </div>}
+        {cars && (
+          <div className="w-[120px] md:w-[160px] my-10 lg:my-16 mx-auto">
+            <Link to="/cars" className="w-full">
+              <Button className="w-full bg-red-600">View All </Button>
+            </Link>
+          </div>
+        )}
       </SectionWrapper>
     </section>
   );
