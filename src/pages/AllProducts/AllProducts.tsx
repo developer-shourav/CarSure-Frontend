@@ -1,6 +1,4 @@
-import {
-  useGetAllProductsQuery,
-} from "@/redux/features/productManagement.api";
+import { useGetAllProductsQuery } from "@/redux/features/productManagement.api";
 import SectionWrapper from "@/components/ui/wrapper/SectionWrapper";
 import { WebsiteHeading } from "@/components/ui/WebsiteHeading/WebsiteHeading";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -28,16 +26,36 @@ export default function AllProducts() {
     brand: [] as string[],
     model: [] as string[],
     category: [] as string[],
-    availability: [] as string[],
+    inStock: [] as string[],
   });
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000000]);
 
   // Fetch filter options
   const filterData = {
-    brand: ["Bugatti", "Mercedes-Benz", "Audi", "Bentley", "Hyundai", "BMW", "Ford"],
-    model: ["LAMB", "Z4", "Bronco", "SL", "Continental", "Kona", "Elantra", "C-Class", "i4", "F-150"],
+    brand: [
+      "BMW",
+      "Bugatti",
+      "Mercedes-Benz",
+      "Audi",
+      "Honda",
+      "Bentley",
+      "Hyundai",
+      "Ford",
+    ],
+    model: [
+      "LAMB",
+      "Z4",
+      "Bronco",
+      "SL",
+      "Continental",
+      "Kona",
+      "Elantra",
+      "C-Class",
+      "i4",
+      "F-150",
+    ],
     category: ["sports", "convertible", "suv", "coupe", "sedan"],
-    availability: ["true", "false"],
+    inStock: ["true", "false"],
   };
 
   const handleCheckboxChange = (type: keyof typeof filters, value: string) => {
@@ -51,6 +69,16 @@ export default function AllProducts() {
           : [...selected, value],
       };
     });
+  };
+
+  const resetFilters = () => {
+    setFilters({
+      brand: [],
+      model: [],
+      category: [],
+      inStock: [],
+    });
+    setPriceRange([0, 1000000]);
   };
 
   const buildParams = () => {
@@ -138,40 +166,53 @@ export default function AllProducts() {
                   </div>
 
                   {/* Filters */}
-                  {["brand", "model", "category", "availability"].map((key) => (
-                    <div key={key}>
-                      <p className="text-sm font-semibold capitalize text-gray-700 dark:text-gray-300 mb-1">
-                        {key}
-                      </p>
-                      <div className="space-y-1 max-h-40 overflow-y-auto pr-2">
-                        {filterData?.[key]?.map((value: string) => (
-                          <div
-                            key={value}
-                            className="flex items-center space-x-2"
-                          >
-                            <Checkbox
-                              id={`${key}-${value}`}
-                              checked={filters[
-                                key as keyof typeof filters
-                              ]?.includes(value)}
-                              onCheckedChange={() =>
-                                handleCheckboxChange(
-                                  key as keyof typeof filters,
-                                  value
-                                )
-                              }
-                            />
-                            <label
-                              htmlFor={`${key}-${value}`}
-                              className="text-sm capitalize text-gray-600 dark:text-gray-300"
+                  {(Object.keys(filterData) as (keyof typeof filterData)[]).map(
+                    (key) => (
+                      <div key={key}>
+                        <p className="text-sm font-semibold capitalize text-gray-700 dark:text-gray-300 mb-1">
+                          {key}
+                        </p>
+                        <div className="space-y-1 max-h-40 overflow-y-auto pr-2">
+                          {filterData[key]?.map((value: string) => (
+                            <div
+                              key={value}
+                              className="flex items-center space-x-2"
                             >
-                              {value}
-                            </label>
-                          </div>
-                        ))}
+                              <Checkbox
+                                id={`${key}-${value}`}
+                                checked={filters[key]?.includes(value)}
+                                onCheckedChange={() =>
+                                  handleCheckboxChange(key, value)
+                                }
+                              />
+                              <label
+                                htmlFor={`${key}-${value}`}
+                                className="text-sm capitalize text-gray-600 dark:text-gray-300"
+                              >
+                                {value === "true"
+                                  ? "inStock"
+                                  : value === "false"
+                                  ? "out of stock"
+                                  : value}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
+
+                  {/* Reset Button */}
+
+                  <SheetTrigger asChild>
+                    <Button
+                      variant="destructive"
+                      className="w-full mt-4"
+                      onClick={resetFilters}
+                    >
+                      Reset Filters
+                    </Button>
+                  </SheetTrigger>
                 </div>
               </SheetContent>
             </Sheet>
