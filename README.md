@@ -19,10 +19,7 @@ Here is the English translation of the provided guidelines for a Product & Servi
 
 1.  This page must have a navbar.
 2.  The design of the product details page will start according to the gap between the logo and menu text in the navbar.
-3.  It can be divided into 2 columns. If multiple images can be used in the image area, it's good. Some information should be included on the other side, such as: for e-commerce - product name, color, size (and other relevant information as needed), stock quantity, increase/decrease buttons for ordering, and an "Add to Cart" button. For services, relevant information should be included so that the service can be booked.
-4.  There can be a review section below this section.
-5.  Below that, the product specifications will be available.
-6.  Users can see similar types of products or services.
+3.  
 
 **Cart Page:**
 

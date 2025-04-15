@@ -1,4 +1,4 @@
-import { useGetAllProductsQuery } from "@/redux/features/productManagement.api";
+import { useGetAllProductsQuery } from "@/redux/features/product/productManagement.api";
 import SectionWrapper from "../wrapper/SectionWrapper";
 import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -66,13 +66,14 @@ export default function CarShowcase() {
                     <p className="text-red-600 font-bold text-lg">
                       ${car.price.toLocaleString()}
                     </p>
-
-                    <Button
-                      variant="outline"
-                      className="w-full mt-2 text-sm border-red-600 text-red-600 hover:bg-red-50 dark:hover:bg-zinc-800"
-                    >
-                      View Details
-                    </Button>
+                    <Link to={`/car/${car._id}`}>
+                      <Button
+                        variant="outline"
+                        className="w-full mt-2 text-sm border-red-600 text-red-600 hover:bg-red-50 dark:hover:bg-zinc-800"
+                      >
+                        View Details
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               ))}

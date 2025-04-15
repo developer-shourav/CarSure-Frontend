@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TCar, TQueryParam, TResponseRedux } from "@/types";
-import { baseApi } from "../api/baseApi";
+import { baseApi } from "../../api/baseApi";
 
 const productManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -27,17 +28,23 @@ const productManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
-    changePassword: builder.mutation({
-      query: (data) => ({
-        url: '/auth/change-password',
-        method: 'POST',
-        body: data,
-      }),
+    getProductDetails: builder.query({
+      query: (id) => {
+        return {
+          url: `/car/${id}`,
+          method: 'GET',
+        };
+      },
+      transformResponse: (response: TResponseRedux<any>) => {
+        return {
+          data: response.data,
+        };
+      },
     }),
   }),
 });
 
 export const {
   useGetAllProductsQuery,
-  useChangePasswordMutation,
+  useGetProductDetailsQuery,
 } = productManagementApi;
