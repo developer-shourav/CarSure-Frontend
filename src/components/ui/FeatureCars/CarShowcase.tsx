@@ -66,7 +66,7 @@ export default function CarShowcase() {
                     <p className="text-red-600 font-bold text-lg">
                       ${car.price.toLocaleString()}
                     </p>
-                    <Link to={`/car/${car._id}`}>
+                    <Link to={`/cars/${car._id}`}>
                       <Button
                         variant="outline"
                         className="w-full mt-2 text-sm border-red-600 text-red-600 hover:bg-red-50 dark:hover:bg-zinc-800"
