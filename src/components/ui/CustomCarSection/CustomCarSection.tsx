@@ -40,9 +40,6 @@ export function CustomCarSection() {
               <span>Quality materials and cutting-edge tech</span>
             </li>
           </ul>
-          <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-md transition-all">
-            Get Started
-          </button>
         </div>
       </div>
     </section>

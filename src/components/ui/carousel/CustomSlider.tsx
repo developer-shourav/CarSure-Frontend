@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 const carDetails = [
   {
     src: "/slider/car4.jpg",
@@ -110,7 +111,7 @@ export default function CustomSlider() {
               </div>
               <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-md xl:max-w-xl p-1 bg-black/.1 backdrop-blur-sm rounded-2xl">{car.description}</p>
               <div className="mt-6 grid grid-cols-2 gap-4 w-[80%] lg:w-[260px]">
-                <Button className="bg-red-500 text-white">BUY NOW</Button>
+                <Button className="bg-red-500 text-white"><Link to="/cars">BUY NOW</Link></Button>
                
               </div>
             </div>
