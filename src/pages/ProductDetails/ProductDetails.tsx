@@ -15,11 +15,32 @@ export default function ProductDetails() {
 
   if (isLoading || !product) {
     return (
-      <div className="p-10">
-        <Skeleton className="h-96 w-full mb-4" />
-        <Skeleton className="h-6 w-1/2 mb-2" />
-        <Skeleton className="h-5 w-1/3 mb-2" />
-      </div>
+      <SectionWrapper>
+        <div className="min-h-screen py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
+            <div className="space-y-4">
+              <Skeleton className="h-96 w-full mb-4" />
+            </div>
+
+            {/* --- Product Info --- */}
+            <div className="space-y-4">
+              <Skeleton className="h-6 w-1/2 mb-2" />
+
+              <Skeleton className="h-8 w-1/2 mb-2" />
+
+              <div className="text-sm space-y-1">
+                <Skeleton className="h-6 w-1/2 mb-2" />
+                <Skeleton className="h-6 w-1/4 mb-2" />
+                <Skeleton className="h-7 w-3/4 mb-2" />
+                <Skeleton className="h-4 w-1/2 mb-2" />
+              </div>
+            </div>
+          </div>
+
+          {/*-----Product Details Description---------  */}
+          <Skeleton className="h-[160px] mt-10 rounded-2xl w-8/10 " />
+        </div>
+      </SectionWrapper>
     );
   }
 
