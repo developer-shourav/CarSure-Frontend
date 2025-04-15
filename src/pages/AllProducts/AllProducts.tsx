@@ -1,46 +1,80 @@
-import { useGetAllProductsQuery } from "@/redux/features/productManagement.api";
+import {
+  useGetAllProductsQuery,
+} from "@/redux/features/productManagement.api";
 import SectionWrapper from "@/components/ui/wrapper/SectionWrapper";
 import { WebsiteHeading } from "@/components/ui/WebsiteHeading/WebsiteHeading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { TCar, TMeta, TQueryParam } from "@/types";
-import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { TCar, TMeta, TQueryParam } from "@/types";
+import { useEffect, useState } from "react";
 
 export default function AllProducts() {
   const [params, setParams] = useState<TQueryParam[]>([]);
   const [search, setSearch] = useState("");
-  const [availability, setAvailability] = useState("");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
   const [page, setPage] = useState(1);
+  const [showFilterSheet, setShowFilterSheet] = useState(false);
+
+  const [filters, setFilters] = useState({
+    brand: [] as string[],
+    model: [] as string[],
+    category: [] as string[],
+    availability: [] as string[],
+  });
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000000]);
+
+  // Fetch filter options
+  const filterData = {
+    brand: ["Bugatti", "Mercedes-Benz", "Audi", "Bentley", "Hyundai", "BMW", "Ford"],
+    model: ["LAMB", "Z4", "Bronco", "SL", "Continental", "Kona", "Elantra", "C-Class", "i4", "F-150"],
+    category: ["sports", "convertible", "suv", "coupe", "sedan"],
+    availability: ["true", "false"],
+  };
+
+  const handleCheckboxChange = (type: keyof typeof filters, value: string) => {
+    setFilters((prev) => {
+      const selected = prev[type];
+      const exists = selected.includes(value);
+      return {
+        ...prev,
+        [type]: exists
+          ? selected.filter((v) => v !== value)
+          : [...selected, value],
+      };
+    });
+  };
 
   const buildParams = () => {
-    const filters: TQueryParam[] = [];
-
-    if (search) filters.push({ name: "search", value: search });
-    if (availability) filters.push({ name: "inStock", value: availability });
-    if (priceRange[0]) filters.push({ name: "minPrice", value: priceRange[0] });
-    if (priceRange[1]) filters.push({ name: "maxPrice", value: priceRange[1] });
-
-    setParams([
+    const p: TQueryParam[] = [
       { name: "limit", value: "12" },
       { name: "page", value: page },
       { name: "sortOrder", value: "asc" },
-      ...filters,
-    ]);
+    ];
+    if (search) p.push({ name: "search", value: search });
+    if (priceRange[0]) p.push({ name: "minPrice", value: priceRange[0] });
+    if (priceRange[1]) p.push({ name: "maxPrice", value: priceRange[1] });
+
+    Object.entries(filters).forEach(([key, values]) => {
+      values.forEach((value) => {
+        p.push({ name: key, value });
+      });
+    });
+
+    setParams(p);
   };
 
   useEffect(() => {
     buildParams();
-  }, [search, availability, priceRange, page]);
+  }, [search, filters, priceRange, page]);
 
   const {
     data: carResponse,
@@ -59,40 +93,97 @@ export default function AllProducts() {
       <SectionWrapper>
         <WebsiteHeading title="All Cars" />
 
-        {/* --- Filters --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <Input
-            placeholder="Search by brand, name or category"
-            className="w-full"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          {/* ------------Filter Fields------------ */}
-          <Select onValueChange={(val) => setAvailability(val)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Filter by availability" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="true">In Stock</SelectItem>
-              <SelectItem value="false">Out of Stock</SelectItem>
-            </SelectContent>
-          </Select>
-          <div className="space-y-1">
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              Price Range: ${priceRange[0]} - ${priceRange[1]}
-            </p>
-            <Slider
-              defaultValue={[0, 100000]}
-              min={0}
-              max={100000}
-              step={1000}
-              value={priceRange}
-              onValueChange={(val) => setPriceRange(val as [number, number])}
+        {/* --- Search & Filter Header --- */}
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+          <div className="flex items-center gap-4 w-full sm:justify-end">
+            <Input
+              placeholder="🔍 Search by brand, name or category"
+              className="w-full sm:max-w-xs"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setPage(1);
+              }}
             />
+            <Sheet open={showFilterSheet} onOpenChange={setShowFilterSheet}>
+              <SheetTrigger asChild>
+                <Button variant="outline">Filter</Button>
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className="w-[220px] lg:w-[340px] overflow-y-auto"
+              >
+                <SheetHeader>
+                  <SheetTitle className="text-lg">Filter Cars</SheetTitle>
+                </SheetHeader>
+
+                <div className="mt-6 space-y-6 p-4">
+                  {/* Price Range */}
+                  <div>
+                    <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                      Price Range
+                    </p>
+                    <Slider
+                      min={0}
+                      max={1000000}
+                      step={1000}
+                      value={priceRange}
+                      onValueChange={(val) =>
+                        setPriceRange(val as [number, number])
+                      }
+                    />
+                    <p className="text-xs mt-1 text-gray-500 dark:text-gray-400">
+                      ${priceRange[0]} - ${priceRange[1]}
+                    </p>
+                  </div>
+
+                  {/* Filters */}
+                  {["brand", "model", "category", "availability"].map((key) => (
+                    <div key={key}>
+                      <p className="text-sm font-semibold capitalize text-gray-700 dark:text-gray-300 mb-1">
+                        {key}
+                      </p>
+                      <div className="space-y-1 max-h-40 overflow-y-auto pr-2">
+                        {filterData?.[key]?.map((value: string) => (
+                          <div
+                            key={value}
+                            className="flex items-center space-x-2"
+                          >
+                            <Checkbox
+                              id={`${key}-${value}`}
+                              checked={filters[
+                                key as keyof typeof filters
+                              ]?.includes(value)}
+                              onCheckedChange={() =>
+                                handleCheckboxChange(
+                                  key as keyof typeof filters,
+                                  value
+                                )
+                              }
+                            />
+                            <label
+                              htmlFor={`${key}-${value}`}
+                              className="text-sm capitalize text-gray-600 dark:text-gray-300"
+                            >
+                              {value}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
 
-        {/* --- Product Cards --- */}
+        {/* --- Result Count --- */}
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          Showing {cars?.length || 0} of {metaData?.total || 0} results
+        </p>
+
+        {/* --- Product Grid --- */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {isLoadingState
             ? Array.from({ length: 8 }).map((_, i) => (
@@ -137,7 +228,6 @@ export default function AllProducts() {
                     <p className="text-red-600 font-bold text-lg">
                       ${car.price.toLocaleString()}
                     </p>
-
                     <Button
                       variant="outline"
                       className="w-full mt-2 text-sm border-red-600 text-red-600 hover:bg-red-50 dark:hover:bg-zinc-800"
