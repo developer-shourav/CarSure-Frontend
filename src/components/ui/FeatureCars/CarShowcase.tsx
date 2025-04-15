@@ -33,6 +33,7 @@ export default function CarShowcase() {
                   <div className="p-4 space-y-2">
                     <Skeleton className="h-5 w-3/4" />
                     <Skeleton className="h-4 w-1/2" />
+                    <Skeleton className="h-4 w-1/2" />
                     <Skeleton className="h-4 w-1/3" />
                     <Skeleton className="h-9 w-full rounded-md" />
                   </div>
@@ -49,12 +50,15 @@ export default function CarShowcase() {
                     loading="lazy"
                     className="w-full h-52 object-cover"
                   />
-                  <div className="p-4 space-y-2">
+                  <div className="p-4 space-y-1">
                     <h3 className="text-lg font-semibold text-black dark:text-white">
                       {car.carName}
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       Brand: {car.brand}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Model: {car.model}
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">
                       Category: {car.category}
