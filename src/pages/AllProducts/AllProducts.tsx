@@ -247,12 +247,19 @@ export default function AllProducts() {
                   key={car._id}
                   className="bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow hover:shadow-xl transition"
                 >
-                  <img
-                    src={car.productImg}
-                    alt={car.carName}
-                    loading="lazy"
-                    className="w-full h-52 object-cover"
-                  />
+                  <div className="relative">
+                    <img
+                      src={car.productImg}
+                      alt={car.carName}
+                      loading="lazy"
+                      className="w-full h-52 object-cover"
+                    />
+                    {!car.inStock && (
+                      <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-md">
+                        Out of Stock
+                      </span>
+                    )}
+                  </div>
                   <div className="p-4 space-y-1">
                     <h3 className="text-lg font-semibold text-black dark:text-white">
                       {car.carName}
