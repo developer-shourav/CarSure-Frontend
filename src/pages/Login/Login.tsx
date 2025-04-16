@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { WebsiteHeading } from "@/components/ui/WebsiteHeading/WebsiteHeading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +8,14 @@ import siteLogo from "@/assets/logo/carSure.png";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/redux/hooks";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { TUser } from "@/types";
+import { setUser } from "@/redux/features/auth/authSlice";
+import toast from "react-hot-toast";
+import { successTheme } from "@/styles/toastThemes";
+import { verifyToken } from "@/utils/verifyToken";
 
 type LoginFormInputs = {
   email: string;
@@ -15,6 +23,10 @@ type LoginFormInputs = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const [login] = useLoginMutation();
   const {
     register,
     handleSubmit,
@@ -24,10 +36,29 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (data: LoginFormInputs) => {
-    console.log(data);
-    // Add login logic here
-    reset()
+  const onSubmit = async (data: LoginFormInputs) => {
+    try {
+      const userInfo = {
+        email: data.email,
+        password: data.password,
+      };
+      const res = await login(userInfo).unwrap();
+      const user = verifyToken(res.data.token) as TUser;
+
+      dispatch(setUser({ user: user, token: res.data.token }));
+
+      toast.success("Login successfully!", successTheme);
+      reset();
+      navigate(`/`);
+    } catch (err: any) {
+      if (err?.data && err?.status !== 404) {
+        if ("message" in err.data) {
+          toast.error(`Error: ${err.data.message}`);
+        }
+      }
+
+      console.log(err);
+    }
   };
 
   return (
@@ -88,7 +119,7 @@ const Login = () => {
 
           <Button
             type="submit"
-            className="w-full mt-2 dark:text-white dark:bg-red-500"
+            className="w-full cursor-pointer mt-2 dark:text-white dark:bg-red-500"
           >
             Login
           </Button>

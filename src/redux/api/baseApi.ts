@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
     BaseQueryApi,
     BaseQueryFn,
@@ -8,7 +9,8 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../store';
 import { logout, setUser } from '../features/auth/authSlice';
-import { toast } from 'sonner';
+import toast from 'react-hot-toast';
+
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'https://car-sure-backend.vercel.app/api',
