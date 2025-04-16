@@ -118,3 +118,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.card-custom-shadow{
+  box-shadow: 2px 1px 4px 2px rgba(44, 44, 44, 0.336);
+}
