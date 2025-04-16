@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { WebsiteHeading } from "@/components/ui/WebsiteHeading/WebsiteHeading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +8,11 @@ import siteLogo from "@/assets/logo/carSure.png";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import toast from "react-hot-toast";
+import { successTheme } from "@/styles/toastThemes";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
 type RegisterFormInputs = {
   name: string;
@@ -16,6 +21,12 @@ type RegisterFormInputs = {
 };
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [registerUser, {isLoading}] = useRegisterMutation({});
+  function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryError {
+    return typeof error === "object" && error !== null && "status" in error;
+  }
+
   const {
     register,
     handleSubmit,
@@ -26,29 +37,46 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (data: RegisterFormInputs) => {
-    // Convert data to FormData type
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-/* 
+    const uploadData = new FormData();
+
+    const userPayload = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+
+    uploadData.append("formData", JSON.stringify(userPayload));
+
     try {
-      const response = await fetch("YOUR_API_ENDPOINT", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await registerUser(uploadData);
 
-      const result = await response.json();
-      console.log("Success:", result);
+      if (res?.data?.statusCode === 201) {
+        if ("message" in res.data) {
+          reset()
+          toast.success(res.data.message, successTheme);
+          navigate(`/`);
+        }
+      }
 
-      reset(); // Reset the form after submission
-    } catch (error) {
-      console.error("Error:", error);
-    } */
+      if (res?.error) {
+        if (isFetchBaseQueryError(res.error)) {
+          const status = res.error.status;
+          const errorMessage =
+            (res.error.data as any)?.message || "Something went wrong";
 
-      console.log(formData );
+          toast.error(errorMessage);
 
-      reset(); // Reset the form after submission
+          // Optional: conditional logic
+          if (status === 500) {
+            console.error("Server error: ", errorMessage);
+          }
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
+
   };
 
   return (
@@ -125,9 +153,10 @@ const Register = () => {
           {/* --------Submit-------- */}
           <Button
             type="submit"
-            className="w-full mt-2 dark:text-white dark:bg-red-500"
+            className="w-full cursor-pointer mt-2 dark:text-white dark:bg-red-500"
+            disabled = {isLoading}
           >
-            Register
+            { isLoading ? 'Registering...' : 'Register'}
           </Button>
         </form>
       </div>
