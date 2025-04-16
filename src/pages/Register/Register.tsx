@@ -31,7 +31,7 @@ const Register = () => {
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("password", data.password);
-
+/* 
     try {
       const response = await fetch("YOUR_API_ENDPOINT", {
         method: "POST",
@@ -44,7 +44,11 @@ const Register = () => {
       reset(); // Reset the form after submission
     } catch (error) {
       console.error("Error:", error);
-    }
+    } */
+
+      console.log(formData );
+
+      reset(); // Reset the form after submission
   };
 
   return (
