@@ -5,10 +5,22 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link, useLocation } from "react-router-dom";
 import navLogo from "../../assets/logo/logo.png";
+import { useAppSelector } from "@/redux/hooks";
+import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import { successTheme } from "@/styles/toastThemes";
+import toast from "react-hot-toast";
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const loggedInUser = useAppSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("Logout success", successTheme);
+  };
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -51,16 +63,23 @@ export function Navbar() {
         </nav>
 
         {/*---------------- Desktop Actions ----------------*/}
-        <div className="hidden md:flex items-center gap-4">
-          <Link to="/login">
-            <Button variant="outline">Login</Button>
-          </Link>
-          <Link to="/register">
-            <Button>Register</Button>
-          </Link>
-          <ThemeToggle />
-        </div>
-
+        {!loggedInUser && (
+          <div className="hidden md:flex items-center gap-4">
+            <Link to="/login">
+              <Button variant="outline">Login</Button>
+            </Link>
+            <Link to="/register">
+              <Button>Register</Button>
+            </Link>
+            <ThemeToggle />
+          </div>
+        )}
+        {loggedInUser && (
+          <div className="hidden md:flex items-center gap-4">
+            <Button  onClick={handleLogout} variant="outline">Logout</Button>
+            <ThemeToggle />
+          </div>
+        )}
         {/* ----------------Mobile Menu---------------- */}
         <div className="md:hidden">
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
@@ -97,16 +116,29 @@ export function Navbar() {
                     {link.label}
                   </Link>
                 ))}
-                <div className="mt-6 flex flex-col gap-3">
-                  <Link to="/login" onClick={() => setMenuOpen(false)}>
-                    <Button variant="outline" className="w-full">
-                      Login
+                {!loggedInUser && (
+                  <div className="mt-6 flex flex-col gap-3">
+                    <Link to="/login" onClick={() => setMenuOpen(false)}>
+                      <Button variant="outline" className="w-full">
+                        Login
+                      </Button>
+                    </Link>
+                    <Link to="/register" onClick={() => setMenuOpen(false)}>
+                      <Button className="w-full">Register</Button>
+                    </Link>
+                  </div>
+                )}
+                {loggedInUser && (
+                  <div className="mt-6 flex flex-col gap-3">
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={handleLogout}
+                    >
+                      Logout
                     </Button>
-                  </Link>
-                  <Link to="/register" onClick={() => setMenuOpen(false)}>
-                    <Button className="w-full">Register</Button>
-                  </Link>
-                </div>
+                  </div>
+                )}
               </nav>
             </SheetContent>
           </Sheet>
