@@ -147,7 +147,7 @@ export default function AllProducts() {
                 </SheetHeader>
 
                 <div className="mt-6 space-y-6 p-4">
-                  {/* Price Range */}
+                  {/* --------Price Range --------*/}
                   <div>
                     <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
                       Price Range
@@ -166,7 +166,7 @@ export default function AllProducts() {
                     </p>
                   </div>
 
-                  {/* Filters */}
+                  {/* --------Filters --------*/}
                   {(Object.keys(filterData) as (keyof typeof filterData)[]).map(
                     (key) => (
                       <div key={key}>
@@ -203,7 +203,7 @@ export default function AllProducts() {
                     )
                   )}
 
-                  {/* Reset Button */}
+                  {/* --------Reset Button-------- */}
 
                   <SheetTrigger asChild>
                     <Button

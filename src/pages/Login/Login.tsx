@@ -34,14 +34,14 @@ const Login = () => {
     <SectionWrapper>
       <WebsiteHeading title="Login" />
       <div className="w-full max-w-md mx-auto space-y-6 p-6 bg-white dark:bg-zinc-900 card-custom-shadow rounded-2xl dark:border dark:border-red-500">
-        {/* Logo */}
+        {/* --------Logo --------*/}
         <img
           src={siteLogo}
           alt="Website Logo"
           className="size-[100px] object-contain mx-auto rounded-2xl"
         />
 
-        {/* Form */}
+        {/* -------- Form --------*/}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>

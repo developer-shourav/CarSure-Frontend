@@ -5,7 +5,7 @@ export function CustomCarSection() {
   return (
     <section className="w-full px-4 py-12 md:py-20 bg-background text-foreground">
       <div className="max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
-        {/* Left Image */}
+        {/* -----------------Left Image -----------------*/}
         <div className="w-full md:w-1/2">
           <img
             src={carSketch}
@@ -15,7 +15,7 @@ export function CustomCarSection() {
           />
         </div>
 
-        {/* Right Content */}
+        {/* -----------------Right Content -----------------*/}
         <div className="w-full md:w-1/2">
           <h2 className="text-2xl md:text-4xl font-bold mb-4">
             Build Your Dream Car from Sketch

@@ -8,9 +8,9 @@ const About = () => {
     <SectionWrapper>
       <section className="bg-white dark:bg-zinc-950">
         <WebsiteHeading title="About Us" />
-        {/* Image Left, Text Right */}
+        {/* -----------------Image Left, Text Right -----------------*/}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10  items-center pb-10">
-          {/* Image */}
+          {/* --------Image-------- */}
           <div>
             <img
               src={aboutImg}
@@ -19,7 +19,7 @@ const About = () => {
             />
           </div>
 
-          {/* Text Content */}
+          {/* --------Text Content ---------*/}
           <div>
             <h4 className="text-4xl font-bold text-zinc-900 dark:text-white mb-4">
               Car<span className="text-red-600">Sure</span>
@@ -38,7 +38,7 @@ const About = () => {
           </div>
         </div>
 
-        {/* Achievements Section */}
+        {/* -----------------Achievements Section----------------- */}
         <div className="mt-20 px-5 lg:px-10">
           <WebsiteHeading title="Our Achievements" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">

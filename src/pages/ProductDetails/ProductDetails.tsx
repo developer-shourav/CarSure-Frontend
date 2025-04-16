@@ -73,7 +73,7 @@ export default function ProductDetails() {
               <p>Stock: {product.stockQty} available</p>
             </div>
 
-            {/* Quantity Selector */}
+            {/* --------Quantity Selector --------*/}
             <div className="flex items-center gap-3 mt-4">
               <Button
                 variant="outline"
@@ -90,7 +90,7 @@ export default function ProductDetails() {
               </Button>
             </div>
 
-            {/* Action Buttons */}
+            {/* --------Action Buttons --------*/}
             <div className="flex flex-col sm:flex-row gap-3 mt-6">
               <Button className="bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto">
                 Add to Cart
