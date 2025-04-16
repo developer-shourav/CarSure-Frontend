@@ -26,7 +26,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const {
     register,
     handleSubmit,
@@ -120,8 +120,9 @@ const Login = () => {
           <Button
             type="submit"
             className="w-full cursor-pointer mt-2 dark:text-white dark:bg-red-500"
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? "Login..." : "Login"}
           </Button>
         </form>
       </div>
