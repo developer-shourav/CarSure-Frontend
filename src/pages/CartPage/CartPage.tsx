@@ -90,7 +90,7 @@ export default function CartPage() {
                   onClick={() =>
                     dispatch(removeFromCart({ userId, id: item.id }))
                   }
-                  variant="destructive"
+                 className="bg-red-600 hover:bg-red-700 text-white"
                   size="sm"
                 >
                   Remove

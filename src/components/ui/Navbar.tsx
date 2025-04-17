@@ -94,7 +94,16 @@ export function Navbar() {
           </div>
         )}
         {/* ----------------Mobile Menu---------------- */}
-        <div className="md:hidden">
+
+        <div className="flex items-center gap-4 md:hidden">
+          {loggedInUser && (
+            <Link to="/cart" className="relative">
+              <ShoppingCart className="w-5 h-5 text-primary" />
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                {cartQuantity}
+              </span>
+            </Link>
+          )}
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">

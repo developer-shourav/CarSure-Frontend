@@ -98,7 +98,7 @@ export default function ProductDetails() {
             </div>
             {/* --------Action Buttons --------*/}
             <div className="flex flex-col sm:flex-row gap-3 mt-6">
-              <Button
+              <Button disabled={product?.quantity === 0}
                 onClick={() => {
                   if (!loggedInUser?.userId) {
                     toast.error("Please login to add to cart");
@@ -123,7 +123,7 @@ export default function ProductDetails() {
                 }}
                 className="bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto"
               >
-                Add to Cart
+                { product?.quantity === 0 ? <span className="line-through">Out of Stock</span>: 'Add to Cart'}
               </Button>
             </div>
           </div>
