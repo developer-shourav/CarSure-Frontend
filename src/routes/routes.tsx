@@ -6,6 +6,9 @@ import App from "@/App";
 import AllProducts from "@/pages/AllProducts/AllProducts";
 import About from "@/pages/About/About";
 import ProductDetails from "@/pages/ProductDetails/ProductDetails";
+import ProtectedRoutes from "@/components/layout/ProtectedRoutes";
+import CartPage from "@/pages/CartPage/CartPage";
+import CheckoutPage from "@/pages/CheckoutPage/CheckoutPage";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +30,16 @@ const router = createBrowserRouter([
       {
         path: "/cars/:id",
         element: <ProductDetails />,
+      },
+      {
+        path: "cart",
+        element: <ProtectedRoutes />,
+        children: [{ index: true, element: <CartPage /> }],
+      },
+      {
+        path: "checkout",
+        element: <ProtectedRoutes />,
+        children: [{ index: true, element: <CheckoutPage /> }],
       },
       {
         path: "/about",

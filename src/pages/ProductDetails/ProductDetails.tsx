@@ -6,12 +6,16 @@ import { useState } from "react";
 import SectionWrapper from "@/components/ui/wrapper/SectionWrapper";
 import ProductDescription from "@/components/ui/ProductDescription/ProductDescription";
 import SuggestedCars from "@/components/ui/SuggestedCars/SuggestedCars";
+import { addToCart } from "@/redux/features/cart/cartSlice";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const { data, isLoading } = useGetProductDetailsQuery(id);
   const product = data?.data;
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
 
   if (isLoading || !product) {
     return (
@@ -92,7 +96,21 @@ export default function ProductDetails() {
 
             {/* --------Action Buttons --------*/}
             <div className="flex flex-col sm:flex-row gap-3 mt-6">
-              <Button className="bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto">
+              <Button
+                onClick={() => {
+                  dispatch(
+                    addToCart({
+                      id: product._id,
+                      name: product.carName,
+                      price: product.price,
+                      image: product.productImg,
+                      quantity,
+                    })
+                  );
+                  toast.success("Added to cart!");
+                }}
+                className="bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto"
+              >
                 Add to Cart
               </Button>
               <Button
