@@ -9,12 +9,15 @@ import SuggestedCars from "@/components/ui/SuggestedCars/SuggestedCars";
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const { data, isLoading } = useGetProductDetailsQuery(id);
   const product = data?.data;
   const [quantity, setQuantity] = useState(1);
+  const loggedInUser = useAppSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
   if (isLoading || !product) {
@@ -93,34 +96,34 @@ export default function ProductDetails() {
                 +
               </Button>
             </div>
-
             {/* --------Action Buttons --------*/}
             <div className="flex flex-col sm:flex-row gap-3 mt-6">
               <Button
                 onClick={() => {
-                  dispatch(
-                    addToCart({
-                      id: product._id,
-                      name: product.carName,
-                      price: product.price,
-                      image: product.productImg,
-                      quantity,
-                    })
-                  );
-                  toast.success("Added to cart!");
+                  if (!loggedInUser?.userId) {
+                    toast.error("Please login to add to cart");
+                    return;
+                  }
+
+                  if (loggedInUser?.userId) {
+                    dispatch(
+                      addToCart({
+                        userId: loggedInUser.userId,
+                        item: {
+                          id: product._id,
+                          name: product.carName,
+                          price: product.price,
+                          image: product.productImg,
+                          quantity,
+                        },
+                      })
+                    );
+                    toast.success("Added to cart!");
+                  }
                 }}
                 className="bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto"
               >
                 Add to Cart
-              </Button>
-              <Button
-                variant="outline"
-                className="border-red-600 text-red-600 hover:bg-red-50 dark:hover:bg-zinc-800 w-full sm:w-auto"
-                onClick={() => {
-                  // Navigate to checkout or open modal
-                }}
-              >
-                Buy Now
               </Button>
             </div>
           </div>

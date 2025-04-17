@@ -7,12 +7,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 export default function CartPage() {
-  const { items, coupon } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+  const loggedInUser = useAppSelector(selectCurrentUser);
+  const userId = loggedInUser?.userId;
 
-  const subtotal = items.reduce(
+  // ✅ Access nested user cart properly
+  const userCart = useAppSelector((state) =>
+    userId
+      ? state.cart.userCarts[userId] || { items: [], coupon: "" }
+      : { items: [], coupon: "" }
+  );
+
+  const [couponCode, setCouponCode] = useState(userCart.coupon || "");
+
+  const subtotal = userCart.items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
@@ -21,30 +33,34 @@ export default function CartPage() {
     <div className="max-w-5xl mx-auto py-10 px-4">
       <h2 className="text-3xl font-bold mb-6">Your Cart</h2>
 
-      {items.length === 0 ? (
+      {!userId ? (
+        <p className="text-red-500">Please login to view your cart.</p>
+      ) : userCart.items.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
         <>
           <div className="space-y-6">
-            {items.map((item) => (
+            {userCart.items.map((item) => (
               <div key={item.id} className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <img
                     src={item.image}
                     className="h-20 w-20 object-cover rounded"
+                    alt={item.name}
                   />
                   <div>
                     <p className="font-semibold">{item.name}</p>
                     <p>
                       ${item.price} x {item.quantity}
                     </p>
-                    <div className="flex gap-2 mt-1">
+                    <div className="flex gap-2 mt-1 items-center">
                       <Button
                         onClick={() =>
                           dispatch(
                             updateQuantity({
+                              userId,
                               id: item.id,
-                              quantity: item.quantity - 1,
+                              quantity: Math.max(1, item.quantity - 1),
                             })
                           )
                         }
@@ -57,6 +73,7 @@ export default function CartPage() {
                         onClick={() =>
                           dispatch(
                             updateQuantity({
+                              userId,
                               id: item.id,
                               quantity: item.quantity + 1,
                             })
@@ -70,7 +87,9 @@ export default function CartPage() {
                   </div>
                 </div>
                 <Button
-                  onClick={() => dispatch(removeFromCart(item.id))}
+                  onClick={() =>
+                    dispatch(removeFromCart({ userId, id: item.id }))
+                  }
                   variant="destructive"
                   size="sm"
                 >
@@ -82,8 +101,18 @@ export default function CartPage() {
 
           {/* Coupon Field */}
           <div className="mt-6 flex gap-4">
-            <Input placeholder="Enter coupon code" />
-            <Button onClick={() => dispatch(applyCoupon("DEMO"))}>Apply</Button>
+            <Input
+              value={couponCode}
+              onChange={(e) => setCouponCode(e.target.value)}
+              placeholder="Enter coupon code"
+            />
+            <Button
+              onClick={() =>
+                dispatch(applyCoupon({ userId, coupon: couponCode }))
+              }
+            >
+              Apply
+            </Button>
           </div>
 
           {/* Checkout Summary */}

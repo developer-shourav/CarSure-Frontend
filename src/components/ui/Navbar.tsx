@@ -10,12 +10,17 @@ import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { successTheme } from "@/styles/toastThemes";
 import toast from "react-hot-toast";
+import { ShoppingCart } from "lucide-react";
+import { selectCartTotalQuantity } from "@/redux/features/cart/cartSlice";
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const loggedInUser = useAppSelector(selectCurrentUser);
   const dispatch = useDispatch();
+  const cartQuantity = useAppSelector(
+    selectCartTotalQuantity(loggedInUser?.userId || "")
+  );
 
   const handleLogout = () => {
     dispatch(logout());
@@ -76,8 +81,16 @@ export function Navbar() {
         )}
         {loggedInUser && (
           <div className="hidden md:flex items-center gap-4">
-            <Button  onClick={handleLogout} variant="outline">Logout</Button>
+            <Button onClick={handleLogout} variant="outline">
+              Logout
+            </Button>
             <ThemeToggle />
+            <Link to="/cart" className="relative">
+              <ShoppingCart className="w-6 h-6 text-primary" />
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {cartQuantity}
+              </span>
+            </Link>
           </div>
         )}
         {/* ----------------Mobile Menu---------------- */}
