@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api',
+    baseUrl: 'https://car-sure-backend.vercel.app/api',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
