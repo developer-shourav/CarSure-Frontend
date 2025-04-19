@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "@/redux/features/product/productManagement.api";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SectionWrapper from "@/components/ui/wrapper/SectionWrapper";
 import ProductDescription from "@/components/ui/ProductDescription/ProductDescription";
 import SuggestedCars from "@/components/ui/SuggestedCars/SuggestedCars";
@@ -19,6 +19,12 @@ export default function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const loggedInUser = useAppSelector(selectCurrentUser);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (product?.quantity < quantity) {
+      toast.error("Order over the Available quantity");
+    }
+  }, [quantity]);
 
   if (isLoading || !product) {
     return (
@@ -91,14 +97,20 @@ export default function ProductDetails() {
               <span>{quantity}</span>
               <Button
                 variant="outline"
-                onClick={() => setQuantity((q) => q + 1)}
+                disabled={product?.quantity < quantity}
+                onClick={() => {
+                  setQuantity((q) => q + 1);
+                }}
               >
                 +
               </Button>
             </div>
             {/* --------Action Buttons --------*/}
             <div className="flex flex-col sm:flex-row gap-3 mt-6">
-              <Button disabled={product?.quantity === 0}
+              <Button
+                disabled={
+                  product?.quantity === 0 || product?.quantity < quantity
+                }
                 onClick={() => {
                   if (!loggedInUser?.userId) {
                     toast.error("Please login to add to cart");
@@ -123,7 +135,11 @@ export default function ProductDetails() {
                 }}
                 className="bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto"
               >
-                { product?.quantity === 0 ? <span className="line-through">Out of Stock</span>: 'Add to Cart'}
+                {product?.quantity === 0 ? (
+                  <span className="line-through">Out of Stock</span>
+                ) : (
+                  "Add to Cart"
+                )}
               </Button>
             </div>
           </div>

@@ -15,7 +15,7 @@ export default function CartPage() {
   const loggedInUser = useAppSelector(selectCurrentUser);
   const userId = loggedInUser?.userId;
 
-  // ✅ Access nested user cart properly
+  // ----------- Access nested user cart properly-----------
   const userCart = useAppSelector((state) =>
     userId
       ? state.cart.userCarts[userId] || { items: [], coupon: "" }
@@ -23,11 +23,6 @@ export default function CartPage() {
   );
 
   const [couponCode, setCouponCode] = useState(userCart.coupon || "");
-
-  const subtotal = userCart.items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-4">
@@ -86,20 +81,31 @@ export default function CartPage() {
                     </div>
                   </div>
                 </div>
-                <Button
-                  onClick={() =>
-                    dispatch(removeFromCart({ userId, id: item.id }))
-                  }
-                 className="bg-red-600 hover:bg-red-700 text-white"
-                  size="sm"
-                >
-                  Remove
-                </Button>
+                <div>
+                  <Link to="/checkout" state={{ item }}>
+                    <Button
+                      className="bg-red-600 hover:bg-red-700 text-white me-2"
+                      size="sm"
+                    >
+                      Checkout
+                    </Button>
+                  </Link>
+
+                  <Button
+                    onClick={() =>
+                      dispatch(removeFromCart({ userId, id: item.id }))
+                    }
+                    className="bg-red-600 hover:bg-red-700 text-white"
+                    size="sm"
+                  >
+                    Remove
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Coupon Field */}
+          {/* ----------Coupon Field---------- */}
           <div className="mt-6 flex gap-4">
             <Input
               value={couponCode}
@@ -115,17 +121,8 @@ export default function CartPage() {
             </Button>
           </div>
 
-          {/* Checkout Summary */}
-          <div className="mt-10 border-t pt-6 flex justify-between items-center">
-            <h4 className="text-xl font-bold">
-              Total: ${subtotal.toLocaleString()}
-            </h4>
-            <Link to="/checkout">
-              <Button className="bg-red-600 hover:bg-red-700 text-white">
-                Proceed to Checkout
-              </Button>
-            </Link>
-          </div>
+          {/*---------- Checkout Summary ----------*/}
+          <div className="mt-10 border-t pt-6 flex justify-between items-center"></div>
         </>
       )}
     </div>
