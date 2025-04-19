@@ -9,6 +9,7 @@ import ProductDetails from "@/pages/ProductDetails/ProductDetails";
 import ProtectedRoutes from "@/components/layout/ProtectedRoutes";
 import CartPage from "@/pages/CartPage/CartPage";
 import CheckoutPage from "@/pages/CheckoutPage/CheckoutPage";
+import VerifyPayment from "@/pages/VerifyPayment/VerifyPayment";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
         path: "checkout",
         element: <ProtectedRoutes />,
         children: [{ index: true, element: <CheckoutPage /> }],
+      },
+      {
+        path: "verifyPayment",
+        element: <ProtectedRoutes />,
+        children: [{ index: true, element: <VerifyPayment /> }],
       },
       {
         path: "/about",
