@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -10,7 +10,6 @@ import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { successTheme } from "@/styles/toastThemes";
 import toast from "react-hot-toast";
-import { ShoppingCart } from "lucide-react";
 import { selectCartTotalQuantity } from "@/redux/features/cart/cartSlice";
 
 export function Navbar() {
@@ -25,6 +24,13 @@ export function Navbar() {
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logout success", successTheme);
+  };
+
+  const getDashboardPath = () => {
+    if (loggedInUser?.role === "admin" || loggedInUser?.role === "superAdmin") {
+      return "/dashboard/admin";
+    }
+    return "/dashboard/user";
   };
 
   const navLinks = [
@@ -65,6 +71,18 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
+          {loggedInUser && (
+            <Link
+              to={getDashboardPath()}
+              className={`text-sm font-medium transition-colors ${
+                isActive("/dashboard")
+                  ? "text-red-600 font-semibold"
+                  : "hover:text-red-500"
+              }`}
+            >
+              Dashboard
+            </Link>
+          )}
         </nav>
 
         {/*---------------- Desktop Actions ----------------*/}
@@ -81,20 +99,20 @@ export function Navbar() {
         )}
         {loggedInUser && (
           <div className="hidden md:flex items-center gap-4">
-            <Button onClick={handleLogout} variant="outline">
-              Logout
-            </Button>
-            <ThemeToggle />
             <Link to="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 text-primary" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {cartQuantity}
               </span>
             </Link>
+            <ThemeToggle />
+            <Button onClick={handleLogout} variant="outline">
+              Logout
+            </Button>
           </div>
         )}
-        {/* ----------------Mobile Menu---------------- */}
 
+        {/* ----------------Mobile Menu---------------- */}
         <div className="flex items-center gap-4 md:hidden">
           {loggedInUser && (
             <Link to="/cart" className="relative">
@@ -138,6 +156,19 @@ export function Navbar() {
                     {link.label}
                   </Link>
                 ))}
+                {loggedInUser && (
+                  <Link
+                    to={getDashboardPath()}
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-sm font-medium transition-colors ${
+                      isActive("/dashboard")
+                        ? "text-red-600 font-semibold"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Dashboard
+                  </Link>
+                )}
                 {!loggedInUser && (
                   <div className="mt-6 flex flex-col gap-3">
                     <Link to="/login" onClick={() => setMenuOpen(false)}>
