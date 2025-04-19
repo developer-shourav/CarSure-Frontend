@@ -83,7 +83,8 @@ export default function ProductDetails() {
               <p>Brand: {product.brand}</p>
               <p>Model: {product.model}</p>
               <p>Category: {product.category}</p>
-              <p>Stock: {product.stockQty} available</p>
+              <p>Car Left: {product.quantity} Only</p>
+              <p>Stock: {product.inStock ? 'available' : 'out of stock'} </p>
             </div>
 
             {/* --------Quantity Selector --------*/}
