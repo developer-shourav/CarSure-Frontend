@@ -64,8 +64,8 @@ export default function ProductDetails() {
           {/* --- Product Image Gallery --- */}
           <div className="space-y-4">
             <img
-              src={product.productImg}
-              alt={product.carName}
+              src={product?.productImg}
+              alt={product?.carName}
               className="w-full h-96 object-cover rounded-xl shadow"
             />
             {/* Mini image gallery can go here if you have multiple images */}
@@ -73,18 +73,18 @@ export default function ProductDetails() {
 
           {/* --- Product Info --- */}
           <div className="space-y-4">
-            <h2 className="text-3xl font-bold">{product.carName}</h2>
+            <h2 className="text-3xl font-bold">{product?.carName}</h2>
 
             <p className="text-xl font-semibold text-red-600">
-              ${product.price.toLocaleString()}
+              ${product?.price.toLocaleString()}
             </p>
 
             <div className="text-sm space-y-1">
-              <p>Brand: {product.brand}</p>
-              <p>Model: {product.model}</p>
-              <p>Category: {product.category}</p>
-              <p>Car Left: {product.quantity} Only</p>
-              <p>Stock: {product.inStock ? 'available' : 'out of stock'} </p>
+              <p>Brand: {product?.brand}</p>
+              <p>Model: {product?.model}</p>
+              <p>Category: {product?.category}</p>
+              <p>Car Left: {product?.quantity} Only</p>
+              <p>Stock: {product?.inStock ? 'available' : 'out of stock'} </p>
             </div>
 
             {/* --------Quantity Selector --------*/}
@@ -123,10 +123,10 @@ export default function ProductDetails() {
                       addToCart({
                         userId: loggedInUser.userId,
                         item: {
-                          id: product._id,
-                          name: product.carName,
-                          price: product.price,
-                          image: product.productImg,
+                          id: product?._id,
+                          name: product?.carName,
+                          price: product?.price,
+                          image: product?.productImg,
                           quantity,
                         },
                       })
@@ -147,7 +147,7 @@ export default function ProductDetails() {
         </div>
 
         {/*-----Product Details Description---------  */}
-        <ProductDescription description={product.description} />
+        <ProductDescription description={product?.description} />
 
         {/* --- Similar Products --- */}
         <div className="mt-16">
