@@ -12,7 +12,9 @@ import { successTheme } from "@/styles/toastThemes";
 import DashboardBodyWrapper from "@/components/ui/wrapper/DashboardBodyWrapper";
 import { DashboardHeading } from "@/components/ui/WebsiteHeading/DashboardHeading";
 import { useAppSelector } from "@/redux/hooks";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 type FormData = {
   name: string;
@@ -22,17 +24,18 @@ type FormData = {
 
 export default function ProfileSettings() {
   const user = useAppSelector(selectCurrentUser);
-
-  const {data} = useGetSingleUserQuery(user?.userId, {
+  const { data } = useGetSingleUserQuery(user?.userId, {
     refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
   });
-
   const currentUserData = data?.data;
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); 
+
   const [preview, setPreview] = useState<string | null>(
     data?.data?.profileImg || null
   );
   const [uploading, setUploading] = useState(false);
-
   const [updateUserInfo, { isLoading, isSuccess, isError }] =
     useUpdateUserInfoMutation();
 
@@ -41,6 +44,7 @@ export default function ProfileSettings() {
     handleSubmit,
     formState: { errors },
     watch,
+
   } = useForm<FormData>({
     defaultValues: {
       name: currentUserData?.name || "",
@@ -62,6 +66,12 @@ export default function ProfileSettings() {
     }
   }, [profileImgFile, currentUserData?.profileImg]);
 
+  // Logout logic
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   // Form submission
   const onSubmit = async (data: FormData) => {
     try {
@@ -72,7 +82,7 @@ export default function ProfileSettings() {
       if (data.profileImg && data.profileImg.length > 0) {
         const formData = new FormData();
         formData.append("file", data.profileImg[0]);
-        formData.append("upload_preset", "CarSure_Nari"); // Change this
+        formData.append("upload_preset", "CarSure_Nari");
         const res = await fetch(
           "https://api.cloudinary.com/v1_1/dinnsayed/image/upload",
           {
@@ -99,10 +109,21 @@ export default function ProfileSettings() {
     }
   };
 
-  // Toast feedback
+  // Success/Error toasts
   useEffect(() => {
     if (isError) toast.error("Error: Update failed!");
-    if (isSuccess) toast.success("User updated successfully!", successTheme);
+
+    if (isSuccess) {
+      toast.success("User updated successfully!", successTheme);
+
+      // If user updated email, logout after delay
+      if (watch("email") !== currentUserData?.email) {
+        setTimeout(() => {
+          toast("You changed your email. Please login again.");
+          handleLogout();
+        }, 3000); // 3s delay
+      }
+    }
   }, [isSuccess, isError]);
 
   return (
@@ -135,6 +156,11 @@ export default function ProfileSettings() {
           {errors.email && (
             <p className="text-sm text-red-500">{errors.email.message}</p>
           )}
+          {/* ⬇️ Permanent note */}
+          <p className="text-sm text-muted-foreground mt-2 italic">
+            [Note: If you change your email, you will need to login again using the
+            new one after saving.]
+          </p>
         </div>
 
         {/* Profile Image */}
