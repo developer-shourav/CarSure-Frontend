@@ -1,20 +1,3 @@
-Here is the English translation of the provided guidelines for a Product & Service based website:
-
-**Product & Service based website Homepage:**
-
-1.  For the logo on the homepage, you can use a PNG file. Ensure the background is removed.
-2.  Keep the menu text size regular.
-3.  The background color will be full on both sides of the menu and logo, but there will be a gap on both sides of the text and logo image.
-4.  There will be gaps on both sides of the Carousel, aligned with the logo and menu text.
-5.  The height of the Carousel should be such that an idea of the section below is visible.
-6.  For service or product websites, keep at least 4 cards in each row. The card size should not be too large.
-7.  The cards should contain relevant information, such as an image, title, price, and review (if available, it's good).
-8.  For product or service pages, the product or service should be highlighted. Present the products in various ways. For example, in the case of an e-commerce website, you can see Hot Products, Best Products, and All Products. You can categorize products into different sections like this. The same applies to services.
-9.  The website can have 1-2 promotional banners.
-10. For the footer, you can divide it into 3-4 columns. These can include the company logo + tagline, menu or additional pages, newsletter, and social media links in another column. Besides this, payment and other information can be included.
-11. The content of the website should be written in your own words. Avoid copying and pasting.
-12. When writing taglines, they should be dynamic. For example, for the homepage tagline, it would be good to have "[Domain Name] Homepage". For the login page, "Login Page" and so on for Product/Service details pages.
-
 **Product/Service Details Page:**
 
 1.  This page must have a navbar.
@@ -31,23 +14,10 @@ Here is the English translation of the provided guidelines for a Product & Servi
 1.  This page will include the delivery address and payment information.
 2.  The order will essentially be placed once it is confirmed from the checkout page.
 
-**Overall:**
 
-1.  The design of each page will be responsive (for mobile, tablet, and desktop).
-2.  It would be good to use a maximum of 2 fonts throughout the entire website.
-3.  For color usage, you can check these two sites: [WebAim Contrast Checker](https://webaim.org/resources/contrastchecker/) and [RealTime Colors](https://www.realtimecolors.com/).
-4.  The gap between one section and another should not be too large.
-5.  You can take ideas from similar types of websites for color usage.
-6.  A hover effect can be used inside the cards.
-7.  Attention should be paid to ensure the website's loading time is low.
-8.  In addition to this, you can design some additional pages for the website, such as About Us, Company Policy, Contact, or others.
 
 **Dashboard Design:**
 
-1.  It would be good to keep the dashboard as black and white as possible.
-2.  The dashboard will have a navbar for the dashboard, but there will be no footer.
-3.  There will be at least 5-6 menus in the dashboard based on roles.
-4.  There will be a menu named "Overview/Dashboard" for all roles, which will contain statistical information. There will be three sections: the first section will have 3-4 cards, the second section will have 1-2 charts, and the third section will have 1-2 tables. You can include more if you want.
 5.  The design inside the "My Profile" page should take up the full page. You can take ideas from social media profile pages if you want.
 6.  For adding information, it would be good if the forms are designed to take up the full page. In that case, you can have 2-3 form fields in one line if you want. You can use a Modal for keeping less information.
 7.  "My Profile" and "Logout" will be in the menu.
