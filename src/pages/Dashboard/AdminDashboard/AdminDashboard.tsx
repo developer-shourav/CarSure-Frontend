@@ -37,7 +37,7 @@ const pieData = [
   { name: "Canceled", value: 100 },
 ];
 
-const COLORS = ["#ef4444", "#facc15", "#9ca3af"];
+const COLORS = ["#00A300", "#facc15", "#ef4444", "#7ec8e3"];
 
 const AdminDashboard = () => {
   return (
@@ -101,7 +101,7 @@ const AdminDashboard = () => {
                   outerRadius={70}
                   label
                 >
-                  {pieData.map((entry, index) => (
+                  {pieData.map((_entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index]} />
                   ))}
                 </Pie>

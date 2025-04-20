@@ -19,9 +19,10 @@ import {
 } from "@/components/ui/table";
 
 const orderStats = [
+  { month: "Dec", orders: 4 },
   { month: "Jan", orders: 2 },
   { month: "Feb", orders: 4 },
-  { month: "Mar", orders: 3 },
+  { month: "Mar", orders: 5 },
   { month: "Apr", orders: 8 },
 ];
 
@@ -54,7 +55,7 @@ const UserDashboard = () => {
 
       {/* Section 2: Chart */}
       <div className="mb-6">
-        <Card className="w-full lg:w-10/12">
+        <Card className="w-full lg:w-8/12">
           <CardContent className="p-4">
             <p className="text-lg font-semibold mb-2">Monthly Orders</p>
             <ResponsiveContainer width="100%" height={200}>

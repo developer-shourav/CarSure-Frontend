@@ -139,7 +139,7 @@ export default function VerifyPayment() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
-              {orderData?.is_verify === 1 ? (
+              {orderData?.bank_status === "Success" ? (
                 <>
                   <CheckCircle className="text-green-500" />
                   <span>Verified</span>
