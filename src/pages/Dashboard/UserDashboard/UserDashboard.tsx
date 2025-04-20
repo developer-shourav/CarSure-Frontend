@@ -1,10 +1,12 @@
 // src/pages/Dashboard/UserDashboard.tsx
 import { Card, CardContent } from "@/components/ui/card";
+import { DashboardHeading } from "@/components/ui/WebsiteHeading/DashboardHeading";
+import DashboardBodyWrapper from "@/components/ui/wrapper/DashboardBodyWrapper";
 
 const UserDashboard = () => {
   return (
-    <div className="p-6 space-y-4">
-      <h2 className="text-2xl font-bold">Welcome to Your Dashboard</h2>
+    <DashboardBodyWrapper>
+      <DashboardHeading title="Welcome to Your Dashboard" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardContent className="p-4">
@@ -19,7 +21,7 @@ const UserDashboard = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </DashboardBodyWrapper>
   );
 };
 
