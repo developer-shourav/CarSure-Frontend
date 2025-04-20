@@ -4,10 +4,15 @@ import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useUpdateUserInfoMutation } from "@/redux/features/user/userApi";
+import {
+  useGetSingleUserQuery,
+  useUpdateUserInfoMutation,
+} from "@/redux/features/user/userApi";
 import { successTheme } from "@/styles/toastThemes";
 import DashboardBodyWrapper from "@/components/ui/wrapper/DashboardBodyWrapper";
 import { DashboardHeading } from "@/components/ui/WebsiteHeading/DashboardHeading";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 type FormData = {
   name: string;
@@ -16,7 +21,16 @@ type FormData = {
 };
 
 export default function ProfileSettings() {
-  const [preview, setPreview] = useState<string | null>(null);
+  const user = useAppSelector(selectCurrentUser);
+
+  const {data} = useGetSingleUserQuery(user?.userId, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const currentUserData = data?.data;
+  const [preview, setPreview] = useState<string | null>(
+    data?.data?.profileImg || null
+  );
   const [uploading, setUploading] = useState(false);
 
   const [updateUserInfo, { isLoading, isSuccess, isError }] =
@@ -26,13 +40,17 @@ export default function ProfileSettings() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
     watch,
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: {
+      name: currentUserData?.name || "",
+      email: currentUserData?.email || "",
+    },
+  });
 
   const profileImgFile = watch("profileImg");
 
-  // Generate image preview
+  // Image preview logic
   useEffect(() => {
     if (profileImgFile && profileImgFile.length > 0) {
       const file = profileImgFile[0];
@@ -40,50 +58,48 @@ export default function ProfileSettings() {
       reader.onloadend = () => setPreview(reader.result as string);
       reader.readAsDataURL(file);
     } else {
-      setPreview(null);
+      setPreview(currentUserData?.profileImg || null);
     }
-  }, [profileImgFile]);
+  }, [profileImgFile, currentUserData?.profileImg]);
 
-  // Submit handler
+  // Form submission
   const onSubmit = async (data: FormData) => {
     try {
       setUploading(true);
-      let profileImgUrl = "";
+      let profileImgUrl = currentUserData?.profileImg || "";
 
+      // Upload to Cloudinary if new image selected
       if (data.profileImg && data.profileImg.length > 0) {
         const formData = new FormData();
         formData.append("file", data.profileImg[0]);
-        formData.append("upload_preset", "CarSure_Nari");
-
-        const cloudRes = await fetch(
+        formData.append("upload_preset", "CarSure_Nari"); // Change this
+        const res = await fetch(
           "https://api.cloudinary.com/v1_1/dinnsayed/image/upload",
           {
             method: "POST",
             body: formData,
           }
         );
-
-        const cloudData = await cloudRes.json();
-        profileImgUrl = cloudData.secure_url;
+        const resData = await res.json();
+        profileImgUrl = resData.secure_url;
       }
 
-      const updatePayload = {
+      const updatedData = {
         name: data.name,
         email: data.email,
-        ...(profileImgUrl && { profileImg: profileImgUrl }),
+        profileImg: profileImgUrl,
       };
 
-      await updateUserInfo(updatePayload);
-      reset();
-      setPreview(null);
-    } catch (err) {
+      await updateUserInfo(updatedData);
+    } catch (error) {
       toast.error("Image upload failed!");
-      console.log(err);
+      console.log(error);
     } finally {
       setUploading(false);
     }
   };
 
+  // Toast feedback
   useEffect(() => {
     if (isError) toast.error("Error: Update failed!");
     if (isSuccess) toast.success("User updated successfully!", successTheme);
@@ -96,12 +112,11 @@ export default function ProfileSettings() {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-6 max-w-2xl mt-6"
       >
-        {/* Name Field */}
+        {/* Name */}
         <div className="space-y-1">
           <Label htmlFor="name">Full Name</Label>
           <Input
             id="name"
-            placeholder="Your full name"
             {...register("name", { required: "Name is required" })}
           />
           {errors.name && (
@@ -109,13 +124,12 @@ export default function ProfileSettings() {
           )}
         </div>
 
-        {/* Email Field */}
+        {/* Email */}
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="email"
-            placeholder="example@email.com"
             {...register("email", { required: "Email is required" })}
           />
           {errors.email && (
@@ -123,7 +137,7 @@ export default function ProfileSettings() {
           )}
         </div>
 
-        {/* Profile Image Field */}
+        {/* Profile Image */}
         <div className="space-y-1">
           <Label htmlFor="profileImg">Profile Image</Label>
           <Input
@@ -135,7 +149,7 @@ export default function ProfileSettings() {
           {preview && (
             <img
               src={preview}
-              alt="Profile Preview"
+              alt="Preview"
               className="mt-2 h-28 w-28 rounded-full border object-cover"
             />
           )}
