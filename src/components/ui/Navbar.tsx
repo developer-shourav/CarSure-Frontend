@@ -124,9 +124,7 @@ export function Navbar() {
           )}
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-8 w-8" />
-              </Button>
+              <Menu className="h-6 w-6" />
             </SheetTrigger>
             <SheetContent side="left" className="w-64 pt-8">
               {/* ----------------Header inside drawer---------------- */}
