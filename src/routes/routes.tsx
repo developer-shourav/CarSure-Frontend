@@ -17,7 +17,6 @@ import ProtectedRoutes from "@/components/layout/ProtectedRoutes";
 import RoleBasedRoute from "@/components/layout/RoleBasedRoute";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 
-
 // Admin Dashboard Pages
 import AdminDashboard from "@/pages/Dashboard/AdminDashboard/AdminDashboard";
 import ManageUsers from "@/pages/Dashboard/admin/ManageUsers";
@@ -29,7 +28,6 @@ import UserDashboard from "@/pages/Dashboard/UserDashboard/UserDashboard";
 import MyOrders from "@/pages/Dashboard/user/MyOrders";
 import ProfileSettings from "@/pages/Dashboard/user/ProfileSettings";
 import ChangePassword from "@/pages/Dashboard/user/ChangePassword";
-
 
 const router = createBrowserRouter([
   {
@@ -62,39 +60,40 @@ const router = createBrowserRouter([
       },
 
       // Dashboard (protected for all roles)
+    ],
+  },
+
+  {
+    path: "dashboard",
+    element: <ProtectedRoutes />,
+    children: [
       {
-        path: "dashboard",
-        element: <ProtectedRoutes />,
+        element: <RoleBasedRoute allowedRoles={["admin", "user"]} />,
         children: [
           {
-            element: <RoleBasedRoute allowedRoles={["admin", "user"]} />,
+            path: "",
+            element: <DashboardLayout />,
             children: [
+              // Admin Routes
               {
-                path: "",
-                element: <DashboardLayout />,
+                path: "admin",
+                element: <RoleBasedRoute allowedRoles={["admin"]} />,
                 children: [
-                  // Admin Routes
-                  {
-                    path: "admin",
-                    element: <RoleBasedRoute allowedRoles={["admin"]} />,
-                    children: [
-                      { index: true, element: <AdminDashboard /> },
-                      { path: "users", element: <ManageUsers /> },
-                      { path: "products", element: <ManageProducts /> },
-                      { path: "orders", element: <ManageOrders /> },
-                    ],
-                  },
-                  // User Routes
-                  {
-                    path: "user",
-                    element: <RoleBasedRoute allowedRoles={["user"]} />,
-                    children: [
-                      { index: true, element: <UserDashboard /> },
-                      { path: "orders", element: <MyOrders /> },
-                      { path: "profile", element: <ProfileSettings /> },
-                      { path: "change-password", element: <ChangePassword /> },
-                    ],
-                  },
+                  { index: true, element: <AdminDashboard /> },
+                  { path: "users", element: <ManageUsers /> },
+                  { path: "products", element: <ManageProducts /> },
+                  { path: "orders", element: <ManageOrders /> },
+                ],
+              },
+              // User Routes
+              {
+                path: "user",
+                element: <RoleBasedRoute allowedRoles={["user"]} />,
+                children: [
+                  { index: true, element: <UserDashboard /> },
+                  { path: "orders", element: <MyOrders /> },
+                  { path: "profile", element: <ProfileSettings /> },
+                  { path: "change-password", element: <ChangePassword /> },
                 ],
               },
             ],

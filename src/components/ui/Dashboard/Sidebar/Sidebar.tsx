@@ -1,18 +1,23 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { SidebarIcon } from "lucide-react";
-import { useAppSelector } from "@/redux/hooks";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-
+import { HomeIcon, LayoutDashboardIcon, LogOut } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import navLogo from "@/assets/logo/logo.png";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
   const user = useAppSelector(selectCurrentUser);
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
-  const isActive = (path: string) =>
-    location.pathname === path ;
+  const isActive = (path: string) => location.pathname === path;
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("Logout successfully");
+  };
 
   const adminLinks = [
     { to: "/dashboard/admin", label: "Admin Dashboard" },
@@ -38,12 +43,20 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Sidebar Button */}
-      <div className=" md:hidden absolute top-20 left-4 z-50 ">
+      <div className=" md:hidden absolute top-4 left-4 z-50 ">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
-            <SidebarIcon className="size-7"/>
+            <div title="Dashboard">
+              <LayoutDashboardIcon className="size-7" />
+            </div>
           </SheetTrigger>
           <SheetContent side="left" className="w-64 p-4">
+            <Link to="/" className="flex items-center gap-2 mb-6">
+              <img src={navLogo} alt="Logo" className="h-8 w-8" />
+              <span className="font-bold text-primary text-lg">
+                Car<span className="text-red-500">Sure</span>
+              </span>
+            </Link>
             <p className="text-lg font-semibold ">Dashboard</p>
             <nav className="flex flex-col gap-1">
               {links.map((link) => (
@@ -60,6 +73,30 @@ const Sidebar = () => {
                   {link.label}
                 </Link>
               ))}
+
+              <Link
+                to="/"
+                className={`rounded mt-8 px-2 py-2 text-sm font-medium transition-colors ${
+                  isActive("/")
+                    ? "bg-primary dark:bg-red-500 text-white"
+                    : " hover:bg-accent "
+                }`}
+              >
+                <span className="flex items-end gap-2">
+                  <HomeIcon className="size-5" />
+                  <span>Return Home</span>
+                </span>
+              </Link>
+
+              <button
+                onClick={handleLogout}
+                className={`rounded px-2 py-2 text-sm font-medium hover:bg-red-500`}
+              >
+                <span className="flex items-end gap-2">
+                  <LogOut className="size-5" />
+                  <span>Logout</span>
+                </span>
+              </button>
             </nav>
           </SheetContent>
         </Sheet>
@@ -67,6 +104,12 @@ const Sidebar = () => {
 
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex md:flex-col w-64 h-screen p-6 border-r border-border bg-background">
+        <Link to="/" className="flex items-center gap-2 mb-6">
+          <img src={navLogo} alt="Logo" className="h-12 w-12" />
+          <span className="font-bold text-primary text-lg">
+            Car<span className="text-red-500">Sure</span>
+          </span>
+        </Link>
         <nav className="flex flex-col gap-2">
           {links.map((link) => (
             <Link
@@ -75,12 +118,36 @@ const Sidebar = () => {
               className={`rounded px-3 py-2 text-sm font-medium transition-colors ${
                 isActive(link.to)
                   ? "bg-primary dark:bg-red-500 text-white"
-                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                  : " hover:bg-accent"
               }`}
             >
               {link.label}
             </Link>
           ))}
+
+          <Link
+            to="/"
+            className={`rounded mt-10 px-3 py-2 text-sm font-medium transition-colors ${
+              isActive("/")
+                ? "bg-primary dark:bg-red-500 text-white"
+                : " hover:bg-accent "
+            }`}
+          >
+            <span className="flex items-end gap-2">
+              <HomeIcon className="size-5" />
+              <span>Return Home</span>
+            </span>
+          </Link>
+
+          <button
+            onClick={handleLogout}
+            className={`rounded px-3 py-2 text-sm font-medium hover:bg-red-500`}
+          >
+            <span className="flex items-end gap-2">
+              <LogOut className="size-5" />
+              <span>Logout</span>
+            </span>
+          </button>
         </nav>
       </aside>
     </>
