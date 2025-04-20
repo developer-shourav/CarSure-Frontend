@@ -1,4 +1,10 @@
+import { DashboardHeading } from "@/components/ui/WebsiteHeading/DashboardHeading";
+import DashboardBodyWrapper from "@/components/ui/wrapper/DashboardBodyWrapper";
 
 export default function ProfileSettings() {
-  return <div>ProfileSettings</div>;
+  return (
+    <DashboardBodyWrapper>
+      <DashboardHeading title="Profile Settings" />
+    </DashboardBodyWrapper>
+  );
 }

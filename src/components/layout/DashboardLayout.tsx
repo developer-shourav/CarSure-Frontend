@@ -4,9 +4,9 @@ import Sidebar from "../ui/Dashboard/Sidebar/Sidebar";
 
 export default function DashboardLayout() {
   return (
-    <div className="max-w-[98%] mx-auto flex min-h-screen">
+    <div className="md:max-w-[1333px] mx-auto md:px-4 flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 p-4 overflow-y-auto">
+      <main className="overflow-y-auto">
         <Outlet />
         <ScrollRestoration />
       </main>
