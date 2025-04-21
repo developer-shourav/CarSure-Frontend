@@ -9,8 +9,17 @@ import { successTheme } from "@/styles/toastThemes";
 import { TUserData } from "@/types";
 import clsx from "clsx";
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
+
 export default function ManageUsers() {
-  // Fetch all users
   const {
     data: users,
     isLoading,
@@ -23,7 +32,6 @@ export default function ManageUsers() {
 
   const allUsers = users?.data || [];
 
-  // Deactivation mutation
   const [
     deactivateUser,
     { isSuccess: isDeactiveSuccess, isLoading: deactivating },
@@ -49,47 +57,42 @@ export default function ManageUsers() {
       <DashboardHeading title="Manage Users" />
 
       {isLoading ? (
-        <div className="mt-6 overflow-x-auto animate-pulse">
-          <table className="min-w-full table-auto border border-gray-200 dark:border-gray-700">
-            <thead className="bg-gray-100 dark:bg-gray-800">
-              <tr>
+        <div className="mt-6 overflow-x-auto">
+          <Table className="border">
+            <TableHeader>
+              <TableRow>
                 {["#", "Name", "Email", "Role", "Status", "Action"].map(
                   (title) => (
-                    <th key={title} className="px-4 py-2 text-left">
-                      {title}
-                    </th>
+                    <TableHead key={title}>{title}</TableHead>
                   )
                 )}
-              </tr>
-            </thead>
-            <tbody>
-              {[...Array(6)].map((_, index) => (
-                <tr
-                  key={index}
-                  className="border-t border-gray-200 dark:border-gray-700"
-                >
-                  <td className="px-4 py-2">
-                    <div className="h-4 w-6 bg-gray-300 dark:bg-gray-700 rounded" />
-                  </td>
-                  <td className="px-4 py-2">
-                    <div className="h-4 w-32 bg-gray-300 dark:bg-gray-700 rounded" />
-                  </td>
-                  <td className="px-4 py-2">
-                    <div className="h-4 w-48 bg-gray-300 dark:bg-gray-700 rounded" />
-                  </td>
-                  <td className="px-4 py-2">
-                    <div className="h-4 w-20 bg-gray-300 dark:bg-gray-700 rounded" />
-                  </td>
-                  <td className="px-4 py-2">
-                    <div className="h-4 w-16 bg-gray-300 dark:bg-gray-700 rounded" />
-                  </td>
-                  <td className="px-4 py-2">
-                    <div className="h-8 w-24 bg-gray-300 dark:bg-gray-700 rounded" />
-                  </td>
-                </tr>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {[...Array(6)].map((_, i) => (
+                <TableRow key={i}>
+                  <TableCell>
+                    <Skeleton className="h-4 w-4" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-32" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-48" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-20" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-16" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-8 w-24" />
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       ) : isError ? (
         <p className="text-center mt-20 text-red-600 text-2xl font-semibold">
@@ -97,38 +100,35 @@ export default function ManageUsers() {
         </p>
       ) : (
         <div className="mt-6 overflow-x-auto">
-          <table className="min-w-full table-auto border border-gray-200 dark:border-gray-700">
-            <thead className="bg-gray-100 dark:bg-gray-800">
-              <tr>
-                <th className="px-4 py-2 text-left">#</th>
-                <th className="px-4 py-2 text-left">Name</th>
-                <th className="px-4 py-2 text-left">Email</th>
-                <th className="px-4 py-2 text-left">Role</th>
-                <th className="px-4 py-2 text-left">Status</th>
-                <th className="px-4 py-2 text-left">Action</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table className="border">
+            <TableHeader>
+              <TableRow>
+                <TableHead>#</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {allUsers.map((user: TUserData, index: number) => (
-                <tr
+                <TableRow
                   key={user._id}
-                  className={clsx(
-                    "border-t border-gray-200 dark:border-gray-700",
-                    user.role === "admin" ? "hidden" : " "
-                  )}
+                  className={clsx(user.role === "admin" && "hidden")}
                 >
-                  <td className="px-4 py-2">{index + 1}</td>
-                  <td className="px-4 py-2">{user.name}</td>
-                  <td className="px-4 py-2">{user.email}</td>
-                  <td className="px-4 py-2 capitalize">{user.role}</td>
-                  <td className="px-4 py-2">
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell className="capitalize">{user.role}</TableCell>
+                  <TableCell>
                     {user.isBlocked ? (
                       <span className="text-red-500 font-medium">Blocked</span>
                     ) : (
                       <span className="text-green-500 font-medium">Active</span>
                     )}
-                  </td>
-                  <td className="px-4 py-2">
+                  </TableCell>
+                  <TableCell>
                     <Button
                       className="dark:bg-red-500 hover:text-white hover:bg-red-600"
                       size="sm"
@@ -137,11 +137,11 @@ export default function ManageUsers() {
                     >
                       {user.isBlocked ? "Deactivated" : "Deactivate"}
                     </Button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       )}
     </DashboardBodyWrapper>
