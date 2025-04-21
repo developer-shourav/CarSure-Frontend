@@ -26,7 +26,6 @@ export default function ProfileSettings() {
   const user = useAppSelector(selectCurrentUser);
   const { data } = useGetSingleUserQuery(user?.userId, {
     refetchOnMountOrArgChange: true,
-    refetchOnFocus: true,
   });
   const currentUserData = data?.data;
   const dispatch = useDispatch();

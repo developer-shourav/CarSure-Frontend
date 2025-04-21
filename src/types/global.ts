@@ -30,3 +30,15 @@ export type TQueryParam = {
   name: string;
   value: boolean | React.Key;
 };
+
+
+export interface TUserData {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  _id?: any;
+  name: string;
+  email: string;
+  password: string;
+  role: 'admin' | 'user';
+  profileImg?: string;
+  isBlocked: boolean;
+}
