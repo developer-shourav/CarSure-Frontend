@@ -48,9 +48,52 @@ export default function ManageUsers() {
       <DashboardHeading title="Manage Users" />
 
       {isLoading ? (
-        <p className="text-center mt-10">Loading users...</p>
+        <div className="mt-6 overflow-x-auto animate-pulse">
+          <table className="min-w-full table-auto border border-gray-200 dark:border-gray-700">
+            <thead className="bg-gray-100 dark:bg-gray-800">
+              <tr>
+                {["#", "Name", "Email", "Role", "Status", "Action"].map(
+                  (title) => (
+                    <th key={title} className="px-4 py-2 text-left">
+                      {title}
+                    </th>
+                  )
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {[...Array(6)].map((_, index) => (
+                <tr
+                  key={index}
+                  className="border-t border-gray-200 dark:border-gray-700"
+                >
+                  <td className="px-4 py-2">
+                    <div className="h-4 w-6 bg-gray-300 dark:bg-gray-700 rounded" />
+                  </td>
+                  <td className="px-4 py-2">
+                    <div className="h-4 w-32 bg-gray-300 dark:bg-gray-700 rounded" />
+                  </td>
+                  <td className="px-4 py-2">
+                    <div className="h-4 w-48 bg-gray-300 dark:bg-gray-700 rounded" />
+                  </td>
+                  <td className="px-4 py-2">
+                    <div className="h-4 w-20 bg-gray-300 dark:bg-gray-700 rounded" />
+                  </td>
+                  <td className="px-4 py-2">
+                    <div className="h-4 w-16 bg-gray-300 dark:bg-gray-700 rounded" />
+                  </td>
+                  <td className="px-4 py-2">
+                    <div className="h-8 w-24 bg-gray-300 dark:bg-gray-700 rounded" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : isError ? (
-        <p className="text-center mt-10 text-red-500">Failed to load users.</p>
+        <p className="text-center mt-20 text-red-600 text-2xl font-semibold">
+          Failed to load users. Please try again later.
+        </p>
       ) : (
         <div className="mt-6 overflow-x-auto">
           <table className="min-w-full table-auto border border-gray-200 dark:border-gray-700">
