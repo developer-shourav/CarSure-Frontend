@@ -26,6 +26,7 @@ const productManagementApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
+      providesTags: ["Products"],
     }),
     getProductDetails: builder.query({
       query: (id) => {
@@ -39,6 +40,36 @@ const productManagementApi = baseApi.injectEndpoints({
           data: response.data,
         };
       },
+      providesTags: ["Products"],
+    }),
+    addProduct: builder.mutation({
+      query: (data) => {
+        return {
+          url: '/car',
+          method: 'POST',
+          body: data,
+        };
+      },
+      invalidatesTags: ["Products"],
+    }),
+    updateProduct: builder.mutation({
+      query: ({ id, data }) => {
+        return {
+          url: `/car/${id}`,
+          method: 'PATCH',
+          body: data,
+        };
+      },
+      invalidatesTags: ["Products"],
+    }),
+    deleteProduct: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/car/${id}`,
+          method: 'DELETE',
+        };
+      },
+      invalidatesTags: ["Products"],
     }),
   }),
 });
@@ -46,4 +77,7 @@ const productManagementApi = baseApi.injectEndpoints({
 export const {
   useGetAllProductsQuery,
   useGetProductDetailsQuery,
+  useAddProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } = productManagementApi;
