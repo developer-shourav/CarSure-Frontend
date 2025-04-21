@@ -111,6 +111,7 @@ export default function AllProducts() {
     isFetching,
   } = useGetAllProductsQuery(params, {
     pollingInterval: 300000,
+    refetchOnReconnect: true,
   });
 
   const isLoadingState = isLoading || isFetching;

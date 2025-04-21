@@ -15,6 +15,7 @@ export default function SuggestedCars() {
     ],
     {
       pollingInterval: 300000,
+      refetchOnReconnect: true,
     }
   );
 

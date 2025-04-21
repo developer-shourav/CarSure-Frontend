@@ -18,6 +18,7 @@ export default function ManageUsers() {
   } = useGetAllUsersQuery(undefined, {
     pollingInterval: 250000,
     refetchOnFocus: true,
+    refetchOnReconnect: true,
   });
 
   const allUsers = users?.data || [];
@@ -129,7 +130,7 @@ export default function ManageUsers() {
                   </td>
                   <td className="px-4 py-2">
                     <Button
-                      className="dark:bg-red-500"
+                      className="dark:bg-red-500 hover:text-white hover:bg-red-600"
                       size="sm"
                       disabled={user.isBlocked || deactivating}
                       onClick={() => handleUserDeactivation(user._id)}

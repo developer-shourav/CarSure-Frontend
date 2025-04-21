@@ -12,6 +12,7 @@ export default function CarShowcase() {
     isFetching,
   } = useGetAllProductsQuery([{ name: "limit", value: "8" }], {
     pollingInterval: 300000,
+    refetchOnReconnect: true,
   });
 
   const isLoadingState = isLoading || isFetching;

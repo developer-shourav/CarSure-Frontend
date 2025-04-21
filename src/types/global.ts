@@ -42,3 +42,30 @@ export interface TUserData {
   profileImg?: string;
   isBlocked: boolean;
 }
+
+
+export type TOrder = {
+  _id: string;
+  user: string;
+  carId: string;
+  customerInfo: {
+    name: string;
+    address: string;
+    email: string;
+    phone: string;
+    city: string;
+    userIP: string;
+  };
+  quantity: number;
+  totalPrice: number;
+  status: "Pending" | "Paid" | "Shipped" | "Completed" | "Cancelled";
+  transaction?: {
+    id: string;
+    transactionStatus: string;
+    bank_status: string;
+    sp_code: string;
+    sp_message: string;
+    method: string;
+    date_time: string;
+  };
+};

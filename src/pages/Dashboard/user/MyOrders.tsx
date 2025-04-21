@@ -11,6 +11,7 @@ export default function MyOrders() {
   const { isLoading, data } = useGetUserOrdersQuery(user?.userId, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 300000,
+    refetchOnReconnect: true,
   });
 
   return (
