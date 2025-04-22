@@ -47,7 +47,7 @@
   - Register with name, email, and password
   - Login with JWT stored in `localStorage`
   - Logout clears session
-  - Default role: `user` (admin must be set manually)
+  - Default role: `user` 
 
 - **Checkout**
 
@@ -72,7 +72,7 @@
 - Fully responsive design
 - Dark & Light mode support
 - Clean, accessible layout using Tailwind + ShadCN
-- Loading spinners during API calls
+- Skeleton(instead of normal boring spinner/loader) during API calls
 - Toast notifications for user actions (e.g., login, errors, orders)
 
 ---
@@ -98,6 +98,7 @@
 - **SurjoPay** Payment Integration
 
 ---
+
 ## 🚀 Local Development Setup
 
 ### Prerequisites
@@ -136,6 +137,7 @@ npm run start:dev
 ```
 
 ### 🖥️ Frontend Setup
+
 ```bash
 # Clone the repo
 git clone https://github.com/developer-shourav/CarSure-Frontend.git
@@ -145,15 +147,16 @@ cd CarSure-Frontend
 npm install
 
 # Start the app
-npm run dev 
+npm run dev
 ```
+
 ---
 
 ## 📽️ Project Introduction Video
 
 ## Project Overview Video
 
-<a href='https://drive.google.com/file/d/1pcnRsgpy2-w2cPKWfWU6PXf0QXHhkSZ8/view?usp=drive_link' target=_blank>
+<a href='https://drive.google.com/file/d/1jkaWCtRyiTNzr66utA6GmntsW322MY2S/view?usp=sharing' target=_blank>
     <img width='350px' src="https://i.ibb.co.com/0RjxFvKS/watch-video-button-01.png" />
 </a>
 
