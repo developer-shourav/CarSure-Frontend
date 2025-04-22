@@ -25,7 +25,8 @@ type FormData = {
 export default function ProfileSettings() {
   const user = useAppSelector(selectCurrentUser);
   const { data } = useGetSingleUserQuery(user?.userId, {
-    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
   });
   const currentUserData = data?.data;
   const dispatch = useDispatch();
@@ -130,7 +131,7 @@ export default function ProfileSettings() {
       <DashboardHeading title="Profile Settings" />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6 max-w-2xl mt-6"
+        className="space-y-6 max-w-xl mt-6"
       >
         {/* Name */}
         <div className="space-y-1">

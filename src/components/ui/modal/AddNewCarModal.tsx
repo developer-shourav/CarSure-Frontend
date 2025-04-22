@@ -49,7 +49,7 @@ export default function AddNewCarModal() {
     reset,
     watch,
     setValue,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<TCar>();
 
   const quantity = watch("quantity");
@@ -119,7 +119,7 @@ export default function AddNewCarModal() {
           className="dark:bg-red-500 dark:text-white dark:hover:text-black dark:hover:bg-white hover:bg-red-600"
           onClick={() => setOpen(true)}
         >
-         <Plus/> Add New Car
+          <Plus /> Add New Car
         </Button>
       </div>
 
@@ -130,19 +130,22 @@ export default function AddNewCarModal() {
       >
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <Label className="mb-2 ">Car Name</Label>
+            <Label className="mb-2">Car Name</Label>
             <Input
               className="dark:border-1 dark:border-[#0000004d]"
-              {...register("carName")}
+              {...register("carName", { required: "Car name is required" })}
               placeholder="Car Name"
             />
+            {errors.carName && (
+              <p className="text-red-500 text-sm">{errors.carName.message}</p>
+            )}
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
               <Label className="mb-2">Brand</Label>
               <select
-                {...register("brand")}
+                {...register("brand", { required: "Brand is required" })}
                 className="w-full border p-2 rounded-md dark:border-[#0000004d]"
               >
                 <option value="">Select brand</option>
@@ -152,12 +155,15 @@ export default function AddNewCarModal() {
                   </option>
                 ))}
               </select>
+              {errors.brand && (
+                <p className="text-red-500 text-sm">{errors.brand.message}</p>
+              )}
             </div>
 
             <div>
               <Label className="mb-2">Model</Label>
               <select
-                {...register("model")}
+                {...register("model", { required: "Model is required" })}
                 className="w-full border p-2 rounded-md dark:border-[#0000004d]"
               >
                 <option value="">Select model</option>
@@ -167,12 +173,17 @@ export default function AddNewCarModal() {
                   </option>
                 ))}
               </select>
+              {errors.model && (
+                <p className="text-red-500 text-sm">{errors.model.message}</p>
+              )}
             </div>
 
             <div>
               <Label className="mb-2">Category</Label>
               <select
-                {...register("category")}
+                {...register("category", {
+                  required: "Category is required",
+                })}
                 className="w-full border p-2 rounded-md dark:border-[#0000004d]"
               >
                 <option value="">Select category</option>
@@ -182,26 +193,37 @@ export default function AddNewCarModal() {
                   </option>
                 ))}
               </select>
+              {errors.category && (
+                <p className="text-red-500 text-sm">
+                  {errors.category.message}
+                </p>
+              )}
             </div>
 
             <div>
               <Label className="mb-2">Year</Label>
               <Input
                 className="dark:border-1 dark:border-[#0000004d]"
-                {...register("year")}
+                {...register("year", { required: "Year is required" })}
                 type="number"
                 placeholder="Year"
               />
+              {errors.year && (
+                <p className="text-red-500 text-sm">{errors.year.message}</p>
+              )}
             </div>
 
             <div>
               <Label className="mb-2">Price</Label>
               <Input
                 className="dark:border-1 dark:border-[#0000004d]"
-                {...register("price")}
+                {...register("price", { required: "Price is required" })}
                 type="number"
                 placeholder="Price"
               />
+              {errors.price && (
+                <p className="text-red-500 text-sm">{errors.price.message}</p>
+              )}
             </div>
 
             <div>
@@ -209,28 +231,43 @@ export default function AddNewCarModal() {
               <Input
                 className="dark:border-1 dark:border-[#0000004d]"
                 type="number"
-                {...register("quantity")}
+                {...register("quantity", { required: "Quantity is required" })}
                 onChange={handleQuantityChange}
               />
+              {errors.quantity && (
+                <p className="text-red-500 text-sm">
+                  {errors.quantity.message}
+                </p>
+              )}
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
-              {...register("inStock")}
+              {...register("inStock", { required: "Stock status is required" })}
               onChange={handleInStockChange}
             />
             <Label className="">In Stock</Label>
+            {errors.inStock && (
+              <p className="text-red-500 text-sm">{errors.inStock.message}</p>
+            )}
           </div>
 
           <div>
             <Label className="mb-2">Description</Label>
             <textarea
-              {...register("description")}
+              {...register("description", {
+                required: "Description is required",
+              })}
               placeholder="Write a short description about the car"
               className="w-full border p-2 rounded-md dark:border-[#0000004d]"
             />
+            {errors.description && (
+              <p className="text-red-500 text-sm">
+                {errors.description.message}
+              </p>
+            )}
           </div>
 
           <div>
@@ -244,7 +281,11 @@ export default function AddNewCarModal() {
           </div>
 
           <div className="text-right">
-            <Button type="submit" disabled={isSubmitting}>
+            <Button
+              className="dark:bg-red-500 text-white hover:bg-red-600"
+              size="sm"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Adding..." : "Add Car"}
             </Button>
           </div>
