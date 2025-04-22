@@ -24,13 +24,16 @@ type FormData = {
 
 export default function ProfileSettings() {
   const user = useAppSelector(selectCurrentUser);
-  const { data } = useGetSingleUserQuery(user?.userId, {
-    refetchOnFocus: true,
-    refetchOnReconnect: true,
-  });
+  const { isLoading: userDataLoading, data } = useGetSingleUserQuery(
+    user?.userId,
+    {
+      refetchOnFocus: true,
+      refetchOnReconnect: true,
+    }
+  );
   const currentUserData = data?.data;
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const [preview, setPreview] = useState<string | null>(
     data?.data?.profileImg || null
@@ -44,7 +47,6 @@ export default function ProfileSettings() {
     handleSubmit,
     formState: { errors },
     watch,
-
   } = useForm<FormData>({
     defaultValues: {
       name: currentUserData?.name || "",
@@ -129,66 +131,68 @@ export default function ProfileSettings() {
   return (
     <DashboardBodyWrapper>
       <DashboardHeading title="Profile Settings" />
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6 max-w-xl mt-6"
-      >
-        {/* Name */}
-        <div className="space-y-1">
-          <Label htmlFor="name">Full Name</Label>
-          <Input
-            id="name"
-            {...register("name", { required: "Name is required" })}
-          />
-          {errors.name && (
-            <p className="text-sm text-red-500">{errors.name.message}</p>
-          )}
-        </div>
-
-        {/* Email */}
-        <div className="space-y-1">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            {...register("email", { required: "Email is required" })}
-          />
-          {errors.email && (
-            <p className="text-sm text-red-500">{errors.email.message}</p>
-          )}
-          {/* ⬇️ Permanent note */}
-          <p className="text-sm text-muted-foreground mt-2 italic">
-            [Note: If you change your email, you will need to login again using the
-            new one after saving.]
-          </p>
-        </div>
-
-        {/* Profile Image */}
-        <div className="space-y-1">
-          <Label htmlFor="profileImg">Profile Image</Label>
-          <Input
-            id="profileImg"
-            type="file"
-            accept="image/*"
-            {...register("profileImg")}
-          />
-          {preview && (
-            <img
-              src={preview}
-              alt="Preview"
-              className="mt-2 h-28 w-28 rounded-full border object-cover"
-            />
-          )}
-        </div>
-
-        <Button
-          type="submit"
-          disabled={isLoading || uploading}
-          className="w-full"
+      {!userDataLoading && (
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-6 max-w-xl mt-6"
         >
-          {uploading || isLoading ? "Saving..." : "Save Changes"}
-        </Button>
-      </form>
+          {/* Name */}
+          <div className="space-y-1">
+            <Label htmlFor="name">Full Name</Label>
+            <Input
+              id="name"
+              {...register("name", { required: "Name is required" })}
+            />
+            {errors.name && (
+              <p className="text-sm text-red-500">{errors.name.message}</p>
+            )}
+          </div>
+
+          {/* Email */}
+          <div className="space-y-1">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              {...register("email", { required: "Email is required" })}
+            />
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email.message}</p>
+            )}
+            {/* ⬇️ Permanent note */}
+            <p className="text-sm text-muted-foreground mt-2 italic">
+              [Note: If you change your email, you will need to login again
+              using the new one after saving.]
+            </p>
+          </div>
+
+          {/* Profile Image */}
+          <div className="space-y-1">
+            <Label htmlFor="profileImg">Profile Image</Label>
+            <Input
+              id="profileImg"
+              type="file"
+              accept="image/*"
+              {...register("profileImg")}
+            />
+            {preview && (
+              <img
+                src={preview}
+                alt="Preview"
+                className="mt-2 h-28 w-28 rounded-full border object-cover"
+              />
+            )}
+          </div>
+
+          <Button
+            type="submit"
+            disabled={isLoading || uploading}
+            className="w-full"
+          >
+            {uploading || isLoading ? "Saving..." : "Save Changes"}
+          </Button>
+        </form>
+      )}
     </DashboardBodyWrapper>
   );
 }
