@@ -12,19 +12,27 @@
 ### ✅ Public Features
 
 - **Home Page**
-  - Logo, Favicon, Navigation
+
+  - Logo, Favicon, Navigation (Responsive Navigation bar)
   - Banner with promotional highlights
-  - Featured Products (6 max) with "View All" button
+  - Ours specialty section
+  - Featured Products (8 max) with "View All" button
+  - Custom car making service section
+  - Our Brans section
+  - Car Gallery
   - Testimonials section
+  - Frequently Asked Questions section
   - Footer with links and social icons
 
 - **All Products Page**
+
   - Text Search: brand, car name, or category
   - Filters: price range, model, brand, category, availability
   - Dynamic results based on filters
   - Product cards with details and "View Details" button
 
 - **Product Details Page**
+
   - Product image and specs
   - “Buy Now” button linking to Checkout
 
@@ -35,12 +43,14 @@
 ### 🔒 Private & Role-Based Features
 
 - **Authentication**
+
   - Register with name, email, and password
   - Login with JWT stored in `localStorage`
   - Logout clears session
   - Default role: `user` (admin must be set manually)
 
 - **Checkout**
+
   - Prevent orders exceeding stock
   - Show order summary and user info
   - SurjoPay payment gateway integration
@@ -70,6 +80,7 @@
 ## 💻 Tech Stack
 
 ### Frontend
+
 - **Vite + React + TypeScript**
 - **Tailwind CSS v4**
 - **Redux Toolkit** for state management
@@ -78,6 +89,7 @@
 - **React Hook Form** for form handling
 
 ### Backend
+
 - **Node.js + Express**
 - **MongoDB + Mongoose**
 - **Zod Validation**
@@ -86,7 +98,6 @@
 - **SurjoPay** Payment Integration
 
 ---
-
 
 ---
 
@@ -97,7 +108,6 @@
 <a href='https://drive.google.com/file/d/1pcnRsgpy2-w2cPKWfWU6PXf0QXHhkSZ8/view?usp=drive_link' target=_blank>
     <img width='350px' src="https://i.ibb.co.com/0RjxFvKS/watch-video-button-01.png" />
 </a>
-
 
 ---
 
@@ -119,5 +129,3 @@ Special thanks to mentors, instructors, and the web dev community of Programming
 **Developer:** Shourav Rajbongshi  
 **Email:** [developer.shourav1@gmail.com]  
 **LinkedIn:** [linkedin.com/in/developer-shourav](https://linkedin.com/in/developer-shourav)
-
-
