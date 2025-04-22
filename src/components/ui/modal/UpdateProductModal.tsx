@@ -56,8 +56,7 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
     if (carData) reset(carData);
   }, [carData, reset]);
 
-  const [updateProduct, { isSuccess, isError}] =
-    useUpdateProductMutation();
+  const [updateProduct, { isSuccess, isError }] = useUpdateProductMutation();
 
   // Handle form logic before submit
   const onSubmit = async (data: TCar) => {
@@ -105,86 +104,87 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
     <CustomModal open={open} onClose={onClose} title="Update Product">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <Label className="mb-1">Car Name</Label>
+          <Label className="mb-2">Car Name</Label>
           <Input
             className="dark:border-1 dark:border-[#0000004d]"
             {...register("carName")}
             placeholder="Car Name"
           />
         </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <Label className="mb-2">Brand</Label>
+            <select
+              {...register("brand")}
+              className="w-full border p-2 rounded-md dark:border-1 dark:border-[#0000004d]"
+            >
+              <option value="">Select brand</option>
+              {brands.map((b) => (
+                <option key={b} value={b}>
+                  {b}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div>
-          <Label className="mb-1">Brand</Label>
-          <select
-            {...register("brand")}
-            className="w-full border p-2 rounded-md dark:border-1 dark:border-[#0000004d]"
-          >
-            <option value="">Select brand</option>
-            {brands.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div>
+            <Label className="mb-2">Model</Label>
+            <select
+              {...register("model")}
+              className="w-full border p-2 rounded-md dark:border-1 dark:border-[#0000004d]"
+            >
+              <option value="">Select model</option>
+              {models.map((m) => (
+                <option key={m} value={m}>
+                  {m}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div>
-          <Label className="mb-1">Model</Label>
-          <select
-            {...register("model")}
-            className="w-full border p-2 rounded-md dark:border-1 dark:border-[#0000004d]"
-          >
-            <option value="">Select model</option>
-            {models.map((m) => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div>
+            <Label className="mb-2">Category</Label>
+            <select
+              {...register("category")}
+              className="w-full border p-2 rounded-md dark:border-1 dark:border-[#0000004d]"
+            >
+              <option value="">Select category</option>
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div>
-          <Label className="mb-1">Category</Label>
-          <select
-            {...register("category")}
-            className="w-full border p-2 rounded-md dark:border-1 dark:border-[#0000004d]"
-          >
-            <option value="">Select category</option>
-            {categories.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div>
+            <Label className="mb-2">Year</Label>
+            <Input
+              className="dark:border-1 dark:border-[#0000004d]"
+              {...register("year")}
+              type="number"
+              placeholder="Year"
+            />
+          </div>
 
-        <div>
-          <Label className="mb-1">Year</Label>
-          <Input
-            className="dark:border-1 dark:border-[#0000004d]"
-            {...register("year")}
-            type="number"
-            placeholder="Year"
-          />
-        </div>
-
-        <div>
-          <Label className="mb-1">Price</Label>
-          <Input
-            className="dark:border-1 dark:border-[#0000004d]"
-            {...register("price")}
-            type="number"
-            placeholder="Price"
-          />
-        </div>
-        <div>
-          <Label className="mb-1">Quantity</Label>
-          <Input
-            className="dark:border-1 dark:border-[#0000004d]"
-            {...register("quantity")}
-            type="number"
-            placeholder="Quantity"
-          />
+          <div>
+            <Label className="mb-2">Price</Label>
+            <Input
+              className="dark:border-1 dark:border-[#0000004d]"
+              {...register("price")}
+              type="number"
+              placeholder="Price"
+            />
+          </div>
+          <div>
+            <Label className="mb-2">Quantity</Label>
+            <Input
+              className="dark:border-1 dark:border-[#0000004d]"
+              {...register("quantity")}
+              type="number"
+              placeholder="Quantity"
+            />
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -198,7 +198,7 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
         </div>
 
         <div className="text-right">
-        <Button
+          <Button
             className="dark:bg-red-500 hover:text-white hover:bg-red-600"
             size="sm"
             disabled={isSubmitting}

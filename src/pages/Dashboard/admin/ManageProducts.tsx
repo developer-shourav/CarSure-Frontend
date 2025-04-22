@@ -30,6 +30,7 @@ import { successTheme } from "@/styles/toastThemes";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import toast from "react-hot-toast";
 import UpdateProductModal from "@/components/ui/modal/UpdateProductModal";
+import AddNewCarModal from "@/components/ui/modal/AddNewCarModal";
 
 export default function ManageProducts() {
   const [page, setPage] = useState(1);
@@ -74,7 +75,7 @@ export default function ManageProducts() {
   return (
     <DashboardBodyWrapper>
       <DashboardHeading title="Manage Products" />
-
+      <AddNewCarModal />
       <div className="mt-6 overflow-x-auto">
         <Table className="border ">
           <TableHeader>
