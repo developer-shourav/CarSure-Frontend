@@ -44,16 +44,22 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { isSubmitting },
   } = useForm<TCar>();
+
+  const quantity = watch("quantity");
+  const inStock = watch("inStock");
 
   useEffect(() => {
     if (carData) reset(carData);
   }, [carData, reset]);
 
-  const [updateProduct, { isSuccess, isError, error, data }] =
+  const [updateProduct, { isSuccess, isError}] =
     useUpdateProductMutation();
 
+  // Handle form logic before submit
   const onSubmit = async (data: TCar) => {
     try {
       const updatedData = {
@@ -61,13 +67,29 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
         price: Number(data.price),
         year: Number(data.year),
         quantity: Number(data.quantity),
+        inStock: data.quantity > 0 && data.inStock !== false, // ensure consistency
       };
-
       await updateProduct({ id: carData?._id, data: updatedData });
     } catch (err) {
       console.error(err);
     }
   };
+
+  // Auto uncheck inStock if quantity is 0
+  useEffect(() => {
+    if (Number(quantity) <= 0) {
+      setValue("inStock", false);
+    } else {
+      setValue("inStock", true);
+    }
+  }, [quantity, setValue]);
+
+  // Auto set quantity to 0 if inStock is unchecked
+  useEffect(() => {
+    if (!inStock) {
+      setValue("quantity", 0);
+    }
+  }, [inStock, setValue]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -78,8 +100,6 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
       toast.error("Failed to update product");
     }
   }, [isSuccess, isError]);
-
-  console.log({ isSuccess, isError, error, data });
 
   return (
     <CustomModal open={open} onClose={onClose} title="Update Product">
@@ -178,7 +198,7 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
         </div>
 
         <div className="text-right">
-          <Button
+        <Button
             className="dark:bg-red-500 hover:text-white hover:bg-red-600"
             size="sm"
             disabled={isSubmitting}
