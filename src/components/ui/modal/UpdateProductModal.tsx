@@ -47,17 +47,23 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
     formState: { isSubmitting },
   } = useForm<TCar>();
 
-
-
   useEffect(() => {
     if (carData) reset(carData);
   }, [carData, reset]);
 
-  const [updateProduct, { isSuccess, isError, error, data }] = useUpdateProductMutation();
+  const [updateProduct, { isSuccess, isError, error, data }] =
+    useUpdateProductMutation();
 
   const onSubmit = async (data: TCar) => {
     try {
-      await updateProduct({ id: carData?._id, data });
+      const updatedData = {
+        ...data,
+        price: Number(data.price),
+        year: Number(data.year),
+        quantity: Number(data.quantity),
+      };
+
+      await updateProduct({ id: carData?._id, data: updatedData });
     } catch (err) {
       console.error(err);
     }
@@ -73,7 +79,7 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
     }
   }, [isSuccess, isError]);
 
-  console.log( { isSuccess, isError, error, data });
+  console.log({ isSuccess, isError, error, data });
 
   return (
     <CustomModal open={open} onClose={onClose} title="Update Product">
@@ -151,6 +157,15 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
             placeholder="Price"
           />
         </div>
+        <div>
+          <Label className="mb-1">Quantity</Label>
+          <Input
+            className="dark:border-1 dark:border-[#0000004d]"
+            {...register("quantity")}
+            type="number"
+            placeholder="Quantity"
+          />
+        </div>
 
         <div className="flex items-center gap-2">
           <input
@@ -163,7 +178,11 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
         </div>
 
         <div className="text-right">
-          <Button type="submit" disabled={isSubmitting}>
+          <Button
+            className="dark:bg-red-500 hover:text-white hover:bg-red-600"
+            size="sm"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Updating..." : "Update"}
           </Button>
         </div>

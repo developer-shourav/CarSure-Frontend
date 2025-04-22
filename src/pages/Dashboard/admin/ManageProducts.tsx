@@ -86,6 +86,7 @@ export default function ManageProducts() {
               <TableHead>Model</TableHead>
               <TableHead>Year</TableHead>
               <TableHead>Price</TableHead>
+              <TableHead>Quantity</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
@@ -100,6 +101,9 @@ export default function ManageProducts() {
                     </TableCell>
                     <TableCell>
                       <Skeleton className="w-14 h-14 object-cover rounded-md" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-4 w-full rounded-md" />
                     </TableCell>
                     <TableCell>
                       <Skeleton className="h-4 w-full rounded-md" />
@@ -143,6 +147,7 @@ export default function ManageProducts() {
                     <TableCell>{car.model}</TableCell>
                     <TableCell>{car.year}</TableCell>
                     <TableCell>${car.price.toLocaleString()}</TableCell>
+                    <TableCell>{car.quantity}</TableCell>
                     <TableCell>
                       {car.inStock ? (
                         <span className="text-green-500 font-medium">

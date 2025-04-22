@@ -19,10 +19,10 @@ export default function CustomModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#27262618]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#27262671] dark:bg-[#27262618]">
       <div
         className={cn(
-          "w-[90%] max-w-[480px] bg-white  text-black  rounded-xl shadow-md p-6",
+          "w-[90%] max-w-[480px]  bg-white  text-black  rounded-xl shadow-md p-6",
           className
         )}
       >
