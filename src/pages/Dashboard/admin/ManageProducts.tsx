@@ -119,7 +119,7 @@ export default function ManageProducts() {
                     <TableCell>
                       <Skeleton className="h-4 w-full rounded-md" />
                     </TableCell>
-                   
+
                     <TableCell>
                       <Skeleton className="h-8 w-14 rounded-md" />
                     </TableCell>
@@ -161,16 +161,12 @@ export default function ManageProducts() {
                       >
                         Edit
                       </Button>
-                      <UpdateProductModal
-                        open={editModalOpen}
-                        onClose={() => setEditModalOpen(false)}
-                        carData={selectedCar}
-                      />
+
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
                           <Button
-                             className="dark:bg-red-500 hover:text-white hover:bg-red-600"
-                             size="sm"
+                            className="dark:bg-red-500 hover:text-white hover:bg-red-600"
+                            size="sm"
                             disabled={deleteLoading}
                           >
                             Delete
@@ -196,6 +192,11 @@ export default function ManageProducts() {
                     </TableCell>
                   </TableRow>
                 ))}
+            <UpdateProductModal
+              open={editModalOpen}
+              onClose={() => setEditModalOpen(false)}
+              carData={selectedCar}
+            />
           </TableBody>
         </Table>
       </div>

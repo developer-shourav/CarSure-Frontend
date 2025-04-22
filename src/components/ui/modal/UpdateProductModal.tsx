@@ -39,11 +39,7 @@ const models = [
 ];
 const categories = ["sports", "convertible", "suv", "coupe", "sedan"];
 
-export default function UpdateProductModal({
-  open,
-  onClose,
-  carData,
-}: Props) {
+export default function UpdateProductModal({ open, onClose, carData }: Props) {
   const {
     register,
     handleSubmit,
@@ -51,29 +47,44 @@ export default function UpdateProductModal({
     formState: { isSubmitting },
   } = useForm<TCar>();
 
-  const [updateProduct] = useUpdateProductMutation();
+
 
   useEffect(() => {
     if (carData) reset(carData);
   }, [carData, reset]);
 
+  const [updateProduct, { isSuccess, isError, error, data }] = useUpdateProductMutation();
+
   const onSubmit = async (data: TCar) => {
     try {
-      await updateProduct({ id: carData?._id, body: data }).unwrap();
-      toast.success("Product updated successfully!", successTheme);
-      onClose();
+      await updateProduct({ id: carData?._id, data });
     } catch (err) {
       console.error(err);
-      toast.error("Failed to update product");
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Product updated successfully!", successTheme);
+      onClose();
+    }
+    if (isError) {
+      toast.error("Failed to update product");
+    }
+  }, [isSuccess, isError]);
+
+  console.log( { isSuccess, isError, error, data });
 
   return (
     <CustomModal open={open} onClose={onClose} title="Update Product">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <Label className="mb-1">Car Name</Label>
-          <Input className="dark:border-1 dark:border-[#0000004d]" {...register("carName")} placeholder="Car Name" />
+          <Input
+            className="dark:border-1 dark:border-[#0000004d]"
+            {...register("carName")}
+            placeholder="Car Name"
+          />
         </div>
 
         <div>
@@ -123,12 +134,22 @@ export default function UpdateProductModal({
 
         <div>
           <Label className="mb-1">Year</Label>
-          <Input className="dark:border-1 dark:border-[#0000004d]" {...register("year")} type="number" placeholder="Year" />
+          <Input
+            className="dark:border-1 dark:border-[#0000004d]"
+            {...register("year")}
+            type="number"
+            placeholder="Year"
+          />
         </div>
 
         <div>
           <Label className="mb-1">Price</Label>
-          <Input className="dark:border-1 dark:border-[#0000004d]" {...register("price")} type="number" placeholder="Price" />
+          <Input
+            className="dark:border-1 dark:border-[#0000004d]"
+            {...register("price")}
+            type="number"
+            placeholder="Price"
+          />
         </div>
 
         <div className="flex items-center gap-2">
