@@ -98,7 +98,55 @@
 - **SurjoPay** Payment Integration
 
 ---
+## 🚀 Local Development Setup
 
+### Prerequisites
+
+- Node.js (v18 or above)
+- MongoDB
+- Cloudinary credentials
+- SurjoPay test credentials
+
+---
+
+### 🔧 Backend Setup
+
+```bash
+# Clone the repo
+git clone https://github.com/developer-shourav/CarSure-Backend.git
+cd CarSure-Backend
+
+# Install dependencies
+npm install
+
+# Add environment variables
+# Create a `.env` file and add:
+PORT=5000
+DATABASE_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+SURJOPAY_SECRET=your_surjopay_secret
+SURJOPAY_STORE_ID=your_store_id
+
+# Start the server
+npm run start:dev
+
+```
+
+### 🖥️ Frontend Setup
+```bash
+# Clone the repo
+git clone https://github.com/developer-shourav/CarSure-Frontend.git
+cd CarSure-Frontend
+
+# Install dependencies
+npm install
+
+# Start the app
+npm run dev 
+```
 ---
 
 ## 📽️ Project Introduction Video
