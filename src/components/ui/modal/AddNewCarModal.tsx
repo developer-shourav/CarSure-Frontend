@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { TCar, TCarCategory } from "@/types";
 import CustomModal from "@/components/CustomModal";
+import { Plus } from "lucide-react";
 
 const brands = [
   "BMW",
@@ -113,8 +114,13 @@ export default function AddNewCarModal() {
 
   return (
     <>
-      <div className="flex justify-end" >
-        <Button onClick={() => setOpen(true)}>Add New Car</Button>
+      <div className="flex justify-end">
+        <Button
+          className="dark:bg-red-500 dark:text-white dark:hover:text-black dark:hover:bg-white hover:bg-red-600"
+          onClick={() => setOpen(true)}
+        >
+         <Plus/> Add New Car
+        </Button>
       </div>
 
       <CustomModal
