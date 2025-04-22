@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TCar } from "@/types";
@@ -8,12 +7,12 @@ import { useUpdateProductMutation } from "@/redux/features/product/productManage
 import { successTheme } from "@/styles/toastThemes";
 import toast from "react-hot-toast";
 import { Label } from "@/components/ui/label";
+import CustomModal from "@/components/CustomModal";
 
 type Props = {
   open: boolean;
   onClose: () => void;
   carData: TCar | null;
-  refetch: () => void;
 };
 
 const brands = [
@@ -26,7 +25,6 @@ const brands = [
   "Hyundai",
   "Ford",
 ];
-
 const models = [
   "LAMB",
   "Z4",
@@ -39,10 +37,13 @@ const models = [
   "i4",
   "F-150",
 ];
-
 const categories = ["sports", "convertible", "suv", "coupe", "sedan"];
 
-export default function UpdateProductModal({ open, onClose, carData, refetch }: Props) {
+export default function UpdateProductModal({
+  open,
+  onClose,
+  carData,
+}: Props) {
   const {
     register,
     handleSubmit,
@@ -53,16 +54,13 @@ export default function UpdateProductModal({ open, onClose, carData, refetch }: 
   const [updateProduct] = useUpdateProductMutation();
 
   useEffect(() => {
-    if (carData) {
-      reset(carData);
-    }
+    if (carData) reset(carData);
   }, [carData, reset]);
 
   const onSubmit = async (data: TCar) => {
     try {
       await updateProduct({ id: carData?._id, body: data }).unwrap();
       toast.success("Product updated successfully!", successTheme);
-      refetch();
       onClose();
     } catch (err) {
       console.error(err);
@@ -71,86 +69,84 @@ export default function UpdateProductModal({ open, onClose, carData, refetch }: 
   };
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Update Product</DialogTitle>
-        </DialogHeader>
+    <CustomModal open={open} onClose={onClose} title="Update Product">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <Label className="mb-1">Car Name</Label>
+          <Input className="dark:border-1 dark:border-[#0000004d]" {...register("carName")} placeholder="Car Name" />
+        </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div>
-            <Label>Car Name</Label>
-            <Input {...register("carName")} placeholder="Car Name" />
-          </div>
+        <div>
+          <Label className="mb-1">Brand</Label>
+          <select
+            {...register("brand")}
+            className="w-full border p-2 rounded-md dark:border-1 dark:border-[#0000004d]"
+          >
+            <option value="">Select brand</option>
+            {brands.map((b) => (
+              <option key={b} value={b}>
+                {b}
+              </option>
+            ))}
+          </select>
+        </div>
 
-          <div>
-            <Label>Brand</Label>
-            <select {...register("brand")} className="w-full border p-2 rounded-md">
-              <option value="">Select brand</option>
-              {brands.map((b) => (
-                <option key={b} value={b}>
-                  {b}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <Label className="mb-1">Model</Label>
+          <select
+            {...register("model")}
+            className="w-full border p-2 rounded-md dark:border-1 dark:border-[#0000004d]"
+          >
+            <option value="">Select model</option>
+            {models.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </select>
+        </div>
 
-          <div>
-            <Label>Model</Label>
-            <select {...register("model")} className="w-full border p-2 rounded-md">
-              <option value="">Select model</option>
-              {models.map((m) => (
-                <option key={m} value={m}>
-                  {m}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <Label className="mb-1">Category</Label>
+          <select
+            {...register("category")}
+            className="w-full border p-2 rounded-md dark:border-1 dark:border-[#0000004d]"
+          >
+            <option value="">Select category</option>
+            {categories.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </div>
 
-          <div>
-            <Label>Category</Label>
-            <select {...register("category")} className="w-full border p-2 rounded-md">
-              <option value="">Select category</option>
-              {categories.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <Label className="mb-1">Year</Label>
+          <Input className="dark:border-1 dark:border-[#0000004d]" {...register("year")} type="number" placeholder="Year" />
+        </div>
 
-          <div>
-            <Label>Year</Label>
-            <Input {...register("year")} type="number" placeholder="Year" />
-          </div>
+        <div>
+          <Label className="mb-1">Price</Label>
+          <Input className="dark:border-1 dark:border-[#0000004d]" {...register("price")} type="number" placeholder="Price" />
+        </div>
 
-          <div>
-            <Label>Price</Label>
-            <Input {...register("price")} type="number" placeholder="Price" />
-          </div>
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            id="inStock"
+            {...register("inStock")}
+            className="h-4 w-4"
+          />
+          <Label htmlFor="inStock">In Stock</Label>
+        </div>
 
-          <div>
-            <Label>Product Image URL</Label>
-            <Input {...register("productImg")} placeholder="Image URL" />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id="inStock"
-              {...register("inStock")}
-              className="h-4 w-4"
-            />
-            <Label htmlFor="inStock">In Stock</Label>
-          </div>
-
-          <div className="text-right">
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Updating..." : "Update"}
-            </Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+        <div className="text-right">
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Updating..." : "Update"}
+          </Button>
+        </div>
+      </form>
+    </CustomModal>
   );
 }

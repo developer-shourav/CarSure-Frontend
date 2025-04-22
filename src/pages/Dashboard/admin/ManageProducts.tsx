@@ -40,7 +40,6 @@ export default function ManageProducts() {
     data: carResponse,
     isLoading,
     isFetching,
-    refetch,
   } = useGetAllProductsQuery(
     [
       { name: "limit", value: "10" },
@@ -61,7 +60,6 @@ export default function ManageProducts() {
     try {
       await deleteCar(id).unwrap();
       toast.success("Product deleted successfully", successTheme);
-      refetch();
     } catch (error) {
       console.log(error);
       toast.error("Failed to delete product");
@@ -78,7 +76,7 @@ export default function ManageProducts() {
       <DashboardHeading title="Manage Products" />
 
       <div className="mt-6 overflow-x-auto">
-        <Table>
+        <Table className="border ">
           <TableHeader>
             <TableRow>
               <TableHead>#</TableHead>
@@ -95,15 +93,39 @@ export default function ManageProducts() {
 
           <TableBody>
             {isLoading || isFetching
-              ? [...Array(8)].map((_, index) => (
+              ? [...Array(10)].map((_, index) => (
                   <TableRow key={index}>
-                    {Array(9)
-                      .fill(0)
-                      .map((_, i) => (
-                        <TableCell key={i}>
-                          <Skeleton className="h-4 w-full rounded-md" />
-                        </TableCell>
-                      ))}
+                    <TableCell>
+                      <Skeleton className="h-4 w-full rounded-md" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="w-14 h-14 object-cover rounded-md" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-4 w-full rounded-md" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-4 w-full rounded-md" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-4 w-full rounded-md" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-4 w-full rounded-md" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-4 w-full rounded-md" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-4 w-full rounded-md" />
+                    </TableCell>
+                   
+                    <TableCell>
+                      <Skeleton className="h-8 w-14 rounded-md" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-8 w-14 rounded-md" />
+                    </TableCell>
                   </TableRow>
                 ))
               : cars?.map((car, idx) => (
@@ -139,27 +161,25 @@ export default function ManageProducts() {
                       >
                         Edit
                       </Button>
-
+                      <UpdateProductModal
+                        open={editModalOpen}
+                        onClose={() => setEditModalOpen(false)}
+                        carData={selectedCar}
+                      />
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
                           <Button
-                            variant="destructive"
+                             className="dark:bg-red-500 hover:text-white hover:bg-red-600"
+                             size="sm"
                             disabled={deleteLoading}
                           >
                             Delete
                           </Button>
                         </AlertDialogTrigger>
-                        {
-                          <UpdateProductModal
-                            open={editModalOpen}
-                            onClose={() => setEditModalOpen(false)}
-                            carData={selectedCar}
-                            refetch={refetch}
-                          />
-                        }
-                        <AlertDialogContent>
+
+                        <AlertDialogContent className="lg:w-[400px]">
                           <AlertDialogHeader>
-                            <AlertDialogTitle>
+                            <AlertDialogTitle className="text-[15px]">
                               Are you sure you want to delete this product?
                             </AlertDialogTitle>
                           </AlertDialogHeader>
