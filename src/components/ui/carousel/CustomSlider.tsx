@@ -9,29 +9,33 @@ const carDetails = [
     title: "Lamborghini Aventador",
     author: "Lamborghini",
     topic: "Luxury",
-    description: "A mid-engine V12 supercar known for its aggressive styling and powerful performance. Top speed over 217 mph, 0-62 mph in under 3 seconds."
+    description:
+      "A mid-engine V12 supercar known for its aggressive styling and powerful performance. Top speed over 217 mph, 0-62 mph in under 3 seconds.",
   },
   {
     src: "/slider/car2.jpg",
     title: "Ferrari 488 GTB",
     author: "Ferrari",
     topic: "Sports Car",
-    description: "A twin-turbocharged V8 marvel delivering exhilarating speed and precise handling. 0-62 mph in 3 seconds, with a top speed of 205 mph."
+    description:
+      "A twin-turbocharged V8 marvel delivering exhilarating speed and precise handling. 0-62 mph in 3 seconds, with a top speed of 205 mph.",
   },
   {
     src: "/slider/car1.jpg",
     title: "McLaren 720S",
     author: "McLaren",
     topic: "Performance",
-    description: "A lightweight, carbon-fiber supercar with a potent twin-turbo V8. Reaches 0-62 mph in 2.9 seconds and boasts a top speed of 212 mph."
+    description:
+      "A lightweight, carbon-fiber supercar with a potent twin-turbo V8. Reaches 0-62 mph in 2.9 seconds and boasts a top speed of 212 mph.",
   },
   {
     src: "/slider/car5.jpg",
     title: "Porsche 911 Turbo S",
     author: "Porsche",
     topic: "Sports Car",
-    description: "An iconic flat-six turbocharged powerhouse offering incredible acceleration and all-weather capability. 0-62 mph in 2.7 seconds, top speed of 205 mph."
-  }
+    description:
+      "An iconic flat-six turbocharged powerhouse offering incredible acceleration and all-weather capability. 0-62 mph in 2.7 seconds, top speed of 205 mph.",
+  },
 ];
 
 export default function CustomSlider() {
@@ -49,18 +53,20 @@ export default function CustomSlider() {
   };
 
   const goToPrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + carDetails.length) % carDetails.length);
+    setCurrentIndex(
+      (prev) => (prev - 1 + carDetails.length) % carDetails.length
+    );
   };
 
   useEffect(() => {
     const autoNext = () => {
-      timeoutRef.current = setTimeout(goToNext, 7000);
+      timeoutRef.current = setTimeout(goToNext, 5000);
     };
 
     autoNext();
 
     return () => {
-      clearTimeoutRef(); // call it, don't return it
+      clearTimeoutRef(); 
     };
   }, [currentIndex]);
 
@@ -109,10 +115,13 @@ export default function CustomSlider() {
               <div className="text-3xl lg:text-4xl xl:text-[40px] xxl:text-5xl font-bold text-red-500">
                 {car.topic}
               </div>
-              <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-md xl:max-w-xl p-1 bg-black/.1 backdrop-blur-sm rounded-2xl">{car.description}</p>
+              <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-md xl:max-w-xl p-1 bg-black/.1 backdrop-blur-sm rounded-2xl">
+                {car.description}
+              </p>
               <div className="mt-6 grid grid-cols-2 gap-4 w-[80%] lg:w-[260px]">
-                <Button className="bg-red-500 text-white"><Link to="/cars">BUY NOW</Link></Button>
-               
+                <Button className="bg-red-500 text-white">
+                  <Link to="/cars">BUY NOW</Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -142,7 +151,9 @@ export default function CustomSlider() {
           {carDetails.map((car, index) => (
             <div
               key={index}
-              className="relative w-[100px] h-[180px] xl:w-[140px] xl:h-[220px] overflow-hidden rounded-2xl cursor-pointer border-2 border-[#00000056] hover:border-white  shadow-xl"
+              className={`relative w-[100px] h-[180px] xl:w-[140px] xl:h-[220px] overflow-hidden rounded-2xl cursor-pointer border-2 border-[#00000056] hover:border-white  shadow-xl ${
+                index === currentIndex ? "border-white" : " "
+              }`}
               onClick={() => setCurrentIndex(index)}
             >
               <img
