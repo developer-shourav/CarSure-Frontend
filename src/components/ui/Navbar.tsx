@@ -194,6 +194,7 @@ export function Navbar() {
             </SheetContent>
           </Sheet>
         </div>
+        {/* ---------------------Add A mega menu for large device-------------- */}
       </div>
     </header>
   );

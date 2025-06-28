@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
 const carDetails = [
   {
     src: "/slider/car4.jpg",
     title: "Lamborghini Aventador",
-    author: "Lamborghini",
+    brand: "Lamborghini",
     topic: "Luxury",
     description:
       "A mid-engine V12 supercar known for its aggressive styling and powerful performance. Top speed over 217 mph, 0-62 mph in under 3 seconds.",
@@ -15,7 +13,7 @@ const carDetails = [
   {
     src: "/slider/car2.jpg",
     title: "Ferrari 488 GTB",
-    author: "Ferrari",
+    brand: "Ferrari",
     topic: "Sports Car",
     description:
       "A twin-turbocharged V8 marvel delivering exhilarating speed and precise handling. 0-62 mph in 3 seconds, with a top speed of 205 mph.",
@@ -23,7 +21,7 @@ const carDetails = [
   {
     src: "/slider/car1.jpg",
     title: "McLaren 720S",
-    author: "McLaren",
+    brand: "McLaren",
     topic: "Performance",
     description:
       "A lightweight, carbon-fiber supercar with a potent twin-turbo V8. Reaches 0-62 mph in 2.9 seconds and boasts a top speed of 212 mph.",
@@ -31,7 +29,7 @@ const carDetails = [
   {
     src: "/slider/car5.jpg",
     title: "Porsche 911 Turbo S",
-    author: "Porsche",
+    brand: "Porsche",
     topic: "Sports Car",
     description:
       "An iconic flat-six turbocharged powerhouse offering incredible acceleration and all-weather capability. 0-62 mph in 2.7 seconds, top speed of 205 mph.",
@@ -66,7 +64,7 @@ export default function CustomSlider() {
     autoNext();
 
     return () => {
-      clearTimeoutRef(); 
+      clearTimeoutRef();
     };
   }, [currentIndex]);
 
@@ -108,21 +106,16 @@ export default function CustomSlider() {
 
             {/* -----------content Which will show right side------------- */}
             <div className="absolute top-[5%] md:top-[10%] left-1/2 -translate-x-1/2 w-[80%] text-shadow-lg ">
-              <div className="tracking-[10px] font-bold">{car.author}</div>
+              <div className="tracking-[10px] font-bold ">{car.brand}</div>
               <div className="text-[32px] lg:text-[40px] xl:text-5xl xxl:text-[50px] font-bold leading-tight">
                 {car.title}
               </div>
               <div className="text-3xl lg:text-4xl xl:text-[40px] xxl:text-5xl font-bold text-red-500">
                 {car.topic}
               </div>
-              <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-md xl:max-w-xl p-1 bg-black/.1 backdrop-blur-sm rounded-2xl">
+              <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-md xl:max-w-xl p-1 b rounded-2xl g-black/.1 backdrop-blur-sm">
                 {car.description}
               </p>
-              <div className="mt-6 grid grid-cols-2 gap-4 w-[80%] lg:w-[260px]">
-                <Button className="bg-red-500 text-white">
-                  <Link to="/cars">BUY NOW</Link>
-                </Button>
-              </div>
             </div>
           </div>
         ))}
