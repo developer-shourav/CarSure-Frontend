@@ -60,7 +60,7 @@ export default function CustomSlider() {
 
   useEffect(() => {
     const autoNext = () => {
-      timeoutRef.current = setTimeout(goToNext, 5000);
+      timeoutRef.current = setTimeout(goToNext, 3000);
     };
 
     autoNext();
@@ -84,7 +84,7 @@ export default function CustomSlider() {
     <div
       className="relative h-[65vh] lg:h-[80vh] xl:h-[76vh] xxl:h-[72vh] w-full overflow-hidden bg-black text-white"
       onMouseEnter={clearTimeoutRef}
-      onMouseLeave={() => (timeoutRef.current = setTimeout(goToNext, 7000))}
+      onMouseLeave={() => (timeoutRef.current = setTimeout(goToNext, 3000))}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       ref={containerRef}
