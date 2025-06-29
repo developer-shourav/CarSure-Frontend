@@ -69,3 +69,12 @@ export type TOrder = {
     date_time: string;
   };
 };
+
+
+interface MenuItem {
+  label: string;
+  href: string;
+  description: string;
+}
+
+export type MegaMenuItems = Record<string, MenuItem[]>;

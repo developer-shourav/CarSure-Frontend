@@ -1,4 +1,4 @@
-import { Menu, ShoppingCart } from "lucide-react";
+import { ChevronDown, Menu, ShoppingCart, User } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -11,9 +11,11 @@ import { useDispatch } from "react-redux";
 import { successTheme } from "@/styles/toastThemes";
 import toast from "react-hot-toast";
 import { selectCartTotalQuantity } from "@/redux/features/cart/cartSlice";
+import { megaMenuItems } from "@/constant";
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const location = useLocation();
   const loggedInUser = useAppSelector(selectCurrentUser);
   const dispatch = useDispatch();
@@ -44,7 +46,7 @@ export function Navbar() {
     (path !== "/" && location.pathname.startsWith(path));
 
   return (
-    <header className="w-full border-b border-border bg-background">
+    <header className="w-full dark:border-b  bg-background">
       <div className="max-w-screen-xl mx-auto flex h-16 items-center justify-between px-4">
         {/* ----------------Logo & Site Name ----------------*/}
         <Link to="/">
@@ -94,7 +96,6 @@ export function Navbar() {
             <Link to="/register">
               <Button>Register</Button>
             </Link>
-            <ThemeToggle />
           </div>
         )}
         {loggedInUser && (
@@ -105,7 +106,6 @@ export function Navbar() {
                 {cartQuantity}
               </span>
             </Link>
-            <ThemeToggle />
             <Button onClick={handleLogout} variant="outline">
               Logout
             </Button>
@@ -194,7 +194,75 @@ export function Navbar() {
             </SheetContent>
           </Sheet>
         </div>
-        {/* ---------------------Add A mega menu for large device-------------- */}
+      </div>
+
+      {/* ----------------Separate Mega Menu (Large Devices Only)---------------- */}
+      <div className="hidden md:block w-full bg-gray-900 text-gray-100 ">
+        <div className="w-11/12 mx-auto  py-2">
+          <nav className="flex gap-6 items-center">
+            <button className="text-sm font-bold table-row-group text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors px-2 py-1">
+              All Categories:
+            </button>
+            {Object.keys(megaMenuItems).map((menuItem) => (
+              <div
+                key={menuItem}
+                className="relative"
+                onMouseEnter={() => setActiveMegaMenu(menuItem)}
+                onMouseLeave={() => setActiveMegaMenu(null)}
+              >
+                <div className="flex items-center cursor-pointer">
+                  <button className="text-sm font-medium text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors px-2 py-1">
+                    {menuItem}
+                  </button>
+                  <ChevronDown className="size-4" />
+                </div>
+                <div
+                  className={`absolute left-0  w-[550px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-100 transition-opacity duration-300 ${
+                    activeMegaMenu === menuItem
+                      ? "opacity-100 visible"
+                      : "opacity-0 invisible"
+                  }`}
+                >
+                  <div className="grid grid-cols-2 gap-4 p-6">
+                    {megaMenuItems[menuItem].map((item) => (
+                      <Link
+                        key={item.href}
+                        to={item.href}
+                        className="block text-black text-sm hover:text-red-500 transition-colors"
+                        onClick={() => setActiveMegaMenu(null)}
+                      >
+                        <span className="font-medium">{item.label} </span>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          {item.description}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            <div className="ml-auto flex items-center gap-4">
+              {loggedInUser ? (
+                <Link
+                  to={getDashboardPath()}
+                  className="text-sm font-medium text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors"
+                >
+                  <User className="size-6" />
+                </Link>
+              ) : (
+                <Link
+                  title="User Profile"
+                  to="/login"
+                  className="text-sm font-medium text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors"
+                >
+                  <User className="size-6 " />
+                </Link>
+              )}
+              <ThemeToggle />
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
   );
