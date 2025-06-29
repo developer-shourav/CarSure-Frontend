@@ -1,4 +1,4 @@
-import { ChevronDown, Menu, ShoppingCart, User } from "lucide-react";
+import { ChevronDown, LogOut, Menu, ShoppingCart, User } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -107,7 +107,7 @@ export function Navbar() {
               </span>
             </Link>
             <Button onClick={handleLogout} variant="outline">
-              Logout
+              <LogOut /> Logout
             </Button>
           </div>
         )}
@@ -186,7 +186,7 @@ export function Navbar() {
                       className="w-full"
                       onClick={handleLogout}
                     >
-                      Logout
+                      <LogOut /> Logout
                     </Button>
                   </div>
                 )}
