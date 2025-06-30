@@ -1,4 +1,11 @@
-import { ChevronDown, LogOut, Menu, ShoppingCart, User } from "lucide-react";
+import {
+  ChevronDown,
+  LogOut,
+  LucideHeart,
+  Menu,
+  ShoppingCart,
+  User,
+} from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -243,10 +250,19 @@ export function Navbar() {
             ))}
 
             <div className="ml-auto flex items-center gap-2 xl:gap-4">
+              {/* ------------Whitelist icon------------ */}
+              <Link
+                title="Wishlist"
+                to="/"
+                className="text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors relative"
+              >
+                <LucideHeart className="size-4 xl:size-6" />
+              </Link>
               {loggedInUser ? (
                 <Link
+                  title="User Profile"
                   to={getDashboardPath()}
-                  className="text-sm font-medium text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors"
+                  className=" text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors"
                 >
                   <User className="size-4 xl:size-6" />
                 </Link>
@@ -254,12 +270,12 @@ export function Navbar() {
                 <Link
                   title="User Profile"
                   to="/login"
-                  className="text-sm font-medium text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors"
+                  className=" text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors"
                 >
-                  <User className="size-4 xl:size-6"/>
+                  <User className="size-4 xl:size-6" />
                 </Link>
               )}
-              <ThemeToggle /> 
+              <ThemeToggle />
             </div>
           </nav>
         </div>
