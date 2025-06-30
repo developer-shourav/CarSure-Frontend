@@ -19,14 +19,14 @@ const brandLogos = [
 export function OurPartners() {
   return (
     <SectionWrapper>
-      <section className="py-8  md:py-16 mb-20 lg:mb-30">
+      <section className="py-8 xl:py-10 w-full mx-auto">
         <WebsiteHeading title="Our Partners" />
 
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 gap-y-8 place-items-center ">
           {brandLogos.map((brand) => (
             <div
               key={brand.name}
-              className="transition-all grayscale hover:grayscale-0"
+              className="transition-all hover:scale-105 duration-300 ease-in-out"
             >
               <img
                 src={brand.src}

@@ -19,7 +19,7 @@ export default function CarShowcase() {
   const cars = carResponse?.data;
 
   return (
-    <section className="w-full py-16 bg-zinc-50 dark:bg-zinc-950 mb-12 lg:mb-20">
+    <section className="w-full mx-auto py-8 xl:py-10">
       <SectionWrapper>
         <WebsiteHeading title="Featured Cars" />
 
@@ -80,7 +80,7 @@ export default function CarShowcase() {
               ))}
         </div>
         {cars && (
-          <div className="w-[120px] md:w-[160px] my-10 lg:my-16 mx-auto">
+          <div className="w-[120px] md:w-[160px] mx-auto my-10">
             <Link to="/cars" className="w-full">
               <Button className="w-full bg-red-600">View All </Button>
             </Link>

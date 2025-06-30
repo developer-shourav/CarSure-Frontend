@@ -45,12 +45,12 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="max-w-4xl mx-auto px-4 py-12">
+    <section className="w-full mx-auto py-8 xl:py-10">
       <WebsiteHeading title="Frequently Asked Questions" />
-      <div className="w-full">
-        <img src={carGroup} loading="lazy" alt="" />
+      <div className="w-full mx-auto flex justify-center">
+        <img src={carGroup}  loading="lazy" alt="" />
       </div>
-      <div className="space-y-4">
+      <div className=" w-10/12 mx-auto lg:w-8/12 space-y-4">
         {faqs.map((faq, index) => {
           const isOpen = openIndex === index;
           return (

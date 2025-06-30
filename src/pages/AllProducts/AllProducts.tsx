@@ -119,7 +119,7 @@ export default function AllProducts() {
   const metaData = carResponse?.meta as TMeta;
 
   return (
-    <section className="w-full min-h-[90vh] py-16 bg-zinc-50 dark:bg-zinc-950 mb-12 lg:mb-20 mt-[62px]">
+    <section className="w-full min-h-[90vh] py-10 bg-zinc-50 dark:bg-zinc-950 mb-12 lg:mb-20 mt-[62px]">
       <SectionWrapper>
         <WebsiteHeading title="All Cars" />
 

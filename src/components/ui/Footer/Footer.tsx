@@ -11,7 +11,7 @@ import { FiMail } from "react-icons/fi";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1a1b1f] text-white py-10 lg:py-20 mt-20 lg:mt-40">
+    <footer className="bg-[#1a1b1f] text-white py-10 lg:py-20 mt-20 ">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap -mx-4">
           <div className="w-full md:hidden lg:block lg:w-1/4  px-4 mb-8 md:mb-0">

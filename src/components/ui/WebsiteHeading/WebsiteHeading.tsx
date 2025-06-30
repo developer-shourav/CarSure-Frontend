@@ -6,8 +6,9 @@ type WebsiteHeadingProps = {
 export function WebsiteHeading({ title, className = "" }: WebsiteHeadingProps) {
   return (
     <h2
-      className={`text-3xl  md:text-4xl lg:text-[42px] font-bold text-center text-foreground 
-                 mt-7 mb-9   md:mt-10 md:mb-12 lg:mb-20  ${className}`}>
+      className={`text-2xl  md:text-3xl xl:text-4xl font-bold text-center text-foreground 
+                 mt-6 mb-9  md:mt-8 md:mb-11 xl:mt-9 xl:mb-12  ${className}`}
+    >
       {title}
     </h2>
   );

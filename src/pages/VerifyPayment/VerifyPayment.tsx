@@ -58,7 +58,7 @@ export default function VerifyPayment() {
   const orderData: OrderData = data?.data?.[0];
 
   return isLoading ? (
-    <div className="min-h-screen py-16 mt-[62px] lg:mt-[116px]">
+    <div className="min-h-screen py-10 mt-[62px] lg:mt-[116px]">
       <Skeleton className="h-full" />
     </div>
   ) : (

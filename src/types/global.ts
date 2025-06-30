@@ -78,3 +78,12 @@ interface MenuItem {
 }
 
 export type MegaMenuItems = Record<string, MenuItem[]>;
+
+
+export type Testimonial = {
+  name: string;
+  feedback: string;
+  image: string;
+  designation: string;
+  rating: number; 
+};
