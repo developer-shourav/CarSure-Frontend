@@ -5,7 +5,7 @@ import { Star, StarHalf } from "lucide-react";
 
 export default function TestimonialSection() {
   return (
-    <section className="py-8 xl:py-10 w-full mx-auto">
+    <section className="py-8 lg:py-10  xl:py-12 w-full mx-auto">
       <SectionWrapper>
         <WebsiteHeading title="What Our Customers Say" />
         <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">

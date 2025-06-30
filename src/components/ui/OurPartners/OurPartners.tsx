@@ -19,7 +19,7 @@ const brandLogos = [
 export function OurPartners() {
   return (
     <SectionWrapper>
-      <section className="py-8 xl:py-10 w-full mx-auto">
+      <section className="py-8 lg:py-10  xl:py-12 w-full mx-auto">
         <WebsiteHeading title="Our Partners" />
 
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 gap-y-8 place-items-center ">

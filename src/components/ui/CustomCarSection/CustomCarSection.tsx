@@ -5,7 +5,7 @@ import SectionWrapper from "../wrapper/SectionWrapper";
 
 export function CustomCarSection() {
   return (
-    <section className="w-full py-8 xl:py-10 mx-auto">
+    <section className="w-full py-8 lg:py-10  xl:py-12 mx-auto">
       <SectionWrapper>
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8">
           {/* -----------------Left Image -----------------*/}

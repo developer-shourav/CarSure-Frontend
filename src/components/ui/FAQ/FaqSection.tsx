@@ -45,7 +45,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="w-full mx-auto py-8 xl:py-10">
+    <section className="w-full mx-auto py-8 lg:py-10  xl:py-12">
       <WebsiteHeading title="Frequently Asked Questions" />
       <div className="w-full mx-auto flex justify-center">
         <img src={carGroup}  loading="lazy" alt="" />

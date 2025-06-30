@@ -5,7 +5,7 @@ import SectionWrapper from "../wrapper/SectionWrapper";
 
 export function PhotoCollage() {
   return (
-    <section className="py-8 xl:py-10 w-full mx-auto">
+    <section className="py-8 lg:py-10  xl:py-12 w-full mx-auto">
       <SectionWrapper>
         <WebsiteHeading title="Our Car Gallery" />
         <div className=" grid grid-cols-4 gap-2 md:gap-4 auto-rows-[100px] md:auto-rows-[200px]">

@@ -31,7 +31,7 @@ const features = [
 
 export default function FeatureSection() {
   return (
-    <section className="w-full py-8 xl:py-10 ">
+    <section className="w-full py-8 lg:py-10  xl:py-12 ">
       <SectionWrapper>
         <WebsiteHeading title="Why Choose CarSure?" />
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">

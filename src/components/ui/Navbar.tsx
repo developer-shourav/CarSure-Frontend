@@ -235,7 +235,7 @@ export function Navbar() {
                       <Link
                         key={item.href}
                         to={item.href}
-                        className="block text-black text-sm hover:text-red-500 transition-colors"
+                        className="block text-black dark:text-white text-sm hover:text-red-500 dark:hover:text-red-400 transition-colors"
                         onClick={() => setActiveMegaMenu(null)}
                       >
                         <span className="font-medium">{item.label} </span>

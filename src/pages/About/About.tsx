@@ -58,7 +58,7 @@ const About = () => {
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-zinc-100 dark:bg-zinc-900 py-8 xl:py-10 px-6 rounded-2xl shadow hover:shadow-lg transition"
+                className="bg-zinc-100 dark:bg-zinc-900 py-8 lg:py-10  xl:py-12 px-6 rounded-2xl shadow hover:shadow-lg transition"
               >
                 <div className="text-4xl font-bold mb-4 text-red-500">{item.value}</div>
                 <p className="text-xl font-semibold text-zinc-800 dark:text-white">

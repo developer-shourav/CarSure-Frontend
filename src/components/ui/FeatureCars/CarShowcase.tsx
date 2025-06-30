@@ -20,7 +20,7 @@ export default function CarShowcase() {
   const cars = carResponse?.data;
 
   return (
-    <section className="w-full mx-auto py-8 xl:py-10">
+    <section className="w-full mx-auto py-8 lg:py-10  xl:py-12">
       <SectionWrapper>
         <WebsiteHeading title="Featured Cars" />
 
