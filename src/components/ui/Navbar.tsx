@@ -59,7 +59,7 @@ export function Navbar() {
         </Link>
 
         {/* ----------------Desktop Nav Links----------------*/}
-        <nav className="hidden md:flex gap-6">
+        <nav className="hidden lg:flex gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -89,7 +89,7 @@ export function Navbar() {
 
         {/*---------------- Desktop Actions ----------------*/}
         {!loggedInUser && (
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <Link to="/login">
               <Button variant="outline">Login</Button>
             </Link>
@@ -99,7 +99,7 @@ export function Navbar() {
           </div>
         )}
         {loggedInUser && (
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <Link to="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 text-primary" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -112,8 +112,8 @@ export function Navbar() {
           </div>
         )}
 
-        {/* ----------------Mobile Menu---------------- */}
-        <div className="flex items-center gap-4 md:hidden">
+        {/* ----------------Medium and Mobile Menu---------------- */}
+        <div className="flex items-center gap-4 lg:hidden">
           {loggedInUser && (
             <Link to="/cart" className="relative">
               <ShoppingCart className="w-5 h-5 text-primary" />
@@ -197,10 +197,10 @@ export function Navbar() {
       </div>
 
       {/* ----------------Separate Mega Menu (Large Devices Only)---------------- */}
-      <div className="hidden md:block w-full bg-gray-900 text-gray-100 ">
-        <div className="w-11/12 mx-auto  py-2">
-          <nav className="flex gap-6 items-center">
-            <button className="text-sm font-bold table-row-group text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors px-2 py-1">
+      <div className="hidden lg:block w-full mx-auto bg-gray-900 text-gray-100 ">
+        <div className="w-11/12 max-w-screen-xl mx-auto  py-2">
+          <nav className="flex gap-4 lg:gap-6 items-center">
+            <button className="text-[12px] xl:text-sm font-bold table-row-group text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors px-2 py-1">
               All Categories:
             </button>
             {Object.keys(megaMenuItems).map((menuItem) => (
@@ -211,13 +211,13 @@ export function Navbar() {
                 onMouseLeave={() => setActiveMegaMenu(null)}
               >
                 <div className="flex items-center cursor-pointer">
-                  <button className="text-sm font-medium text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors px-2 py-1">
+                  <button className="text-[12px] xl:text-sm font-medium text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors  px-1 xl:px-2 py-1">
                     {menuItem}
                   </button>
                   <ChevronDown className="size-4" />
                 </div>
                 <div
-                  className={`absolute left-0  w-[550px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-100 transition-opacity duration-300 ${
+                  className={`absolute left-0 w-[380px] xl:w-[550px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-100 transition-opacity duration-300 ${
                     activeMegaMenu === menuItem
                       ? "opacity-100 visible"
                       : "opacity-0 invisible"
@@ -242,13 +242,13 @@ export function Navbar() {
               </div>
             ))}
 
-            <div className="ml-auto flex items-center gap-4">
+            <div className="ml-auto flex items-center gap-2 xl:gap-4">
               {loggedInUser ? (
                 <Link
                   to={getDashboardPath()}
                   className="text-sm font-medium text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors"
                 >
-                  <User className="size-6" />
+                  <User className="size-4 xl:size-6" />
                 </Link>
               ) : (
                 <Link
@@ -256,10 +256,10 @@ export function Navbar() {
                   to="/login"
                   className="text-sm font-medium text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors"
                 >
-                  <User className="size-6 " />
+                  <User className="size-4 xl:size-6"/>
                 </Link>
               )}
-              <ThemeToggle />
+              <ThemeToggle /> 
             </div>
           </nav>
         </div>
