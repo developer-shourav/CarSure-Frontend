@@ -6,7 +6,7 @@ import SectionWrapper from "@/components/ui/wrapper/SectionWrapper";
 const About = () => {
   return (
     <SectionWrapper>
-      <section className="bg-white dark:bg-zinc-950">
+      <section className="bg-white dark:bg-zinc-950 mt-[78px] lg:mt-[165px]">
         <WebsiteHeading title="About Us" />
         {/* -----------------Image Left, Text Right -----------------*/}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10  items-center pb-10">

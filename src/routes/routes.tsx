@@ -59,7 +59,6 @@ const router = createBrowserRouter([
         children: [{ index: true, element: <VerifyPayment /> }],
       },
 
-      // Dashboard (protected for all roles)
     ],
   },
 

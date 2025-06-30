@@ -9,7 +9,7 @@ import { PhotoCollage } from "@/components/ui/PhotoCollage/PhotoCollage";
 
 export default function Home() {
   return (
-    <main className="w-full">
+    <main className="w-full mt-[62px] lg:mt-[116px]">
       <CustomSlider />
       <FeatureSection />
       <CarShowcase />

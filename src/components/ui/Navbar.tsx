@@ -46,7 +46,7 @@ export function Navbar() {
     (path !== "/" && location.pathname.startsWith(path));
 
   return (
-    <header className="w-full dark:border-b  bg-background">
+    <header className="w-full dark:border-b  bg-background fixed top-0 left-0 z-50">
       <div className="max-w-screen-xl mx-auto flex h-16 items-center justify-between px-4">
         {/* ----------------Logo & Site Name ----------------*/}
         <Link to="/">

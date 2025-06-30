@@ -29,8 +29,8 @@ export default function ProductDetails() {
   if (isLoading || !product) {
     return (
       <SectionWrapper>
-        <div className="min-h-screen py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
+        <div className="min-h-screen py-16 mt-[62px] lg:mt-[116px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-end ">
             <div className="space-y-4">
               <Skeleton className="h-96 w-full mb-4" />
             </div>
@@ -59,7 +59,7 @@ export default function ProductDetails() {
 
   return (
     <SectionWrapper>
-      <div className="min-h-screen py-16">
+      <div className="min-h-screen py-16 mt-[62px] lg:mt-[116px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
           {/* --- Product Image Gallery --- */}
           <div className="space-y-4">

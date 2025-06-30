@@ -60,7 +60,6 @@ export default function CheckoutPage() {
     };
 
     await createOrder(orderPayload);
-    console.log("🚀 ~ onSubmit ~ orderPayload:", orderPayload)
     dispatch(removeFromCart({ userId: user, id: singleItem.id }));
   };
    
@@ -80,7 +79,7 @@ export default function CheckoutPage() {
 
   if (!singleItem) {
     return (
-      <div className="max-w-xl mx-auto py-10 px-4">
+      <div className="max-w-xl mx-auto py-10 px-4 mt-[62px] lg:mt-[116px]">
         <p className="text-red-600">No item selected for checkout.</p>
       </div>
     );
@@ -89,7 +88,7 @@ export default function CheckoutPage() {
   const total = singleItem.price * singleItem.quantity;
 
   return (
-    <div className="max-w-xl mx-auto py-10 px-4 space-y-6">
+    <div className="max-w-xl mx-auto py-10 px-4 space-y-6 mt-[62px] lg:mt-[116px]">
       <h2 className="text-3xl font-bold">Checkout</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

@@ -25,7 +25,7 @@ export default function CartPage() {
   const [couponCode, setCouponCode] = useState(userCart.coupon || "");
 
   return (
-    <div className="max-w-5xl mx-auto py-10 px-4">
+    <div className="max-w-5xl mx-auto py-10 px-4 mt-[62px] lg:mt-[116px]">
       <h2 className="text-3xl font-bold mb-6">Your Cart</h2>
 
       {!userId ? (
