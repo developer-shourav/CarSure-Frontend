@@ -64,6 +64,7 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
       const updatedData = {
         ...data,
         price: Number(data.price),
+        rating: Number(data.rating),
         year: Number(data.year),
         quantity: Number(data.quantity),
         inStock: data.quantity > 0 && data.inStock !== false, // ensure consistency
@@ -103,15 +104,15 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
   return (
     <CustomModal open={open} onClose={onClose} title="Update Product">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div>
-          <Label className="mb-2">Car Name</Label>
-          <Input
-            className="dark:border-1 dark:border-[#0000004d]"
-            {...register("carName")}
-            placeholder="Car Name"
-          />
-        </div>
         <div className="grid grid-cols-2 gap-3">
+          <div>
+            <Label className="mb-2">Car Name</Label>
+            <Input
+              className="dark:border-1 dark:border-[#0000004d]"
+              {...register("carName")}
+              placeholder="Car Name"
+            />
+          </div>
           <div>
             <Label className="mb-2">Brand</Label>
             <select
@@ -185,16 +186,31 @@ export default function UpdateProductModal({ open, onClose, carData }: Props) {
               placeholder="Quantity"
             />
           </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="inStock"
-            {...register("inStock")}
-            className="h-4 w-4"
-          />
-          <Label htmlFor="inStock">In Stock</Label>
+          <div>
+            <Label className="mb-2">Ratings</Label>
+            <Input
+              type="number"
+              placeholder="rating"
+              min="1"
+              max="5"
+              step="0.1"
+              {...register("rating", {
+                valueAsNumber: true,
+                min: 1,
+                max: 5,
+              })}
+              className="dark:border-1 dark:border-[#0000004d]"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="inStock"
+              {...register("inStock")}
+              className="h-4 w-4"
+            />
+            <Label htmlFor="inStock">In Stock</Label>
+          </div>
         </div>
 
         <div className="text-right">
