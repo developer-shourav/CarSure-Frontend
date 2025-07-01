@@ -41,8 +41,7 @@ const categories: TCarCategory[] = [
 ];
 
 export default function AddNewProduct() {
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
-  const [uploading, setUploading] = useState(false);
+  const [uploadingIds, setUploadingIds] = useState<number[]>([]);
   const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
 
   const {
@@ -63,10 +62,14 @@ export default function AddNewProduct() {
     const files = e.target.files ? Array.from(e.target.files) : [];
     if (!files.length) return;
 
-    setUploading(true);
+    const newUploadingIds = files.map(() => Date.now() + Math.random());
+    setUploadingIds((prev) => [...prev, ...newUploadingIds]);
+
     try {
       const urls: string[] = [];
-      for (const file of files) {
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", "CarSure_Nari");
@@ -81,18 +84,21 @@ export default function AddNewProduct() {
         const result = await res.json();
         urls.push(result.secure_url);
       }
+
       setUploadedUrls((prev) => [...prev, ...urls]);
-      setImageFiles([]);
     } catch (err) {
       console.error(err);
       toast.error("Failed to upload image(s).");
     } finally {
-      setUploading(false);
+      setUploadingIds((prev) =>
+        prev.filter((id) => !newUploadingIds.includes(id))
+      );
     }
   };
 
   const onSubmit = async (data: TCar) => {
-    if (!uploadedUrls.length) return toast.error("Please upload at least one image.");
+    if (!uploadedUrls.length)
+      return toast.error("Please upload at least one image.");
 
     try {
       const carToAdd: TCar = {
@@ -100,7 +106,7 @@ export default function AddNewProduct() {
         year: Number(data.year),
         price: Number(data.price),
         quantity: Number(data.quantity),
-        productImg: uploadedUrls, // always array
+        productImg: uploadedUrls,
         inStock: data.quantity > 0 && data.inStock,
         description: data.description,
       };
@@ -134,12 +140,15 @@ export default function AddNewProduct() {
     <DashboardBodyWrapper>
       <DashboardHeading title="Add New Car" />
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 max-w-2xl space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-6 max-w-2xl space-y-6"
+      >
         {/* Image uploader */}
         <div className="flex flex-wrap gap-4">
           {uploadedUrls.map((url, index) => (
             <div
-              key={index}
+              key={`uploaded-${index}`}
               className="w-32 h-32 border rounded-md overflow-hidden relative"
             >
               <img
@@ -150,9 +159,16 @@ export default function AddNewProduct() {
             </div>
           ))}
 
-          <label
-            className="w-32 h-32 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800 transition"
-          >
+          {uploadingIds.map((id) => (
+            <div
+              key={`uploading-${id}`}
+              className="w-32 h-32 border rounded-md flex items-center justify-center animate-pulse bg-gray-100 dark:bg-zinc-800"
+            >
+              <span className="text-gray-600 text-xs">Uploading...</span>
+            </div>
+          ))}
+
+          <label className="w-32 h-32 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800 transition">
             <Plus className="w-6 h-6 text-gray-500" />
             <input
               type="file"
@@ -165,10 +181,11 @@ export default function AddNewProduct() {
         </div>
 
         {/* Car details */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           <div>
-            <Label>Car Name</Label>
+            <Label className="mb-2">Car Name</Label>
             <Input
+              className="dark:border-[#0000004d]"
               {...register("carName", { required: "Car name is required" })}
               placeholder="Car Name"
             />
@@ -176,54 +193,65 @@ export default function AddNewProduct() {
               <p className="text-red-500 text-sm">{errors.carName.message}</p>
             )}
           </div>
+
           <div>
-            <Label>Brand</Label>
+            <Label className="mb-2">Brand</Label>
             <select
               {...register("brand", { required: "Brand is required" })}
               className="w-full border p-2 rounded-md dark:border-[#0000004d]"
             >
               <option value="">Select brand</option>
               {brands.map((b) => (
-                <option key={b} value={b}>{b}</option>
+                <option key={b} value={b}>
+                  {b}
+                </option>
               ))}
             </select>
             {errors.brand && (
               <p className="text-red-500 text-sm">{errors.brand.message}</p>
             )}
           </div>
+
           <div>
-            <Label>Model</Label>
+            <Label className="mb-2">Model</Label>
             <select
               {...register("model", { required: "Model is required" })}
               className="w-full border p-2 rounded-md dark:border-[#0000004d]"
             >
               <option value="">Select model</option>
               {models.map((m) => (
-                <option key={m} value={m}>{m}</option>
+                <option key={m} value={m}>
+                  {m}
+                </option>
               ))}
             </select>
             {errors.model && (
               <p className="text-red-500 text-sm">{errors.model.message}</p>
             )}
           </div>
+
           <div>
-            <Label>Category</Label>
+            <Label className="mb-2">Category</Label>
             <select
               {...register("category", { required: "Category is required" })}
               className="w-full border p-2 rounded-md dark:border-[#0000004d]"
             >
               <option value="">Select category</option>
               {categories.map((c) => (
-                <option key={c} value={c}>{c}</option>
+                <option key={c} value={c}>
+                  {c}
+                </option>
               ))}
             </select>
             {errors.category && (
               <p className="text-red-500 text-sm">{errors.category.message}</p>
             )}
           </div>
+
           <div>
-            <Label>Year</Label>
+            <Label className="mb-2">Year</Label>
             <Input
+              className="dark:border-[#0000004d]"
               type="number"
               {...register("year", { required: "Year is required" })}
               placeholder="Year"
@@ -232,9 +260,11 @@ export default function AddNewProduct() {
               <p className="text-red-500 text-sm">{errors.year.message}</p>
             )}
           </div>
+
           <div>
-            <Label>Price</Label>
+            <Label className="mb-2">Price</Label>
             <Input
+              className="dark:border-[#0000004d]"
               type="number"
               {...register("price", { required: "Price is required" })}
               placeholder="Price"
@@ -243,34 +273,40 @@ export default function AddNewProduct() {
               <p className="text-red-500 text-sm">{errors.price.message}</p>
             )}
           </div>
+
           <div>
-            <Label>Quantity</Label>
+            <Label className="mb-2">Quantity</Label>
             <Input
+              className="dark:border-[#0000004d]"
               type="number"
               {...register("quantity", { required: "Quantity is required" })}
               onChange={handleQuantityChange}
+              placeholder="Quantity"
             />
             {errors.quantity && (
               <p className="text-red-500 text-sm">{errors.quantity.message}</p>
             )}
           </div>
-          <div className="flex items-center gap-2 mt-2">
-            <input
-              type="checkbox"
-              {...register("inStock", { required: "Stock status is required" })}
-              onChange={handleInStockChange}
-            />
-            <Label>In Stock</Label>
-            {errors.inStock && (
-              <p className="text-red-500 text-sm">{errors.inStock.message}</p>
-            )}
-          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            {...register("inStock", { required: "Stock status is required" })}
+            onChange={handleInStockChange}
+          />
+          <Label>In Stock</Label>
+          {errors.inStock && (
+            <p className="text-red-500 text-sm">{errors.inStock.message}</p>
+          )}
         </div>
 
         <div>
-          <Label>Description</Label>
+          <Label className="mb-2">Description</Label>
           <textarea
-            {...register("description", { required: "Description is required" })}
+            {...register("description", {
+              required: "Description is required",
+            })}
             placeholder="Write a short description about the car"
             className="w-full border p-2 rounded-md dark:border-[#0000004d]"
           />
@@ -283,9 +319,9 @@ export default function AddNewProduct() {
           <Button
             className="dark:bg-red-500 text-white hover:bg-red-600"
             size="sm"
-            disabled={isSubmitting || uploading}
+            disabled={isSubmitting || uploadingIds.length > 0}
           >
-            {isSubmitting || uploading ? "Adding..." : "Add Car"}
+            {isSubmitting || uploadingIds.length > 0 ? "Adding..." : "Add Car"}
           </Button>
         </div>
       </form>
