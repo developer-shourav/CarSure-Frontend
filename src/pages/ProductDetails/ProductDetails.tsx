@@ -64,7 +64,7 @@ export default function ProductDetails() {
           {/* --- Product Image Gallery --- */}
           <div className="space-y-4">
             <img
-              src={product?.productImg}
+              src={product?.productImg[0]}
               alt={product?.carName}
               className="w-full h-96 object-cover rounded-xl shadow"
             />
@@ -126,7 +126,7 @@ export default function ProductDetails() {
                           id: product?._id,
                           name: product?.carName,
                           price: product?.price,
-                          image: product?.productImg,
+                          image: product?.productImg[0],
                           quantity,
                         },
                       })

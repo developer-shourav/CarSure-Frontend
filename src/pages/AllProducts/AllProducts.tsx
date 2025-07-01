@@ -251,7 +251,7 @@ export default function AllProducts() {
                 >
                   <div className="relative">
                     <img
-                      src={car.productImg}
+                      src={car.productImg[0]}
                       alt={car.carName}
                       loading="lazy"
                       className="w-full h-52 object-cover"

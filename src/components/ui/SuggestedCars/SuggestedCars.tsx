@@ -46,7 +46,7 @@ export default function SuggestedCars() {
               className="bg-white dark:bg-zinc-900 rounded-xl overflow-hidden shadow hover:shadow-xl transition"
             >
               <img
-                src={car.productImg}
+                src={car.productImg[0]}
                 alt={car.carName}
                 loading="lazy"
                 className="w-full h-52 object-cover"

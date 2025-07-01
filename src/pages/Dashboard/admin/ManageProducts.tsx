@@ -138,7 +138,7 @@ export default function ManageProducts() {
                     <TableCell>{meta.limit * (page - 1) + idx + 1}</TableCell>
                     <TableCell>
                       <img
-                        src={car.productImg}
+                        src={car.productImg[0]}
                         alt={car.carName}
                         className="w-14 h-14 object-cover rounded-md"
                       />

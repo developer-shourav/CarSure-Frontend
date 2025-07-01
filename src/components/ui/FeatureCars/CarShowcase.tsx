@@ -66,7 +66,7 @@ export default function CarShowcase() {
                     </button>
 
                     <img
-                      src={car.productImg}
+                      src={car.productImg[0]}
                       alt={car.carName}
                       loading="lazy"
                       className="w-full h-48 object-cover group-hover:scale-105 transition duration-300"
