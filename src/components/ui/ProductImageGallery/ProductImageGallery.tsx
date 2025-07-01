@@ -21,7 +21,7 @@ export default function ProductImageGallery({
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      {/* Main Image */}
+      {/* ---------Main Image--------- */}
       <div className="border rounded-lg overflow-hidden mb-4 relative">
         <img
           src={selectedImage}
@@ -32,7 +32,7 @@ export default function ProductImageGallery({
         />
       </div>
 
-      {/* Thumbnails */}
+      {/* ---------Thumbnails--------- */}
       <div className="flex flex-wrap justify-center gap-2">
         {images.map((img, idx) => (
           <button

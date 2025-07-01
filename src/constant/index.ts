@@ -114,24 +114,24 @@ export const megaMenuItems: MegaMenuItems = {
     ],
     Latest: [
         {
-            label: "Chiron",
+            label: "Range Rover Autobiography",
             href: "/cars/67fcee9eca89f6a53562ad81",
-            description: "Bugatti hypercar",
+            description: "Range Rover Autobiography hypercar",
         },
         {
-            label: "M8 Competition",
+            label: "GLE 450 4MATIC",
             href: "/cars/67fcefbfca89f6a53562ad8d",
-            description: "BMW flagship coupe",
+            description: "Mercedes-Benz flagship coupe",
         },
         {
-            label: "EQE",
+            label: "CR-V Hybrid",
             href: "/cars/67fcf091ca89f6a53562ad95",
-            description: "Mercedes electric sedan",
+            description: "Best hybrid ever",
         },
     ],
     Customizable: [
         {
-            label: "RS7",
+            label: "Bronco Raptor",
             href: "/cars/67fcf3b6ca89f6a53562adbd",
             description: "Audi high-performance sedan",
         },
@@ -141,26 +141,26 @@ export const megaMenuItems: MegaMenuItems = {
             description: "Ford iconic muscle car",
         },
         {
-            label: "Civic Type R",
+            label: "Elantra N",
             href: "/cars/67fcf18bca89f6a53562ada9",
-            description: "Honda performance hatchback",
+            description: "Honday performance hatchback",
         },
     ],
     Limited_Addition: [
         {
-            label: "Supra",
+            label: "M3 Competition",
             href: "/cars/67fcec266fd51c6239bddad0",
-            description: "Toyota sports legend",
+            description: "BMW sports legend",
         },
         {
-            label: "Flying Spur",
+            label: "Huracán Tecnica",
             href: "/cars/67fcedc9ca89f6a53562ad79",
-            description: "Bentley luxury sedan",
+            description: "Lamborghini luxury sports",
         },
         {
-            label: "IONIQ 5",
+            label: "C-Class Sedan",
             href: "/cars/67fcef69ca89f6a53562ad89",
-            description: "Hyundai electric crossover",
+            description: "Mercedes-Benz  crossover",
         },
     ],
 };
