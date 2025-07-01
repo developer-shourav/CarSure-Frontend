@@ -30,18 +30,18 @@ export function CustomCarSection() {
               our expert team will bring it to life with precision and style.
               From design to delivery, we handle it all.
             </p>
-            <ul className="space-y-2 mb-6">
+            <ul className="space-y-2 mb-6 ">
               <li className="flex items-center gap-2">
                 {" "}
-                <FaRegCircleCheck className="font-bold text-green-600 text-xl" />{" "}
+                <FaRegCircleCheck className="font-bold text-green-600 " />{" "}
                 <span>Hand-crafted design and engineering</span>
               </li>
               <li className="flex items-center gap-2">
-                <FaRegCircleCheck className="font-bold text-green-600 text-xl" />{" "}
+                <FaRegCircleCheck className="font-bold text-green-600" />{" "}
                 <span>Real-time collaboration with our team</span>
               </li>
               <li className="flex items-center gap-2">
-                <FaRegCircleCheck className="font-bold text-green-600 text-xl" />{" "}
+                <FaRegCircleCheck className="font-bold text-green-600" />{" "}
                 <span>Quality materials and cutting-edge tech</span>
               </li>
             </ul>
