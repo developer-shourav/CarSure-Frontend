@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAddProductMutation } from "@/redux/features/product/productManagement.api";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -143,6 +144,7 @@ export default function AddNewProduct() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mt-6 max-w-2xl space-y-6"
+        noValidate
       >
         {/* Image uploader */}
         <div className="flex flex-wrap gap-4">
@@ -196,17 +198,21 @@ export default function AddNewProduct() {
 
           <div>
             <Label className="mb-2">Brand</Label>
-            <select
+            <Select
+              onValueChange={(value) => setValue("brand", value)}
               {...register("brand", { required: "Brand is required" })}
-              className="w-full border p-2 rounded-md dark:border-[#0000004d]"
             >
-              <option value="">Select brand</option>
-              {brands.map((b) => (
-                <option key={b} value={b}>
-                  {b}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full dark:border-[#0000004d]">
+                <SelectValue placeholder="Select brand" />
+              </SelectTrigger>
+              <SelectContent>
+                {brands.map((b) => (
+                  <SelectItem key={b} value={b}>
+                    {b}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             {errors.brand && (
               <p className="text-red-500 text-sm">{errors.brand.message}</p>
             )}
@@ -214,17 +220,21 @@ export default function AddNewProduct() {
 
           <div>
             <Label className="mb-2">Model</Label>
-            <select
+            <Select
+              onValueChange={(value) => setValue("model", value)}
               {...register("model", { required: "Model is required" })}
-              className="w-full border p-2 rounded-md dark:border-[#0000004d]"
             >
-              <option value="">Select model</option>
-              {models.map((m) => (
-                <option key={m} value={m}>
-                  {m}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full dark:border-[#0000004d]">
+                <SelectValue placeholder="Select model" />
+              </SelectTrigger>
+              <SelectContent>
+                {models.map((m) => (
+                  <SelectItem key={m} value={m}>
+                    {m}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             {errors.model && (
               <p className="text-red-500 text-sm">{errors.model.message}</p>
             )}
@@ -232,17 +242,21 @@ export default function AddNewProduct() {
 
           <div>
             <Label className="mb-2">Category</Label>
-            <select
+            <Select
+              onValueChange={(value) => setValue("category", value)}
               {...register("category", { required: "Category is required" })}
-              className="w-full border p-2 rounded-md dark:border-[#0000004d]"
             >
-              <option value="">Select category</option>
-              {categories.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full dark:border-[#0000004d]">
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((c) => (
+                  <SelectItem key={c} value={c}>
+                    {c}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             {errors.category && (
               <p className="text-red-500 text-sm">{errors.category.message}</p>
             )}

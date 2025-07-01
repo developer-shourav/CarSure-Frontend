@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import navLogo from "@/assets/logo/logo.png";
 import toast from "react-hot-toast";
+import { DashBoardThemeToggle } from "@/components/DashBoardThemeToggle";
 
 const Sidebar = () => {
   const user = useAppSelector(selectCurrentUser);
@@ -126,15 +127,21 @@ const Sidebar = () => {
             </Link>
           ))}
 
+          <div
+            className={`rounded mt-6 px-3  text-sm font-medium transition-colors hover:bg-accent`}
+          >
+            <DashBoardThemeToggle />
+          </div>
+
           <Link
             to="/"
-            className={`rounded mt-10 px-3 py-2 text-sm font-medium transition-colors ${
+            className={`rounded   px-3 py-2 text-sm font-medium transition-colors ${
               isActive("/")
                 ? "bg-primary dark:bg-red-500 text-white"
                 : " hover:bg-accent "
             }`}
           >
-            <span className="flex items-end gap-2">
+            <span className="flex gap-2">
               <HomeIcon className="size-5" />
               <span>Return Home</span>
             </span>
@@ -144,7 +151,7 @@ const Sidebar = () => {
             onClick={handleLogout}
             className={`rounded px-3 py-2 text-sm font-medium hover:bg-red-500`}
           >
-            <span className="flex items-end gap-2">
+            <span className="flex  gap-2">
               <LogOut className="size-5" />
               <span>Logout</span>
             </span>
