@@ -45,11 +45,11 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Sidebar Button */}
-      <div className=" md:hidden absolute top-4 left-4 z-50 ">
+      <div className=" lg:hidden absolute top-4 left-4 z-50 ">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
-            <div title="Dashboard">
-              <LayoutDashboardIcon className="size-7" />
+            <div title="Dashboard md:mb-5">
+              <LayoutDashboardIcon className="size-7 md:size-10 " />
             </div>
           </SheetTrigger>
           <SheetContent side="left" className="w-64 p-4">
@@ -76,9 +76,15 @@ const Sidebar = () => {
                 </Link>
               ))}
 
+              <div
+                className={`rounded mt-5 px-3  text-sm font-medium transition-colors hover:bg-accent`}
+              >
+                <DashBoardThemeToggle />
+              </div>
+
               <Link
                 to="/"
-                className={`rounded mt-8 px-2 py-2 text-sm font-medium transition-colors ${
+                className={`rounded  px-2 py-2 text-sm font-medium transition-colors ${
                   isActive("/")
                     ? "bg-primary dark:bg-red-500 text-white"
                     : " hover:bg-accent "
@@ -105,7 +111,7 @@ const Sidebar = () => {
       </div>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex md:flex-col w-64 h-screen p-6 border-r border-border bg-background">
+      <aside className="hidden lg:flex md:flex-col w-64 h-screen p-6 border-r border-border bg-background">
         <Link to="/" className="flex items-center gap-2 mb-6">
           <img src={navLogo} alt="Logo" className="h-12 w-12" />
           <span className="font-bold text-primary text-lg">
