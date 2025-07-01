@@ -243,7 +243,7 @@ export default function AddNewProduct() {
           <div>
             <Label className="mb-2">Category</Label>
             <Select
-              onValueChange={(value) => setValue("category", value)}
+              onValueChange={(value) => setValue("category", value as TCarCategory)}
               {...register("category", { required: "Category is required" })}
             >
               <SelectTrigger className="w-full dark:border-[#0000004d]">
