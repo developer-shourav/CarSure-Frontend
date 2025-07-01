@@ -28,6 +28,7 @@ import UserDashboard from "@/pages/Dashboard/UserDashboard/UserDashboard";
 import MyOrders from "@/pages/Dashboard/user/MyOrders";
 import ProfileSettings from "@/pages/Dashboard/user/ProfileSettings";
 import ChangePassword from "@/pages/Dashboard/user/ChangePassword";
+import AddNewProduct from "@/pages/Dashboard/admin/AddNewProduct";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,7 @@ const router = createBrowserRouter([
                 children: [
                   { index: true, element: <AdminDashboard /> },
                   { path: "users", element: <ManageUsers /> },
+                  { path: "addProduct", element: <AddNewProduct /> },
                   { path: "products", element: <ManageProducts /> },
                   { path: "orders", element: <ManageOrders /> },
                 ],

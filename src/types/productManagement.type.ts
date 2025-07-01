@@ -11,6 +11,6 @@ export type TCar = {
     category: TCarCategory;
     description: string;
     quantity: number;
-    productImg: string;
+    productImg: string | string[];
     inStock: boolean;
 };
