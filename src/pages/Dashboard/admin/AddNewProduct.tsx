@@ -2,7 +2,13 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useAddProductMutation } from "@/redux/features/product/productManagement.api";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -10,6 +16,7 @@ import { TCar, TCarCategory } from "@/types";
 import { Plus } from "lucide-react";
 import DashboardBodyWrapper from "@/components/ui/wrapper/DashboardBodyWrapper";
 import { DashboardHeading } from "@/components/ui/WebsiteHeading/DashboardHeading";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const brands = [
   "BMW",
@@ -143,49 +150,13 @@ export default function AddNewProduct() {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-6 max-w-2xl space-y-6"
+        className="mt-6 max-w-3xl space-y-6"
         noValidate
       >
-        {/* Image uploader */}
-        <div className="flex flex-wrap gap-4">
-          {uploadedUrls.map((url, index) => (
-            <div
-              key={`uploaded-${index}`}
-              className="w-32 h-32 border rounded-md overflow-hidden relative"
-            >
-              <img
-                src={url}
-                alt="Uploaded"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-
-          {uploadingIds.map((id) => (
-            <div
-              key={`uploading-${id}`}
-              className="w-32 h-32 border rounded-md flex items-center justify-center animate-pulse bg-gray-100 dark:bg-zinc-800"
-            >
-              <span className="text-gray-600 text-xs">Uploading...</span>
-            </div>
-          ))}
-
-          <label className="w-32 h-32 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800 transition">
-            <Plus className="w-6 h-6 text-gray-500" />
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              className="hidden"
-              onChange={handleImageSelect}
-            />
-          </label>
-        </div>
-
-        {/* Car details */}
+        {/* --------------Car details --------------*/}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <Label className="mb-2">Car Name</Label>
+            <Label className="mb-2 mb:mb-3">Car Name</Label>
             <Input
               className="dark:border-[#0000004d]"
               {...register("carName", { required: "Car name is required" })}
@@ -197,7 +168,7 @@ export default function AddNewProduct() {
           </div>
 
           <div>
-            <Label className="mb-2">Brand</Label>
+            <Label className="mb-2 md:mb-3">Brand</Label>
             <Select
               onValueChange={(value) => setValue("brand", value)}
               {...register("brand", { required: "Brand is required" })}
@@ -219,7 +190,7 @@ export default function AddNewProduct() {
           </div>
 
           <div>
-            <Label className="mb-2">Model</Label>
+            <Label className="mb-2 md:mt-1">Model</Label>
             <Select
               onValueChange={(value) => setValue("model", value)}
               {...register("model", { required: "Model is required" })}
@@ -241,9 +212,11 @@ export default function AddNewProduct() {
           </div>
 
           <div>
-            <Label className="mb-2">Category</Label>
+            <Label className="mb-2 md:mt-1">Category</Label>
             <Select
-              onValueChange={(value) => setValue("category", value as TCarCategory)}
+              onValueChange={(value) =>
+                setValue("category", value as TCarCategory)
+              }
               {...register("category", { required: "Category is required" })}
             >
               <SelectTrigger className="w-full dark:border-[#0000004d]">
@@ -263,7 +236,7 @@ export default function AddNewProduct() {
           </div>
 
           <div>
-            <Label className="mb-2">Year</Label>
+            <Label className="mb-2 md:mt-1">Year</Label>
             <Input
               className="dark:border-[#0000004d]"
               type="number"
@@ -276,7 +249,7 @@ export default function AddNewProduct() {
           </div>
 
           <div>
-            <Label className="mb-2">Price</Label>
+            <Label className="mb-2 md:mt-1">Price</Label>
             <Input
               className="dark:border-[#0000004d]"
               type="number"
@@ -289,7 +262,7 @@ export default function AddNewProduct() {
           </div>
 
           <div>
-            <Label className="mb-2">Quantity</Label>
+            <Label className="mb-2 md:mt-1">Quantity</Label>
             <Input
               className="dark:border-[#0000004d]"
               type="number"
@@ -301,41 +274,79 @@ export default function AddNewProduct() {
               <p className="text-red-500 text-sm">{errors.quantity.message}</p>
             )}
           </div>
-        </div>
 
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            {...register("inStock", { required: "Stock status is required" })}
-            onChange={handleInStockChange}
-          />
-          <Label>In Stock</Label>
-          {errors.inStock && (
-            <p className="text-red-500 text-sm">{errors.inStock.message}</p>
-          )}
+          <div className="flex  mt-12 gap-2">
+            <input
+              type="checkbox"
+              {...register("inStock", { required: "Stock status is required" })}
+              onChange={handleInStockChange}
+            />
+            <Label>In Stock</Label>
+            {errors.inStock && (
+              <p className="text-red-500 text-sm">{errors.inStock.message}</p>
+            )}
+          </div>
         </div>
 
         <div>
-          <Label className="mb-2">Description</Label>
+          <Label className="mb-2 md:mt-1">Description</Label>
           <textarea
             {...register("description", {
               required: "Description is required",
             })}
-            placeholder="Write a short description about the car"
+            placeholder="Write details description about the car"
             className="w-full border p-2 rounded-md dark:border-[#0000004d]"
+            rows={3}
           />
           {errors.description && (
             <p className="text-red-500 text-sm">{errors.description.message}</p>
           )}
         </div>
 
-        <div className="text-right">
+        {/*-------------- Image uploader --------------*/}
+        <Label className="mb-2 md:-mt-3">Add Car Images</Label>
+        <div className="flex flex-wrap gap-4">
+          {uploadedUrls.map((url, index) => (
+            <div
+              key={`uploaded-${index}`}
+              className="size-20 border rounded-md overflow-hidden relative"
+            >
+              <img
+                src={url}
+                alt="Uploaded"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+
+          {uploadingIds.map((id) => (
+            <Skeleton
+              key={`uploading-${id}`}
+              className="size-20 border rounded-md flex items-center justify-center "
+            >
+              <span className="text-gray-600 text-xs">Uploading...</span>
+            </Skeleton>
+          ))}
+
+          <label className="size-20 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800 transition">
+            <Plus className="w-6 h-6 text-gray-500" />
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              className="hidden"
+              onChange={handleImageSelect}
+            />
+          </label>
+        </div>
+
+        <div className="text-center">
           <Button
-            className="dark:bg-red-500 text-white hover:bg-red-600"
-            size="sm"
+            className="dark:bg-red-500 text-white hover:bg-red-600 w-full"
+
             disabled={isSubmitting || uploadingIds.length > 0}
           >
-            {isSubmitting || uploadingIds.length > 0 ? "Adding..." : "Add Car"}
+            {isSubmitting ? "Adding..." : "Add Car"}
           </Button>
         </div>
       </form>
