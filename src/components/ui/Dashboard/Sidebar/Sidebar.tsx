@@ -22,10 +22,10 @@ const Sidebar = () => {
 
   const adminLinks = [
     { to: "/dashboard/admin", label: "Admin Dashboard" },
-    { to: "/dashboard/admin/users", label: "Manage Users" },
     { to: "/dashboard/admin/addProduct", label: "Add Product" },
     { to: "/dashboard/admin/products", label: "Manage Products" },
     { to: "/dashboard/admin/orders", label: "Manage Orders" },
+     { to: "/dashboard/admin/users", label: "Manage Users" },
   ];
 
   const userLinks = [

@@ -57,7 +57,7 @@ export default function ManageUsers() {
       <DashboardHeading title="Manage Users" />
 
       {isLoading ? (
-        <div className="mt-6 overflow-x-auto">
+        <div className="mt-4 overflow-x-auto">
           <Table className="border">
             <TableHeader>
               <TableRow>
@@ -99,7 +99,7 @@ export default function ManageUsers() {
           Failed to load users. Please try again later.
         </p>
       ) : (
-        <div className="mt-6 overflow-x-auto">
+        <div className="mt-4 overflow-x-auto">
           <Table className="border">
             <TableHeader>
               <TableRow>

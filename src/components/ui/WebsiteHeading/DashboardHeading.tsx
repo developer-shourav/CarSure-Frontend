@@ -8,7 +8,7 @@ export function DashboardHeading({
   className = "",
 }: DashboardHeadingProps) {
   return (
-    <h2 className={`my-5 text-[22px] md:text-[28px] font-bold ${className}`}>
+    <h2 className={`my-5 lg:-mt-2 text-[22px] md:text-[28px] font-bold ${className}`}>
       {title}
     </h2>
   );

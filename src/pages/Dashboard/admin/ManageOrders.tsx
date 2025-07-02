@@ -71,7 +71,7 @@ export default function ManageOrders() {
     <DashboardBodyWrapper>
       <DashboardHeading title="Manage Orders" />
 
-      <div className="mt-6 overflow-x-auto">
+      <div className="mt-4 overflow-x-auto">
         <Table className="border p-1">
           <TableHeader>
             <TableRow>
