@@ -29,13 +29,10 @@ import {
 import { successTheme } from "@/styles/toastThemes";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import toast from "react-hot-toast";
-import UpdateProductModal from "@/components/ui/modal/UpdateProductModal";
 import { Link } from "react-router-dom";
 
 export default function ManageProducts() {
   const [page, setPage] = useState(1);
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [selectedCar, setSelectedCar] = useState<TCar | null>(null);
 
   const {
     data: carResponse,
@@ -67,11 +64,6 @@ export default function ManageProducts() {
     }
   };
 
-  const handleUpdate = (car: TCar) => {
-    setSelectedCar(car);
-    setEditModalOpen(true);
-  };
-
   return (
     <DashboardBodyWrapper>
       <DashboardHeading title="Manage Products" />
@@ -94,7 +86,7 @@ export default function ManageProducts() {
 
           <TableBody>
             {isLoading || isFetching
-              ? [...Array(10)].map((_, index) => (
+              ? [...Array(6)].map((_, index) => (
                   <TableRow key={index}>
                     <TableCell>
                       <Skeleton className="h-4 w-full rounded-md" />
@@ -194,11 +186,6 @@ export default function ManageProducts() {
                     </TableCell>
                   </TableRow>
                 ))}
-            <UpdateProductModal
-              open={editModalOpen}
-              onClose={() => setEditModalOpen(false)}
-              carData={selectedCar}
-            />
           </TableBody>
         </Table>
       </div>

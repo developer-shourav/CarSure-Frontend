@@ -295,7 +295,7 @@ export default function AddNewProduct() {
               required: "Description is required",
             })}
             placeholder="Write details description about the car"
-            className="w-full border p-2 rounded-md dark:border-[#0000004d]"
+            className="w-full border p-2 rounded-md dark:border-[#c5c5c565]"
             rows={3}
           />
           {errors.description && (
