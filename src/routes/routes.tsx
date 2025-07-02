@@ -29,6 +29,7 @@ import MyOrders from "@/pages/Dashboard/user/MyOrders";
 import ProfileSettings from "@/pages/Dashboard/user/ProfileSettings";
 import ChangePassword from "@/pages/Dashboard/user/ChangePassword";
 import AddNewProduct from "@/pages/Dashboard/admin/AddNewProduct";
+import UpdateProduct from "@/pages/Dashboard/admin/UpdateProduct";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,6 @@ const router = createBrowserRouter([
         element: <ProtectedRoutes />,
         children: [{ index: true, element: <VerifyPayment /> }],
       },
-
     ],
   },
 
@@ -83,6 +83,7 @@ const router = createBrowserRouter([
                   { path: "users", element: <ManageUsers /> },
                   { path: "addProduct", element: <AddNewProduct /> },
                   { path: "products", element: <ManageProducts /> },
+                  { path: "products/:id", element: <UpdateProduct /> },
                   { path: "orders", element: <ManageOrders /> },
                 ],
               },

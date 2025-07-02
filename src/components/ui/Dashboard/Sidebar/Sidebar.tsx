@@ -14,7 +14,13 @@ const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    // -----------Special case for products route
+    if (path === "/dashboard/admin/products") {
+      return location.pathname.startsWith("/dashboard/admin/products");
+    }
+    return location.pathname === path;
+  };
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logout successfully");
@@ -25,7 +31,7 @@ const Sidebar = () => {
     { to: "/dashboard/admin/addProduct", label: "Add Product" },
     { to: "/dashboard/admin/products", label: "Manage Products" },
     { to: "/dashboard/admin/orders", label: "Manage Orders" },
-     { to: "/dashboard/admin/users", label: "Manage Users" },
+    { to: "/dashboard/admin/users", label: "Manage Users" },
   ];
 
   const userLinks = [

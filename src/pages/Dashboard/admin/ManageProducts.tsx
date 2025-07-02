@@ -30,6 +30,7 @@ import { successTheme } from "@/styles/toastThemes";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import toast from "react-hot-toast";
 import UpdateProductModal from "@/components/ui/modal/UpdateProductModal";
+import { Link } from "react-router-dom";
 
 export default function ManageProducts() {
   const [page, setPage] = useState(1);
@@ -159,12 +160,9 @@ export default function ManageProducts() {
                       )}
                     </TableCell>
                     <TableCell className="text-right space-x-2">
-                      <Button
-                        variant="outline"
-                        onClick={() => handleUpdate(car)}
-                      >
-                        Edit
-                      </Button>
+                      <Link to={`./${car._id}`}>
+                        <Button className="hover:underline cursor-pointer" variant="outline">Edit</Button>
+                      </Link>
 
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
