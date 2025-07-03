@@ -82,7 +82,7 @@ export default function UpdateProduct() {
       reset(carData);
       setUploadedUrls(carData.productImg || []);
     }
-  }, [carRawData, reset]);
+  }, [carData, carRawData, reset]);
 
   // Handle image uploads (append to existing images)
   const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {

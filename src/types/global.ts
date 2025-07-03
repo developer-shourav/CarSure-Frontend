@@ -41,6 +41,24 @@ export interface TUserData {
   role: 'admin' | 'user';
   profileImg?: string;
   isBlocked: boolean;
+
+  // -------optional profile fields
+  bio?: string;
+  phone?: string;
+  dateOfBirth?: string;
+  gender?: 'male' | 'female' | 'other';
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    postalCode?: string;
+    country?: string;
+  };
+  website?: string;
+  occupation?: string;
+  company?: string;
+  timezone?: string;
+  language?: string;
 }
 
 
@@ -85,5 +103,5 @@ export type Testimonial = {
   feedback: string;
   image: string;
   designation: string;
-  rating: number; 
+  rating: number;
 };

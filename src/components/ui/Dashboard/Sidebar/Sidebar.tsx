@@ -32,12 +32,14 @@ const Sidebar = () => {
     { to: "/dashboard/admin/products", label: "Manage Products" },
     { to: "/dashboard/admin/orders", label: "Manage Orders" },
     { to: "/dashboard/admin/users", label: "Manage Users" },
+    { to: "/dashboard/admin/profile", label: "My Profile" },
+    { to: "/dashboard/admin/profileII", label: "My ProfileII" },
   ];
 
   const userLinks = [
     { to: "/dashboard/user", label: "User Dashboard" },
     { to: "/dashboard/user/orders", label: "My Orders" },
-    { to: "/dashboard/user/profile", label: "Profile Settings" },
+    { to: "/dashboard/user/profile", label: "My Profile" },
     { to: "/dashboard/user/change-password", label: "Change Password" },
   ];
 

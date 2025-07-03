@@ -30,6 +30,8 @@ import ProfileSettings from "@/pages/Dashboard/user/ProfileSettings";
 import ChangePassword from "@/pages/Dashboard/user/ChangePassword";
 import AddNewProduct from "@/pages/Dashboard/admin/AddNewProduct";
 import UpdateProduct from "@/pages/Dashboard/admin/UpdateProduct";
+import ProfileSettingsAdmin from "@/pages/Dashboard/admin/ProfileSettingsAdmin";
+import MyProfile from "@/pages/Dashboard/admin/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +87,8 @@ const router = createBrowserRouter([
                   { path: "products", element: <ManageProducts /> },
                   { path: "products/:id", element: <UpdateProduct /> },
                   { path: "orders", element: <ManageOrders /> },
+                  { path: "profile", element: <ProfileSettingsAdmin /> },
+                  { path: "profileII", element: <MyProfile /> },
                 ],
               },
               // User Routes
