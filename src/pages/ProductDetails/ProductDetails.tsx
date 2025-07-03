@@ -11,6 +11,9 @@ import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import ProductImageGallery from "@/components/ui/ProductImageGallery/ProductImageGallery";
+import { Star, StarHalf } from "lucide-react";
+import ProductShareInfo from "@/components/ui/ProductShareInfo/ProductShareInfo";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -25,6 +28,19 @@ export default function ProductDetails() {
       toast.error("Order over the Available quantity");
     }
   }, [quantity]);
+
+  const stars = [];
+  const fullStars = Math.floor(product?.rating);
+  const hasHalfStar = product?.rating % 1 !== 0;
+  for (let i = 0; i < 5; i++) {
+    if (i < fullStars) {
+      stars.push("full");
+    } else if (i === fullStars && hasHalfStar) {
+      stars.push("half");
+    } else {
+      stars.push("empty");
+    }
+  }
 
   if (isLoading || !product) {
     return (
@@ -59,90 +75,125 @@ export default function ProductDetails() {
 
   return (
     <SectionWrapper>
-      <div className="min-h-screen py-10 mt-[62px] lg:mt-[116px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
+      <div className="min-h-screen py-10 mt-[62px] lg:mt-[130px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 ">
           {/* --- Product Image Gallery --- */}
-          <div className="space-y-4">
-            <img
-              src={product?.productImg[0]}
-              alt={product?.carName}
-              className="w-full h-96 object-cover rounded-xl shadow"
-            />
-            {/* Mini image gallery can go here if you have multiple images */}
-          </div>
+          <ProductImageGallery images={product?.productImg} />
 
           {/* --- Product Info --- */}
           <div className="space-y-4">
             <h2 className="text-3xl font-bold">{product?.carName}</h2>
+            <div className="flex items-center gap-1">
+              {stars.map((starType, idx) =>
+                starType === "full" ? (
+                  <Star
+                    key={idx}
+                    size={15}
+                    className="text-yellow-600 fill-yellow-500"
+                  />
+                ) : starType === "half" ? (
+                  <StarHalf
+                    key={idx}
+                    size={15}
+                    className="text-yellow-600 fill-yellow-500"
+                  />
+                ) : (
+                  <Star key={idx} size={15} className="text-gray-300" />
+                )
+              )}{" "}
+              <span className=" font-semibold text-gray-700 dark:text-gray-400">
+                {product.rating}
+              </span>
+            </div>
 
-            <p className="text-xl font-semibold text-red-600">
-              ${product?.price.toLocaleString()}
+            <div className="flex items-center justify-between border-b pb-2">
+              <p className="text-xl lg:text-2xl font-bold text-red-600">
+                ${product?.price.toLocaleString()}
+              </p>
+              <p>
+                {product?.inStock ? (
+                  <span className="font-bold text-green-500">In Stock</span>
+                ) : (
+                  <span className="font-bold text-red-500 line-through">
+                    Out Of Stock
+                  </span>
+                )}{" "}
+              </p>
+            </div>
+            <p className="text-sm  text-gray-600 dark:text-gray-300">
+              {product?.description?.slice(0, 160) + "..."}
             </p>
 
-            <div className="text-sm space-y-1">
+            <div className="text-sm lg:text-[15px] space-y-2 font-semibold text-gray-700 dark:text-gray-200">
               <p>Brand: {product?.brand}</p>
               <p>Model: {product?.model}</p>
               <p>Category: {product?.category}</p>
               <p>Car Left: {product?.quantity} Only</p>
-              <p>Stock: {product?.inStock ? 'available' : 'out of stock'} </p>
             </div>
 
-            {/* --------Quantity Selector --------*/}
-            <div className="flex items-center gap-3 mt-4">
-              <Button
-                variant="outline"
-                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              >
-                -
-              </Button>
-              <span>{quantity}</span>
-              <Button
-                variant="outline"
-                disabled={product?.quantity < quantity}
-                onClick={() => {
-                  setQuantity((q) => q + 1);
-                }}
-              >
-                +
-              </Button>
-            </div>
-            {/* --------Action Buttons --------*/}
-            <div className="flex flex-col sm:flex-row gap-3 mt-6">
-              <Button
-                disabled={
-                  product?.quantity === 0 || product?.quantity < quantity
-                }
-                onClick={() => {
-                  if (!loggedInUser?.userId) {
-                    toast.error("Please login to add to cart");
-                    return;
+            <div className="flex flex-col md:flex-row justify-between items-center gap-3">
+              {/* --------Quantity Selector --------*/}
+              <div className="flex items-center justify-center gap-4 rounded-md w-12/12 md:w-3/12 border py-1">
+                <button
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  className="text-lg"
+                >
+                  -
+                </button>
+                <span>{quantity}</span>
+                <button
+                  disabled={product?.quantity < quantity}
+                  onClick={() => {
+                    setQuantity((q) => q + 1);
+                  }}
+                  className="text-lg"
+                >
+                  +
+                </button>
+              </div>
+              {/* --------Action Buttons --------*/}
+              <div className="flex flex-col sm:flex-row gap-3 w-12/12 md:w-9/12 ">
+                <Button
+                  disabled={
+                    product?.quantity === 0 || product?.quantity < quantity
                   }
+                  onClick={() => {
+                    if (!loggedInUser?.userId) {
+                      toast.error("Please login to add to cart");
+                      return;
+                    }
 
-                  if (loggedInUser?.userId) {
-                    dispatch(
-                      addToCart({
-                        userId: loggedInUser.userId,
-                        item: {
-                          id: product?._id,
-                          name: product?.carName,
-                          price: product?.price,
-                          image: product?.productImg[0],
-                          quantity,
-                        },
-                      })
-                    );
-                    toast.success("Added to cart!");
-                  }
-                }}
-                className="bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto"
-              >
-                {product?.quantity === 0 ? (
-                  <span className="line-through">Out of Stock</span>
-                ) : (
-                  "Add to Cart"
-                )}
-              </Button>
+                    if (loggedInUser?.userId) {
+                      dispatch(
+                        addToCart({
+                          userId: loggedInUser.userId,
+                          item: {
+                            id: product?._id,
+                            name: product?.carName,
+                            price: product?.price,
+                            image: product?.productImg[0],
+                            quantity,
+                          },
+                        })
+                      );
+                      toast.success("Added to cart!");
+                    }
+                  }}
+                  className="bg-red-600 hover:bg-red-700 text-white w-full block"
+                >
+                  {product?.quantity === 0 ? (
+                    <span className="line-through">Out of Stock</span>
+                  ) : (
+                    "Add to Cart"
+                  )}
+                </Button>
+              </div>
             </div>
+
+            <ProductShareInfo
+              url={`https://car-sure.vercel.app/cars/${product?._id}`}
+              title={`${product?.carName} - ${product?.brand} ${product?.model} -CarSure Awesome cars collections`}
+            />
           </div>
         </div>
 
