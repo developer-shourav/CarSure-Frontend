@@ -326,7 +326,7 @@ export default function UserProfilePage() {
                     </Label>
                     <select
                       {...register("gender")}
-                      className="w-full bg-gray-50 border border-gray-300 rounded-xl text-sm py-[] px-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-900"
+                      className="w-full bg-gray-50 border border-gray-300 rounded-xl text-sm py-[6px] px-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-900"
                     >
                       <option value="">Select</option>
                       <option value="male">Male</option>
