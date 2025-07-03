@@ -27,7 +27,7 @@ export default function ProductDetails() {
     if (product?.quantity < quantity) {
       toast.error("Order over the Available quantity");
     }
-  }, [quantity]);
+  }, [product?.quantity, quantity]);
 
   const stars = [];
   const fullStars = Math.floor(product?.rating);
