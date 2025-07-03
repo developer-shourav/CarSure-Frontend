@@ -16,6 +16,7 @@ import {
 import { TCar, TMeta, TQueryParam } from "@/types";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Star, StarHalf, Heart } from "lucide-react";
 
 export default function AllProducts() {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -262,36 +263,41 @@ export default function AllProducts() {
 
             {/* --------Filters --------*/}
             {(Object.keys(filterData) as (keyof typeof filterData)[]).map(
-              (key) => (
-                <div key={key}>
-                  <p className="text-sm font-semibold capitalize text-gray-700 dark:text-gray-300 mb-1">
-                    {key}
-                  </p>
-                  <div className="space-y-1 max-h-40 overflow-y-auto pr-2">
-                    {filterData[key]?.map((value: string) => (
-                      <div key={value} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`${key}-${value}`}
-                          checked={filters[key]?.includes(value)}
-                          onCheckedChange={() =>
-                            handleCheckboxChange(key, value)
-                          }
-                        />
-                        <label
-                          htmlFor={`${key}-${value}`}
-                          className="text-sm capitalize text-gray-600 dark:text-gray-300"
+              (key) => {
+                return (
+                  <div key={key}>
+                    <p className="text-sm font-semibold capitalize text-gray-700 dark:text-gray-300 mb-1">
+                      {key}
+                    </p>
+                    <div className="space-y-1 max-h-40 overflow-y-auto pr-2">
+                      {filterData[key]?.map((value: string) => (
+                        <div
+                          key={value}
+                          className="flex items-center space-x-2"
                         >
-                          {value === "true"
-                            ? "inStock"
-                            : value === "false"
-                            ? "out of stock"
-                            : value}
-                        </label>
-                      </div>
-                    ))}
+                          <Checkbox
+                            id={`${key}-${value}`}
+                            checked={filters[key]?.includes(value)}
+                            onCheckedChange={() =>
+                              handleCheckboxChange(key, value)
+                            }
+                          />
+                          <label
+                            htmlFor={`${key}-${value}`}
+                            className="text-sm capitalize text-gray-600 dark:text-gray-300"
+                          >
+                            {value === "true"
+                              ? "inStock"
+                              : value === "false"
+                              ? "out of stock"
+                              : value}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )
+                );
+              }
             )}
           </div>
           <div className="col-span-3">
@@ -318,58 +324,105 @@ export default function AllProducts() {
                       </div>
                     </div>
                   ))
-                : cars?.map((car) => (
-                    <div
-                      key={car._id}
-                      className="bg-white dark:bg-zinc-900 rounded-lg overflow-hidden shadow hover:shadow-xl transition"
-                    >
-                      <div className="flex flex-col justify-between h-full">
-                        <div>
-                          <div className="relative">
-                            <img
-                              src={car.productImg[0]}
-                              alt={car.carName}
-                              loading="lazy"
-                              className="w-full h-40 object-cover"
-                            />
-                            {!car.inStock && (
-                              <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-md">
-                                Out of Stock
+                : cars?.map((car) => {
+                    const stars = [];
+                    const fullStars = Math.floor(car.rating);
+                    const hasHalfStar = car.rating % 1 !== 0;
+                    for (let i = 0; i < 5; i++) {
+                      if (i < fullStars) {
+                        stars.push("full");
+                      } else if (i === fullStars && hasHalfStar) {
+                        stars.push("half");
+                      } else {
+                        stars.push("empty");
+                      }
+                    }
+                    return (
+                      <div
+                        key={car._id}
+                        className="relative bg-white dark:bg-zinc-900 rounded-lg overflow-hidden shadow hover:shadow-xl transition group"
+                      >
+                        {/* Heart Icon */}
+                        <button
+                          title="Add to favorite"
+                          className="absolute top-2 right-3 z-10 p-1 hidden group-hover:block bg-white  rounded-full"
+                        >
+                          <Heart className="size-5 text-black  hover:text-pink-600" />
+                        </button>
+                        <div className="flex flex-col justify-between h-full">
+                          <div>
+                            <div className="relative">
+                              <img
+                                src={car.productImg[0]}
+                                alt={car.carName}
+                                loading="lazy"
+                                className="w-full h-40 object-cover group-hover:scale-110 transition duration-300"
+                              />
+                              {!car.inStock && (
+                                <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-md">
+                                  Out of Stock
+                                </span>
+                              )}
+                            </div>
+                            <div className="p-2">
+                              <h3 className="text-lg font-semibold text-black dark:text-white">
+                                {car.carName}
+                              </h3>
+                            </div>
+                          </div>
+                          <div className="p-2 space-y-[2px]">
+                            <div className="flex items-center gap-1">
+                              {stars.map((starType, idx) =>
+                                starType === "full" ? (
+                                  <Star
+                                    key={idx}
+                                    size={13}
+                                    className="text-yellow-600 fill-yellow-500"
+                                  />
+                                ) : starType === "half" ? (
+                                  <StarHalf
+                                    key={idx}
+                                    size={13}
+                                    className="text-yellow-600 fill-yellow-500"
+                                  />
+                                ) : (
+                                  <Star
+                                    key={idx}
+                                    size={13}
+                                    className="text-gray-300"
+                                  />
+                                )
+                              )}{" "}
+                              <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">
+                                {car.rating}
                               </span>
-                            )}
+                            </div>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                              Brand: {car.brand}
+                            </p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                              Model: {car.model}
+                            </p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">
+                              Category: {car.category}
+                            </p>
+                            <p className="text-red-600 font-bold text-[15px]">
+                              ${car.price.toLocaleString()}
+                            </p>
+                            <Link to={`./${car._id}`} className="mt-auto">
+                              <Button
+                                variant="outline"
+                                size={"sm"}
+                                className="w-full mt-1 text-sm border-red-600 text-red-600 hover:bg-red-50 dark:hover:bg-zinc-800"
+                              >
+                                View Details
+                              </Button>
+                            </Link>
                           </div>
-                          <div className="p-2">
-                            <h3 className="text-lg font-semibold text-black dark:text-white">
-                              {car.carName}
-                            </h3>
-                          </div>
-                        </div>
-                        <div className="p-2 space-y-1">
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
-                            Brand: {car.brand}
-                          </p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
-                            Model: {car.model}
-                          </p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">
-                            Category: {car.category}
-                          </p>
-                          <p className="text-red-600 font-bold text-[15px]">
-                            ${car.price.toLocaleString()}
-                          </p>
-                          <Link to={`./${car._id}`} className="mt-auto">
-                            <Button
-                              variant="outline"
-                              size={"sm"}
-                              className="w-full mt-1 text-sm border-red-600 text-red-600 hover:bg-red-50 dark:hover:bg-zinc-800"
-                            >
-                              View Details
-                            </Button>
-                          </Link>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
             </div>
 
             {/* --- Pagination --- */}

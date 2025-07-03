@@ -69,7 +69,7 @@ export default function CarShowcase() {
                       src={car.productImg[0]}
                       alt={car.carName}
                       loading="lazy"
-                      className="w-full h-48 object-cover group-hover:scale-105 transition duration-300"
+                      className="w-full h-48 object-cover group-hover:scale-110 transition duration-300"
                     />
 
                     <div className="p-4 space-y-2">
