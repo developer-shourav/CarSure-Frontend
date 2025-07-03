@@ -150,8 +150,8 @@ export default function ProductDetails() {
         <ProductDescription description={product?.description} />
 
         {/* --- Similar Products --- */}
-        <div className="mt-16">
-          <h3 className="text-2xl font-bold mb-6 lg:mb-10">Similar Cars</h3>
+        <div className="mt-10">
+          <h3 className="text-xl font-bold mb-6 ">Similar Cars</h3>
           <SuggestedCars />
         </div>
       </div>
