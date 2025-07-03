@@ -8,12 +8,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function MyOrders() {
   const user = useAppSelector(selectCurrentUser);
-  const { isLoading, data } = useGetUserOrdersQuery(user?.userId, {
+  const { isLoading, data: allOrders } = useGetUserOrdersQuery(user?.userId, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 300000,
     refetchOnReconnect: true,
   });
 
+  console.log(allOrders);
   return (
     <DashboardBodyWrapper>
       <DashboardHeading title="My Orders" />
@@ -38,7 +39,7 @@ export default function MyOrders() {
               </tr>
             </thead>
             <tbody>
-              {data?.data?.map((order: any, i: number) => (
+              {allOrders?.data?.map((order: any, i: number) => (
                 <tr key={order._id} className="border-b hover:bg-accent">
                   <td className="px-4 py-2">{i + 1}</td>
                   <td className="px-4 py-2">{order._id}</td>
@@ -63,6 +64,12 @@ export default function MyOrders() {
               ))}
             </tbody>
           </table>
+          {allOrders?.data?.length === 0 && (
+            <h2 className="text-center text-2xl text-gray-400 my-10">
+              {" "}
+              No order placed yet
+            </h2>
+          )}
         </div>
       )}
     </DashboardBodyWrapper>

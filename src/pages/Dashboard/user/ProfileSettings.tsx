@@ -14,7 +14,24 @@ import DashboardBodyWrapper from "@/components/ui/wrapper/DashboardBodyWrapper";
 import { DashboardHeading } from "@/components/ui/WebsiteHeading/DashboardHeading";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { Edit, Camera, Mail, Phone, Globe, Calendar, Clock, Languages, User, Briefcase, Building2, MapPin, Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
+import {
+  Edit,
+  Camera,
+  Mail,
+  Phone,
+  Globe,
+  Calendar,
+  Clock,
+  Languages,
+  User,
+  Briefcase,
+  Building2,
+  MapPin,
+  Twitter,
+  Facebook,
+  Instagram,
+  Linkedin,
+} from "lucide-react";
 
 type FormData = {
   name: string;
@@ -148,8 +165,11 @@ export default function UserProfilePage() {
   if (userDataLoading) {
     return (
       <DashboardBodyWrapper>
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="mb-6">
+          <DashboardHeading title="My Profile"/>
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          </div>
         </div>
       </DashboardBodyWrapper>
     );
