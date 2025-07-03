@@ -4,15 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Heart, Star, StarHalf } from "lucide-react";
 
-export default function SuggestedCars() {
+export default function SuggestedCars({suggestion}: { suggestion: string }) {
+  console.log(suggestion);
   const {
     data: carResponse,
     isLoading,
     isFetching,
   } = useGetAllProductsQuery(
     [
-      { name: "limit", value: "8" },
-      { name: "category", value: "suv" },
+      { name: "limit", value: "10" },
+      { name: "category", value: suggestion },
     ],
     {
       pollingInterval: 300000,
@@ -24,7 +25,7 @@ export default function SuggestedCars() {
   const cars = carResponse?.data;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
       {isLoadingState
         ? Array.from({ length: 8 }).map((_, i) => (
             <div

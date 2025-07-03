@@ -27,23 +27,23 @@ export default function ProductShareInfo({
     <div className="mt-5 space-y-4">
       {/* Shipping, Delivery, Money Back */}
       <div className="space-y-2">
-        <div className="flex items-center gap-2 text-gray-700 text-sm">
-          <Truck className="w-5 h-5 text-gray-500" />
+        <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200 text-sm">
+          <Truck className="w-5 h-5 text-gray-500 dark:text-gray-300" />
           <span>Free Shipping & Returns on this item</span>
         </div>
-        <div className="flex items-center gap-2 text-gray-700 text-sm">
-          <Package className="w-5 h-5 text-gray-500" />
+        <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200 text-sm">
+          <Package className="w-5 h-5 text-gray-500 dark:text-gray-300" />
           <span>Delivery within 3-5 working days</span>
         </div>
-        <div className="flex items-center gap-2 text-gray-700 text-sm">
-          <ShieldCheck className="w-5 h-5 text-gray-500" />
+        <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200 text-sm">
+          <ShieldCheck className="w-5 h-5 text-gray-500 dark:text-gray-300" />
           <span>Money Back Guarantee</span>
         </div>
       </div>
 
       {/* Share Buttons */}
       <div>
-        <div className="text-sm font-medium mb-2 text-gray-700">
+        <div className="font-semibold mb-2 lg:text-lg text-gray-700 dark:text-gray-200">
           Share this product:
         </div>
         <div className="flex gap-2">

@@ -203,7 +203,7 @@ export default function ProductDetails() {
         {/* --- Similar Products --- */}
         <div className="mt-10">
           <h3 className="text-xl font-bold mb-6 ">Similar Cars</h3>
-          <SuggestedCars />
+          <SuggestedCars suggestion={product.category} />
         </div>
       </div>
     </SectionWrapper>

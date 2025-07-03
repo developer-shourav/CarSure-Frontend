@@ -13,7 +13,7 @@ function ProductDescription({ description }: { description: string }) {
   return (
     <div className="mt-10 w-full">
       <h2 className="text-red-500 font-bold text-xl mb-3">Product details</h2>
-      <p className="text-gray-600 font-semibold text-sm lg:text-[15px] dark:text-gray-300 text-justify">
+      <p className="text-gray-600 font-medium text-sm lg:text-[15px] dark:text-gray-300 text-justify">
         {isLong ? (
           <>
             {showFull ? description : `${shortText}`}
