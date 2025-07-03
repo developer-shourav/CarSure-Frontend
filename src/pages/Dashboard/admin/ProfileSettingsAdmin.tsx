@@ -210,7 +210,7 @@ export default function ProfileSettingsAdmin() {
               <Label className="mb-2">Gender</Label>
               <select
                 {...register("gender")}
-                className="w-full border rounded px-3 py-2"
+                className="w-full border rounded px-3 py-2 dark:bg-[#151515]"
               >
                 <option value="">Select</option>
                 <option value="male">Male</option>
@@ -238,7 +238,7 @@ export default function ProfileSettingsAdmin() {
               <Label className="mb-2">Language</Label>
               <Input {...register("language")} />
             </div>
-            <div>
+            <div className="col-span-2">
               <Label className="mb-2">Bio</Label>
               <textarea
                 {...register("bio")}
