@@ -125,7 +125,15 @@ const Register = () => {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 placeholder="Enter your password"
-                {...register("password", { required: "Password is required" })}
+                {...register("password", {
+                  required: "Password is required",
+                  pattern: {
+                    value:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                    message:
+                      "Password must be at least 8 characters, with uppercase, lowercase, number, and special character.",
+                  },
+                })}
               />
               <div
                 className="absolute right-3 top-[30px] cursor-pointer text-zinc-500 dark:text-zinc-300"
