@@ -150,7 +150,9 @@ export default function ProfileSettingsAdmin() {
         >
           {/* Full Name */}
           <div>
-            <Label htmlFor="name">Full Name</Label>
+            <Label className="mb-2" htmlFor="name">
+              Full Name
+            </Label>
             <Input
               id="name"
               {...register("name", { required: "Name is required" })}
@@ -162,7 +164,9 @@ export default function ProfileSettingsAdmin() {
 
           {/* Email (Read-only) */}
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label className="mb-2" htmlFor="email">
+              Email
+            </Label>
             <Input
               id="email"
               type="email"
@@ -174,13 +178,6 @@ export default function ProfileSettingsAdmin() {
 
           {/* Profile Image Upload */}
           <div>
-            <Label htmlFor="profileImg">Profile Image</Label>
-            <Input
-              id="profileImg"
-              type="file"
-              accept="image/*"
-              {...register("profileImg")}
-            />
             {preview && (
               <img
                 src={preview}
@@ -188,20 +185,29 @@ export default function ProfileSettingsAdmin() {
                 className="mt-2 h-28 w-28 rounded-full border object-cover"
               />
             )}
+            <Label className="my-2" htmlFor="profileImg">
+              Profile Image
+            </Label>
+            <Input
+              id="profileImg"
+              type="file"
+              accept="image/*"
+              {...register("profileImg")}
+            />
           </div>
 
           {/* Additional Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label>Phone</Label>
+              <Label className="mb-2">Phone</Label>
               <Input {...register("phone")} />
             </div>
             <div>
-              <Label>Date of Birth</Label>
+              <Label className="mb-2">Date of Birth</Label>
               <Input type="date" {...register("dateOfBirth")} />
             </div>
             <div>
-              <Label>Gender</Label>
+              <Label className="mb-2">Gender</Label>
               <select
                 {...register("gender")}
                 className="w-full border rounded px-3 py-2"
@@ -213,27 +219,27 @@ export default function ProfileSettingsAdmin() {
               </select>
             </div>
             <div>
-              <Label>Website</Label>
+              <Label className="mb-2">Website</Label>
               <Input {...register("website")} />
             </div>
             <div>
-              <Label>Occupation</Label>
+              <Label className="mb-2">Occupation</Label>
               <Input {...register("occupation")} />
             </div>
             <div>
-              <Label>Company</Label>
+              <Label className="mb-2">Company</Label>
               <Input {...register("company")} />
             </div>
             <div>
-              <Label>Timezone</Label>
+              <Label className="mb-2">Timezone</Label>
               <Input {...register("timezone")} />
             </div>
             <div>
-              <Label>Language</Label>
+              <Label className="mb-2">Language</Label>
               <Input {...register("language")} />
             </div>
             <div>
-              <Label>Bio</Label>
+              <Label className="mb-2">Bio</Label>
               <textarea
                 {...register("bio")}
                 className="w-full border rounded px-3 py-2"
@@ -245,23 +251,23 @@ export default function ProfileSettingsAdmin() {
           {/* Address Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label>Street</Label>
+              <Label className="mb-2">Street</Label>
               <Input {...register("address.street")} />
             </div>
             <div>
-              <Label>City</Label>
+              <Label className="mb-2">City</Label>
               <Input {...register("address.city")} />
             </div>
             <div>
-              <Label>State</Label>
+              <Label className="mb-2">State</Label>
               <Input {...register("address.state")} />
             </div>
             <div>
-              <Label>Postal Code</Label>
+              <Label className="mb-2">Postal Code</Label>
               <Input {...register("address.postalCode")} />
             </div>
             <div>
-              <Label>Country</Label>
+              <Label className="mb-2">Country</Label>
               <Input {...register("address.country")} />
             </div>
           </div>
