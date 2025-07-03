@@ -12,32 +12,43 @@ import { successTheme } from "@/styles/toastThemes";
 import DashboardBodyWrapper from "@/components/ui/wrapper/DashboardBodyWrapper";
 import { DashboardHeading } from "@/components/ui/WebsiteHeading/DashboardHeading";
 import { useAppSelector } from "@/redux/hooks";
-import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 type FormData = {
   name: string;
   email: string;
   profileImg?: FileList;
+  bio?: string;
+  phone?: string;
+  dateOfBirth?: string;
+  gender?: "male" | "female" | "other";
+  website?: string;
+  occupation?: string;
+  company?: string;
+  timezone?: string;
+  language?: string;
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    postalCode?: string;
+    country?: string;
+  };
 };
 
 export default function ProfileSettingsAdmin() {
   const user = useAppSelector(selectCurrentUser);
-  const { isLoading: userDataLoading, data } = useGetSingleUserQuery(
-    user?.userId,
-    {
-      refetchOnFocus: true,
-      refetchOnReconnect: true,
-    }
-  );
-  const currentUserData = data?.data;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const {
+    data,
+    isLoading: userDataLoading,
+    refetch,
+  } = useGetSingleUserQuery(user?.userId, {
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+  });
 
-  const [preview, setPreview] = useState<string | null>(
-    data?.data?.profileImg || null
-  );
+  const currentUserData = data?.data;
+  const [preview, setPreview] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [updateUserInfo, { isLoading, isSuccess, isError }] =
     useUpdateUserInfoMutation();
@@ -47,40 +58,53 @@ export default function ProfileSettingsAdmin() {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<FormData>({
-    defaultValues: {
-      name: currentUserData?.name || "",
-      email: currentUserData?.email || "",
-    },
-  });
+    reset,
+  } = useForm<FormData>();
 
   const profileImgFile = watch("profileImg");
 
-  // Image preview logic
+  // Populate default values when data is loaded
+  useEffect(() => {
+    if (currentUserData) {
+      reset({
+        name: currentUserData.name || "",
+        email: currentUserData.email || "",
+        bio: currentUserData.bio || "",
+        phone: currentUserData.phone || "",
+        dateOfBirth: currentUserData.dateOfBirth || "",
+        gender: currentUserData.gender || undefined,
+        website: currentUserData.website || "",
+        occupation: currentUserData.occupation || "",
+        company: currentUserData.company || "",
+        timezone: currentUserData.timezone || "",
+        language: currentUserData.language || "",
+        address: {
+          street: currentUserData.address?.street || "",
+          city: currentUserData.address?.city || "",
+          state: currentUserData.address?.state || "",
+          postalCode: currentUserData.address?.postalCode || "",
+          country: currentUserData.address?.country || "",
+        },
+      });
+      setPreview(currentUserData.profileImg || null);
+    }
+  }, [currentUserData, reset]);
+
+  // Preview selected image
   useEffect(() => {
     if (profileImgFile && profileImgFile.length > 0) {
       const file = profileImgFile[0];
       const reader = new FileReader();
       reader.onloadend = () => setPreview(reader.result as string);
       reader.readAsDataURL(file);
-    } else {
-      setPreview(currentUserData?.profileImg || null);
     }
-  }, [profileImgFile, currentUserData?.profileImg]);
+  }, [profileImgFile]);
 
-  // Logout logic
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
-  };
-
-  // Form submission
   const onSubmit = async (data: FormData) => {
     try {
       setUploading(true);
       let profileImgUrl = currentUserData?.profileImg || "";
 
-      // Upload to Cloudinary if new image selected
       if (data.profileImg && data.profileImg.length > 0) {
         const formData = new FormData();
         formData.append("file", data.profileImg[0]);
@@ -97,35 +121,23 @@ export default function ProfileSettingsAdmin() {
       }
 
       const updatedData = {
-        name: data.name,
-        email: data.email,
+        ...data,
         profileImg: profileImgUrl,
       };
 
       await updateUserInfo(updatedData);
+      await refetch();
     } catch (error) {
       toast.error("Image upload failed!");
-      console.log(error);
+      console.error(error);
     } finally {
       setUploading(false);
     }
   };
 
-  // Success/Error toasts
   useEffect(() => {
     if (isError) toast.error("Error: Update failed!");
-
-    if (isSuccess) {
-      toast.success("User updated successfully!", successTheme);
-
-      // If user updated email, logout after delay
-      if (watch("email") !== currentUserData?.email) {
-        setTimeout(() => {
-          toast("You changed your email. Please login again.");
-          handleLogout();
-        }, 3000); // 3s delay
-      }
-    }
+    if (isSuccess) toast.success("User updated successfully!", successTheme);
   }, [isSuccess, isError]);
 
   return (
@@ -134,40 +146,34 @@ export default function ProfileSettingsAdmin() {
       {!userDataLoading && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-6 max-w-xl mt-6"
+          className="space-y-6 max-w-2xl mt-6"
         >
-          {/* Name */}
-          <div className="space-y-1">
+          {/* Full Name */}
+          <div>
             <Label htmlFor="name">Full Name</Label>
             <Input
               id="name"
               {...register("name", { required: "Name is required" })}
             />
             {errors.name && (
-              <p className="text-sm text-red-500">{errors.name.message}</p>
+              <p className="text-red-500 text-sm">{errors.name.message}</p>
             )}
           </div>
 
-          {/* Email */}
-          <div className="space-y-1">
+          {/* Email (Read-only) */}
+          <div>
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
               type="email"
-              {...register("email", { required: "Email is required" })}
+              readOnly
+              {...register("email")}
+              className="bg-gray-100 cursor-not-allowed"
             />
-            {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
-            )}
-            {/* ⬇️ Permanent note */}
-            <p className="text-sm text-muted-foreground mt-2 italic">
-              [Note: If you change your email, you will need to login again
-              using the new one after saving.]
-            </p>
           </div>
 
-          {/* Profile Image */}
-          <div className="space-y-1">
+          {/* Profile Image Upload */}
+          <div>
             <Label htmlFor="profileImg">Profile Image</Label>
             <Input
               id="profileImg"
@@ -182,6 +188,82 @@ export default function ProfileSettingsAdmin() {
                 className="mt-2 h-28 w-28 rounded-full border object-cover"
               />
             )}
+          </div>
+
+          {/* Additional Fields */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label>Phone</Label>
+              <Input {...register("phone")} />
+            </div>
+            <div>
+              <Label>Date of Birth</Label>
+              <Input type="date" {...register("dateOfBirth")} />
+            </div>
+            <div>
+              <Label>Gender</Label>
+              <select
+                {...register("gender")}
+                className="w-full border rounded px-3 py-2"
+              >
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <Label>Website</Label>
+              <Input {...register("website")} />
+            </div>
+            <div>
+              <Label>Occupation</Label>
+              <Input {...register("occupation")} />
+            </div>
+            <div>
+              <Label>Company</Label>
+              <Input {...register("company")} />
+            </div>
+            <div>
+              <Label>Timezone</Label>
+              <Input {...register("timezone")} />
+            </div>
+            <div>
+              <Label>Language</Label>
+              <Input {...register("language")} />
+            </div>
+            <div>
+              <Label>Bio</Label>
+              <textarea
+                {...register("bio")}
+                className="w-full border rounded px-3 py-2"
+                rows={3}
+              />
+            </div>
+          </div>
+
+          {/* Address Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label>Street</Label>
+              <Input {...register("address.street")} />
+            </div>
+            <div>
+              <Label>City</Label>
+              <Input {...register("address.city")} />
+            </div>
+            <div>
+              <Label>State</Label>
+              <Input {...register("address.state")} />
+            </div>
+            <div>
+              <Label>Postal Code</Label>
+              <Input {...register("address.postalCode")} />
+            </div>
+            <div>
+              <Label>Country</Label>
+              <Input {...register("address.country")} />
+            </div>
           </div>
 
           <Button

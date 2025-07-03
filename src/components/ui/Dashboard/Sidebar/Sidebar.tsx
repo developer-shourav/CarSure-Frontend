@@ -33,7 +33,6 @@ const Sidebar = () => {
     { to: "/dashboard/admin/orders", label: "Manage Orders" },
     { to: "/dashboard/admin/users", label: "Manage Users" },
     { to: "/dashboard/admin/profile", label: "My Profile" },
-    { to: "/dashboard/admin/profileII", label: "My ProfileII" },
   ];
 
   const userLinks = [
