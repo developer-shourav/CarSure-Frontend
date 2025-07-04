@@ -1,5 +1,6 @@
 import {
   ChevronDown,
+  LogIn,
   LogOut,
   LucideHeart,
   Menu,
@@ -80,6 +81,18 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
+          {!loggedInUser && (
+            <Link
+              to="/register"
+              className={`text-sm font-medium transition-colors ${
+                isActive("/register")
+                  ? "text-red-600 font-semibold"
+                  : "hover:text-red-500"
+              }`}
+            >
+              Register
+            </Link>
+          )}
           {loggedInUser && (
             <Link
               to={getDashboardPath()}
@@ -98,10 +111,7 @@ export function Navbar() {
         {!loggedInUser && (
           <div className="hidden lg:flex items-center gap-4">
             <Link to="/login">
-              <Button variant="outline">Login</Button>
-            </Link>
-            <Link to="/register">
-              <Button>Register</Button>
+              <Button variant="outline"> <LogIn/> Login</Button>
             </Link>
           </div>
         )}

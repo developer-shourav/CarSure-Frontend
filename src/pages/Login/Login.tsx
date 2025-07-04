@@ -31,7 +31,7 @@ const Login = () => {
     register,
     handleSubmit,
     reset,
-    setValue, 
+    setValue,
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
@@ -66,7 +66,7 @@ const Login = () => {
     <SectionWrapper>
       <div className="mt-[82px] lg:mt-[136px]">
         <WebsiteHeading title="Login" />
-        <div className="w-full max-w-md mx-auto space-y-3 p-6 bg-white dark:bg-zinc-900 card-custom-shadow rounded-2xl dark:border dark:border-red-500">
+        <div className="w-full -mt-3 lg:-mt-7 max-w-md mx-auto space-y-3 p-6 bg-white dark:bg-zinc-900 card-custom-shadow rounded-2xl dark:border ">
           {/* --------Logo --------*/}
           <img
             src={siteLogo}
@@ -77,29 +77,6 @@ const Login = () => {
           {/* -------- Form --------*/}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
             {/* -------- Demo Credentials --------*/}
-            <div className="flex items-center justify-end gap-2 -mt-5">
-              <button
-                type="button"
-                onClick={() => {
-                  setValue("email", "porimol@gmail.com");
-                  setValue("password", "123456");
-                }}
-                className="text-xs cursor-pointer font-semibold rounded-full bg-gray-300 px-4 py-1 text-black dark:bg-gray-700 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 transition"
-              >
-                User
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setValue("email", "shourav.rajbongshi1@gmail.com");
-                  setValue("password", "HKdasaSRB1");
-                }}
-                className="text-xs cursor-pointer font-semibold rounded-full bg-red-200 px-4 py-1 text-red-600 dark:bg-red-600 dark:text-white hover:bg-red-300 dark:hover:bg-red-600 transition"
-              >
-               Admin
-              </button>
-            </div>
 
             {/* -------- Email --------*/}
             <div className="space-y-2">
@@ -135,6 +112,30 @@ const Login = () => {
                   {errors.password.message}
                 </p>
               )}
+            </div>
+
+            <div className="flex items-center  gap-2 mt-5">
+              <button
+                type="button"
+                onClick={() => {
+                  setValue("email", "porimol@gmail.com");
+                  setValue("password", "123456");
+                }}
+                className="text-xs cursor-pointer font-semibold rounded-full bg-gray-300 px-4 py-1 text-black dark:bg-gray-700 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-700 transition"
+              >
+                Demo User
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setValue("email", "shourav.rajbongshi1@gmail.com");
+                  setValue("password", "HKdasaSRB1");
+                }}
+                className="text-xs cursor-pointer font-semibold rounded-full bg-red-200 px-4 py-1 text-red-600 dark:bg-red-600 dark:text-white hover:bg-red-300 dark:hover:bg-red-600 transition"
+              >
+                Demo Admin
+              </button>
             </div>
 
             {/* Register Link */}

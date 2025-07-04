@@ -81,7 +81,7 @@ const Register = () => {
     <SectionWrapper>
       <div className="mt-[82px] lg:mt-[136px]">
         <WebsiteHeading title="Register" />
-        <div className="w-full -mt-5 max-w-md mx-auto space-y-6 p-6 bg-white dark:bg-zinc-900 card-custom-shadow rounded-2xl dark:border dark:border-red-500">
+        <div className="w-full -mt-3 lg:-mt-7 max-w-md mx-auto space-y-6 p-6 bg-white dark:bg-zinc-900 card-custom-shadow rounded-2xl dark:border ">
           {/* --------Logo --------*/}
           <img
             src={siteLogo}
