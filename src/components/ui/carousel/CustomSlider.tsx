@@ -10,6 +10,7 @@ const carDetails = [
     topic: "Luxury",
     description:
       "A mid-engine V12 supercar known for its aggressive styling and powerful performance. Top speed over 217 mph, 0-62 mph in under 3 seconds.",
+    carLink: "/cars/67fcee57ca89f6a53562ad7d",
   },
   {
     src: "/slider/car2.jpg",
@@ -18,6 +19,7 @@ const carDetails = [
     topic: "Sports Car",
     description:
       "A twin-turbocharged V8 marvel delivering exhilarating speed and precise handling. 0-62 mph in 3 seconds, with a top speed of 205 mph.",
+    carLink: "/cars/67fcefbfca89f6a53562ad8d",
   },
   {
     src: "/slider/car1.jpg",
@@ -26,6 +28,7 @@ const carDetails = [
     topic: "Performance",
     description:
       "A lightweight, carbon-fiber supercar with a potent twin-turbo V8. Reaches 0-62 mph in 2.9 seconds and boasts a top speed of 212 mph.",
+    carLink: "/cars/67fced8aca89f6a53562ad75",
   },
   {
     src: "/slider/car5.jpg",
@@ -34,6 +37,7 @@ const carDetails = [
     topic: "Sports Car",
     description:
       "An iconic flat-six turbocharged powerhouse offering incredible acceleration and all-weather capability. 0-62 mph in 2.7 seconds, top speed of 205 mph.",
+    carLink: "/cars/67fcedc9ca89f6a53562ad79",
   },
 ];
 
@@ -81,7 +85,7 @@ export default function CustomSlider() {
 
   return (
     <div
-      className="relative h-[65vh] lg:h-[80vh] xl:h-[76vh] xxl:h-[72vh] w-full overflow-hidden bg-black text-white"
+      className="relative h-[65vh] lg:h-[80vh] xl:h-[76vh] xxl:h-[72vh] w-full mx-auto overflow-hidden bg-black text-white"
       onMouseEnter={clearTimeoutRef}
       onMouseLeave={() => (timeoutRef.current = setTimeout(goToNext, 3000))}
       onTouchStart={handleTouchStart}
@@ -121,10 +125,10 @@ export default function CustomSlider() {
               </p>
               {/* Fixed View Cars Button */}
               <Link
-                to="/cars"
-                className="mt-4 inline-block px-6 py-3 bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors z-30 relative"
+                to={car.carLink}
+                className="mt-4 inline-block px-6 py-2 md:py-[10px] bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors relative uppercase text-sm  md:text-[15px]"
               >
-                View Cars
+                Buy Now
               </Link>
             </div>
           </div>
@@ -132,7 +136,7 @@ export default function CustomSlider() {
       </div>
 
       {/* ------------Slider Right Side Section-------------- */}
-      <div className=" absolute bottom-6 left-1/2 -translate-x-1/2 w-full hidden lg:flex items-end justify-end gap-36 z-20 ">
+      <div className=" absolute bottom-6 right-6 hidden md:flex items-end gap-36 z-20 ">
         {/* -----------------Slider Buttons------------- */}
         <div className=" flex gap-6 items-center">
           <button
