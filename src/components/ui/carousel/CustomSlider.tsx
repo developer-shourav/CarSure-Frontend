@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 const carDetails = [
   {
     src: "/slider/car4.jpg",
@@ -97,25 +98,34 @@ export default function CustomSlider() {
               index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             )}
           >
-            {/* ----------Image Covering the Section--------------- */}
+            {/* Gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent z-10"></div>
+
             <img
               src={car.src}
               className="h-full w-full object-cover"
               alt={car.title}
             />
 
-            {/* -----------content Which will show right side------------- */}
-            <div className="absolute top-[5%] md:top-[10%] left-1/2 -translate-x-1/2 w-[80%] text-shadow-lg ">
-              <div className="tracking-[10px] font-bold ">{car.brand}</div>
+            {/* Fixed content container */}
+            <div className="absolute top-[5%] md:top-[10%] left-[45%] xxl-left-[50%] -translate-x-1/2 w-[80%] z-20">
+              <div className="tracking-[10px] font-bold">{car.brand}</div>
               <div className="text-[32px] lg:text-[40px] xl:text-5xl xxl:text-[50px] font-bold leading-tight">
                 {car.title}
               </div>
               <div className="text-3xl lg:text-4xl xl:text-[40px] xxl:text-5xl font-bold text-red-500">
                 {car.topic}
               </div>
-              <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-md xl:max-w-xl p-1 b rounded-2xl g-black/.1 backdrop-blur-sm">
+              <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-md xl:max-w-xl">
                 {car.description}
               </p>
+              {/* Fixed View Cars Button */}
+              <Link
+                to="/cars"
+                className="mt-4 inline-block px-6 py-3 bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors z-30 relative"
+              >
+                View Cars
+              </Link>
             </div>
           </div>
         ))}
