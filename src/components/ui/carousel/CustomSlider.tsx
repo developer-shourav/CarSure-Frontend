@@ -111,7 +111,7 @@ export default function CustomSlider() {
       ))}
 
       {/* Content Wrapper */}
-      <div className="relative max-w-[1233px] mx-auto h-full px-4 md:px-6 lg:px-0">
+      <div className="relative max-w-[1233px] w-full mx-auto h-full px-4 md:px-6 lg:px-0">
         {/* Left Side Content */}
         <div className="absolute top-[5%] md:top-[10%] w-full z-20">
           {carDetails.map((car, index) => (
@@ -129,7 +129,7 @@ export default function CustomSlider() {
               <div className="text-3xl lg:text-4xl xl:text-[40px] xxl:text-5xl font-bold text-red-500">
                 {car.topic}
               </div>
-              <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-md xl:max-w-xl">
+              <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-full md:max-w-md xl:max-w-xl pr-2">
                 {car.description}
               </p>
               <Link
