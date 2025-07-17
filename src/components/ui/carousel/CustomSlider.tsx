@@ -85,34 +85,43 @@ export default function CustomSlider() {
 
   return (
     <div
-      className="relative h-[65vh] lg:h-[80vh] xl:h-[76vh] xxl:h-[72vh] w-full mx-auto overflow-hidden bg-black text-white"
+      className="relative h-[65vh] lg:h-[80vh] xl:h-[76vh] xxl:h-[72vh] w-full overflow-hidden bg-black text-white"
       onMouseEnter={clearTimeoutRef}
       onMouseLeave={() => (timeoutRef.current = setTimeout(goToNext, 3000))}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       ref={containerRef}
     >
-      {/* --------------Slider Left Side Section-------------- */}
-      <div className="absolute inset-0 transition-all duration-500 ease-in-out p-4">
-        {carDetails.map((car, index) => (
-          <div
-            key={index}
-            className={cn(
-              "absolute inset-0 transition-opacity duration-1000 ease-in-out",
-              index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-            )}
-          >
-            {/* Gradient overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent z-10"></div>
+      {/* Background images with gradient */}
+      {carDetails.map((car, index) => (
+        <div
+          key={car.title + "bg"}
+          className={cn(
+            "absolute inset-0 transition-opacity duration-1000 ease-in-out",
+            index === currentIndex ? "opacity-100" : "opacity-0"
+          )}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent z-10"></div>
+          <img
+            src={car.src}
+            className="h-full w-full object-cover"
+            alt={car.title}
+          />
+        </div>
+      ))}
 
-            <img
-              src={car.src}
-              className="h-full w-full object-cover"
-              alt={car.title}
-            />
-
-            {/* Fixed content container */}
-            <div className="absolute top-[5%] md:top-[10%] left-[45%] xxl-left-[50%] -translate-x-1/2 w-[80%] z-20">
+      {/* Content Wrapper */}
+      <div className="relative max-w-[1233px] mx-auto h-full px-4 md:px-6 lg:px-0">
+        {/* Left Side Content */}
+        <div className="absolute top-[5%] md:top-[10%] w-full z-20">
+          {carDetails.map((car, index) => (
+            <div
+              key={car.title + "content"}
+              className={cn(
+                "absolute top-0 left-0 transition-opacity duration-1000 ease-in-out",
+                index === currentIndex ? "opacity-100" : "opacity-0"
+              )}
+            >
               <div className="tracking-[10px] font-bold">{car.brand}</div>
               <div className="text-[32px] lg:text-[40px] xl:text-5xl xxl:text-[50px] font-bold leading-tight">
                 {car.title}
@@ -123,7 +132,6 @@ export default function CustomSlider() {
               <p className="mt-4 text-sm md:text-[14px] lg:text-[16px] max-w-md xl:max-w-xl">
                 {car.description}
               </p>
-              {/* Fixed View Cars Button */}
               <Link
                 to={car.carLink}
                 className="mt-4 inline-block px-6 py-2 md:py-[10px] bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors relative uppercase text-sm  md:text-[15px]"
@@ -131,53 +139,53 @@ export default function CustomSlider() {
                 Buy Now
               </Link>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* ------------Slider Right Side Section-------------- */}
-      <div className=" absolute bottom-6 right-6 hidden md:flex items-end gap-36 z-20 ">
-        {/* -----------------Slider Buttons------------- */}
-        <div className=" flex gap-6 items-center">
-          <button
-            onClick={goToPrev}
-            className="w-10 h-10 rounded-full bg-white/30 hover:bg-white text-white hover:text-black font-bold flex items-center justify-center"
-          >
-            <ChevronLeft />
-          </button>
-          <button
-            onClick={goToNext}
-            className="w-10 h-10 rounded-full bg-white/30 hover:bg-white text-white hover:text-black font-bold flex items-center justify-center"
-          >
-            <ChevronRight />
-          </button>
+          ))}
         </div>
 
-        {/* ------------Slider List Image with Title------------ */}
-        <div className="flex gap-4 overflow-x-auto scrollbar-hide">
-          {carDetails.map((car, index) => (
-            <div
-              key={index}
-              className={`relative w-[100px] h-[180px] xl:w-[140px] xl:h-[220px] overflow-hidden rounded-2xl cursor-pointer border-2 border-[#00000056] hover:border-white  shadow-xl ${
-                index === currentIndex ? "border-white" : " "
-              }`}
-              onClick={() => setCurrentIndex(index)}
+        {/* Right Side Content */}
+        <div className="absolute bottom-6 right-2 md:right-6 flex items-end gap-4 lg:gap-36 z-20">
+          {/* Slider Buttons */}
+          <div className="hidden md:flex gap-3 md:gap-6 items-center">
+            <button
+              onClick={goToPrev}
+              className="w-10 h-10 rounded-full bg-white/30 hover:bg-white text-white hover:text-black font-bold flex items-center justify-center"
             >
-              <img
-                src={car.src}
-                className="w-full h-full object-cover  rounded-2xl shadow-xl"
-                alt="thumb"
-              />
-              <div className="absolute bottom-2 left-2 right-2 text-[12px] xl:text-sm">
-                <div className="font-medium">
-                  {car.title.slice(0, 10) + " ..."}
-                </div>
-                <div className="text-sm">
-                  {car.description.slice(0, 15) + " ..."}
+              <ChevronLeft />
+            </button>
+            <button
+              onClick={goToNext}
+              className="w-10 h-10 rounded-full bg-white/30 hover:bg-white text-white hover:text-black font-bold flex items-center justify-center"
+            >
+              <ChevronRight />
+            </button>
+          </div>
+
+          {/* Slider List Image with Title */}
+          <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
+            {carDetails.map((car, index) => (
+              <div
+                key={index}
+                className={`relative w-[70px] h-[85px] md:w-[100px] md:h-[140px] xl:w-[140px] xl:h-[220px] overflow-hidden rounded-2xl cursor-pointer border-2 border-[#00000056] hover:border-white  shadow-xl ${
+                  index === currentIndex ? "border-white" : " "
+                }`}
+                onClick={() => setCurrentIndex(index)}
+              >
+                <img
+                  src={car.src}
+                  className="w-full h-full object-cover  rounded-2xl shadow-xl"
+                  alt="thumb"
+                />
+                <div className="hidden md:block absolute bottom-2 left-1 md:left-2 md:right-2 text-[12px] xl:text-sm">
+                  <div className="font-medium">
+                    {car.title.slice(0, 10) + " ..."}
+                  </div>
+                  <div className="text-sm hidden md:block">
+                    {car.description.slice(0, 15) + " ..."}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
