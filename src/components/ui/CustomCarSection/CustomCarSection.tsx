@@ -20,7 +20,6 @@ export function CustomCarSection() {
 
           {/* -----------------Right Content -----------------*/}
           <div className="w-full md:w-1/2">
-            <h2 className="text-2xl md:text-4xl font-bold mb-4"></h2>
             <WebsiteHeading
               title=" Build Your Dream Car from Sketch"
               className="text-left"

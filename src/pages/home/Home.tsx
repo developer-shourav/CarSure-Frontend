@@ -6,6 +6,7 @@ import FaqSection from "@/components/ui/FAQ/FaqSection";
 import { CustomCarSection } from "@/components/ui/CustomCarSection/CustomCarSection";
 import { OurPartners } from "@/components/ui/OurPartners/OurPartners";
 import { PhotoCollage } from "@/components/ui/PhotoCollage/PhotoCollage";
+import { AiCarSection } from "@/components/ui/AiCarSection/AiCarSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <FeatureSection />
       <CarShowcase />
       <CustomCarSection />
+      <AiCarSection />
       <OurPartners />
       <PhotoCollage />
       <TestimonialSection />
