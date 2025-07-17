@@ -2,6 +2,7 @@ import { LucideShieldCheck, LucideWallet, Layers } from "lucide-react";
 import { FaCar } from "react-icons/fa";
 import SectionWrapper from "./wrapper/SectionWrapper";
 import { WebsiteHeading } from "./WebsiteHeading/WebsiteHeading";
+import { CountUpStats } from "./CountUpStats";
 
 const features = [
   {
@@ -80,14 +81,7 @@ export default function FeatureSection() {
               { value: "24h", label: "Fastest Delivery" },
               { value: "200+", label: "Verified Dealers" },
             ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl font-bold bg-gradient-to-br from-red-600 to-red-800 bg-clip-text text-transparent">
-                  {stat.value}
-                </div>
-                <p className="text-gray-700 dark:text-gray-400 mt-2">
-                  {stat.label}
-                </p>
-              </div>
+              <CountUpStats key={index} value={stat.value} label={stat.label} />
             ))}
           </div>
         </div>
