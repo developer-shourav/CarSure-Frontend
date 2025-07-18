@@ -1,9 +1,10 @@
 import { collageImages } from "@/constant";
-import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
-import SectionWrapper from "../wrapper/SectionWrapper";
+import SectionWrapper from "../../wrapper/SectionWrapper";
+import { WebsiteHeading } from "../../WebsiteHeading/WebsiteHeading";
 
 
-export function PhotoCollage() {
+
+export default function PhotoCollage() {
   return (
     <section className="py-8 lg:py-10  xl:py-12 w-full mx-auto">
       <SectionWrapper>

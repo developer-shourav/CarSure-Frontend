@@ -1,6 +1,6 @@
 import { testimonials } from "@/constant";
-import { WebsiteHeading } from "./WebsiteHeading/WebsiteHeading";
-import SectionWrapper from "./wrapper/SectionWrapper";
+import { WebsiteHeading } from "../../WebsiteHeading/WebsiteHeading";
+import SectionWrapper from "../../wrapper/SectionWrapper";
 import { Star, StarHalf, Quote } from "lucide-react";
 
 export default function TestimonialSection() {

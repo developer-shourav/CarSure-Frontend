@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import carGroup from "@/assets/carGroup.png";
-import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
-import SectionWrapper from "../wrapper/SectionWrapper";
+import { WebsiteHeading } from "../../WebsiteHeading/WebsiteHeading";
+import SectionWrapper from "../../wrapper/SectionWrapper";
 const faqs = [
   {
     question: "What is CarSure?",

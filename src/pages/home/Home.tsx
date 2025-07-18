@@ -1,12 +1,13 @@
-import FeatureSection from "@/components/ui/FeatureSection";
-import CarShowcase from "@/components/ui/FeatureCars/CarShowcase";
-import TestimonialSection from "@/components/ui/TestimonialSection";
-import CustomSlider from "@/components/ui/carousel/CustomSlider";
-import FaqSection from "@/components/ui/FAQ/FaqSection";
-import { CustomCarSection } from "@/components/ui/CustomCarSection/CustomCarSection";
-import { OurPartners } from "@/components/ui/OurPartners/OurPartners";
-import { PhotoCollage } from "@/components/ui/PhotoCollage/PhotoCollage";
-import { AiCarSection } from "@/components/ui/AiCarSection/AiCarSection";
+import FeatureSection from "@/components/ui/Home/FeatureSection/FeatureSection";
+import CarShowcase from "@/components/ui/Home/FeatureCars/CarShowcase";
+import TestimonialSection from "@/components/ui/Home/TestimonialSection/TestimonialSection";
+import CustomSlider from "@/components/ui/Home/carousel/CustomSlider";
+import FaqSection from "@/components/ui/Home/FAQ/FaqSection";
+import CustomCarSection  from "@/components/ui/Home/CustomCarSection/CustomCarSection";
+import OurPartners  from "@/components/ui/Home/OurPartners/OurPartners";
+import PhotoCollage from "@/components/ui/Home/PhotoCollage/PhotoCollage";
+import AiCarSection from "@/components/ui/Home/AiCarSection/AiCarSection";
+
 
 export default function Home() {
   return (

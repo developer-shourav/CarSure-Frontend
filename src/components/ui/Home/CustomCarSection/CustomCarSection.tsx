@@ -1,9 +1,9 @@
 import carSketch from "@/assets/skatch.png";
 import { FaRegCircleCheck } from "react-icons/fa6";
-import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
-import SectionWrapper from "../wrapper/SectionWrapper";
+import { WebsiteHeading } from "../../WebsiteHeading/WebsiteHeading";
+import SectionWrapper from "../../wrapper/SectionWrapper";
 
-export function CustomCarSection() {
+export default function CustomCarSection() {
   return (
     <section className="w-full py-8 lg:py-10  xl:py-12 mx-auto">
       <SectionWrapper>

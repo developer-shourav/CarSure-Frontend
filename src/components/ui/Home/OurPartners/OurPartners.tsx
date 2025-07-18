@@ -1,5 +1,5 @@
-import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
-import SectionWrapper from "../wrapper/SectionWrapper";
+import { WebsiteHeading } from "../../WebsiteHeading/WebsiteHeading";
+import SectionWrapper from "../../wrapper/SectionWrapper";
 
 const brandLogos = [
   { name: "Tesla", src: "/brands/brand1.png" },
@@ -25,7 +25,7 @@ const brandLogos = [
   { name: "Marsidis2", src: "/brands/brand21.png" },
 ];
 
-export function OurPartners() {
+export default function OurPartners() {
   return (
     <SectionWrapper>
       <section className="py-8 lg:py-10 xl:py-12 w-full mx-auto">

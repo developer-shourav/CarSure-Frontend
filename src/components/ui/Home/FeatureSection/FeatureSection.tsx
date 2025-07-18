@@ -1,8 +1,8 @@
 import { LucideShieldCheck, LucideWallet, Layers } from "lucide-react";
 import { FaCar } from "react-icons/fa";
-import SectionWrapper from "./wrapper/SectionWrapper";
-import { WebsiteHeading } from "./WebsiteHeading/WebsiteHeading";
-import { CountUpStats } from "./CountUpStats";
+import SectionWrapper from "../../wrapper/SectionWrapper";
+import { WebsiteHeading } from "../../WebsiteHeading/WebsiteHeading";
+import { CountUpStats } from "../../CountUpStats";
 
 const features = [
   {

@@ -1,6 +1,6 @@
 import { useGetAllProductsQuery } from "@/redux/features/product/productManagement.api";
-import SectionWrapper from "../wrapper/SectionWrapper";
-import { WebsiteHeading } from "../WebsiteHeading/WebsiteHeading";
+import SectionWrapper from "../../wrapper/SectionWrapper";
+import { WebsiteHeading } from "../../WebsiteHeading/WebsiteHeading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
