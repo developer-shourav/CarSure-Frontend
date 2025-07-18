@@ -1,15 +1,16 @@
-
 import aboutImg from "@/assets/aboutUs.jpg";
 import { WebsiteHeading } from "@/components/ui/WebsiteHeading/WebsiteHeading";
 import SectionWrapper from "@/components/ui/wrapper/SectionWrapper";
+import { CountUpStats } from "@/components/ui/CountUpStats";
 
 const About = () => {
   return (
     <SectionWrapper>
       <section className="bg-white dark:bg-zinc-950 mt-[78px] lg:mt-[165px]">
         <WebsiteHeading title="About Us" />
+
         {/* -----------------Image Left, Text Right -----------------*/}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10  items-center pb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center pb-10">
           {/* --------Image-------- */}
           <div>
             <img
@@ -35,36 +36,30 @@ const About = () => {
               thousands of happy customers find the right vehicle — reliably and
               affordably.
             </p>
+            <p className="text-muted-foreground mb-6">
+              Our platform is built to give you control and confidence. From
+              comparing car models to securing financing or checking
+              registration status — everything is transparent, fast, and secure
+              under one roof.
+            </p>
+            <p className="text-muted-foreground mb-6">
+              As we grow across Bangladesh, our focus remains the same: quality
+              vehicles, trusted dealers, and a customer-first support team ready
+              to assist you at any moment.
+            </p>
           </div>
         </div>
 
         {/* -----------------Achievements Section----------------- */}
         <div className="mt-20 px-5 lg:px-10">
-          <WebsiteHeading title="Our Achievements" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ">
             {[
-              {
-                label: "Years Experience",
-                value: "10+ ",
-              },
-              {
-                label: "Happy Clients",
-                value: "100+ ",
-              },
-              {
-                label: "Projects Completed",
-                value: "200+",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-zinc-100 dark:bg-zinc-900 py-8 lg:py-10  xl:py-12 px-6 rounded-2xl shadow hover:shadow-lg transition"
-              >
-                <div className="text-4xl font-bold mb-4 text-red-500">{item.value}</div>
-                <p className="text-xl font-semibold text-zinc-800 dark:text-white">
-                  {item.label}
-                </p>
-              </div>
+              { value: "10K+", label: "Happy Customers" },
+              { value: "98%", label: "Satisfaction Rate" },
+              { value: "24h", label: "Fastest Delivery" },
+              { value: "200+", label: "Verified Dealers" },
+            ].map((stat, index) => (
+              <CountUpStats key={index} value={stat.value} label={stat.label} />
             ))}
           </div>
         </div>
