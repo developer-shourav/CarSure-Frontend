@@ -67,7 +67,7 @@ export function Navbar() {
         </Link>
 
         {/* ----------------Desktop Nav Links----------------*/}
-        <nav className="hidden lg:flex gap-6">
+        <nav className="hidden lg:flex gap-6 uppercase">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -109,9 +109,9 @@ export function Navbar() {
 
         {/*---------------- Desktop Actions ----------------*/}
         {!loggedInUser && (
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4 ">
             <Link to="/login">
-              <Button variant="outline"> <LogIn/> Login</Button>
+              <Button variant="outline" className="uppercase"> <LogIn/> Login</Button>
             </Link>
           </div>
         )}
