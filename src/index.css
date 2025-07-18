@@ -125,12 +125,12 @@
 
 @layer components {
   .our-partners-grid {
-    @apply relative p-3 md:p-6 rounded-lg bg-[length:2rem_2rem]  md:bg-[length:3rem_3rem];
-    background-image: linear-gradient(rgba(4, 9, 48, 0.199) 1px, transparent 1px), linear-gradient(90deg, rgba(10, 5, 27, 0.205) 1px, transparent 1px);
+    @apply relative p-3 md:p-6 rounded-lg bg-[length:2.5rem_2.5rem]  md:bg-[length:3rem_3rem];
+    background-image: linear-gradient(rgba(59, 59, 59, 0.144) 1px, transparent 1px), linear-gradient(90deg, rgba(31, 31, 31, 0.164) 1px, transparent 1px);
   }
 
   .dark .our-partners-grid {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.144) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.158) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.103) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.089) 1px, transparent 1px);
   }
 
   .our-partners-grid::before {
