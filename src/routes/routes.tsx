@@ -31,6 +31,7 @@ import ChangePassword from "@/pages/Dashboard/user/ChangePassword";
 import AddNewProduct from "@/pages/Dashboard/admin/AddNewProduct";
 import UpdateProduct from "@/pages/Dashboard/admin/UpdateProduct";
 import ProfileSettingsAdmin from "@/pages/Dashboard/admin/ProfileSettingsAdmin";
+import NotFound from "@/pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
