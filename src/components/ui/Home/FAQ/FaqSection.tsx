@@ -46,7 +46,6 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="w-full mx-auto py-8 lg:py-10  xl:py-12">
       <SectionWrapper>
         <WebsiteHeading title="Frequently Asked Questions" />
         <div className="px-3 w-full mx-auto flex justify-center">
@@ -98,6 +97,5 @@ export default function FaqSection() {
           })}
         </div>
       </SectionWrapper>
-    </section>
   );
 }

@@ -33,16 +33,13 @@ const features = [
 
 export default function FeatureSection() {
   return (
-    <section className="w-full py-12 lg:py-16 xl:py-20 relative overflow-hidden">
+    <div className="w-full  relative overflow-hidden">
       {/* --------Decorative background elements --------*/}
-      <div className="absolute -top-[500px] -left-[200px] w-[800px] h-[800px] rounded-full bg-red-600/5 dark:bg-red-600/10 blur-[100px] z-0"></div>
+      <div className="absolute -top-[500px] -left-[200px] w-[800px] h-[800px] rounded-full bg-red-600/5 dark:bg-red-600/20 blur-[100px] z-0"></div>
       <div className="absolute -bottom-[300px] -right-[200px] w-[600px] h-[600px] rounded-full bg-red-600/5 dark:bg-red-600/10 blur-[100px] z-0"></div>
-
       <SectionWrapper>
         <div className="relative z-10">
-          <WebsiteHeading
-            title="Why Choose CarSure?"
-          />
+          <WebsiteHeading title="Why Choose CarSure?" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
             {features.map((feature, index) => (
@@ -67,8 +64,6 @@ export default function FeatureSection() {
                 <p className="text-gray-700 dark:text-gray-300">
                   {feature.description}
                 </p>
-
-               
               </div>
             ))}
           </div>
@@ -86,6 +81,6 @@ export default function FeatureSection() {
           </div>
         </div>
       </SectionWrapper>
-    </section>
+    </div>
   );
 }

@@ -56,7 +56,6 @@ const achievements = [
 
 const OurAchievements = () => {
   return (
-    <section className="w-full mx-auto py-8 lg:py-10  xl:py-12">
       <SectionWrapper>
         <WebsiteHeading title="Our Achievements" />
 
@@ -92,9 +91,7 @@ const OurAchievements = () => {
             </div>
           ))}
         </div>
-      </SectionWrapper>
-    </section>
-  );
+      </SectionWrapper>  );
 };
 
 export default OurAchievements;
