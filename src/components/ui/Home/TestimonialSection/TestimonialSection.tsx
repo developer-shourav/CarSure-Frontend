@@ -13,7 +13,7 @@ export default function TestimonialSection() {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {testimonials.map((testimonial, index) => {
-            // Build star rating array
+            // --------Build star rating array
             const stars = [];
             const fullStars = Math.floor(testimonial.rating);
             const hasHalfStar = testimonial.rating % 1 !== 0;
@@ -33,7 +33,7 @@ export default function TestimonialSection() {
                 key={index}
                 className="relative bg-white dark:bg-zinc-900 p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group overflow-hidden"
               >
-                {/* Decorative elements */}
+                {/* --------Decorative elements-------- */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-red-600/5 dark:bg-red-600/10 rounded-bl-full transition-all duration-500 group-hover:bg-red-600/15 dark:group-hover:bg-red-600/20" />
 
                 <div className="absolute top-6 right-6 text-red-600/20 dark:text-red-600/30">

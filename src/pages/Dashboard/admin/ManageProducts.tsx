@@ -190,7 +190,7 @@ export default function ManageProducts() {
         </Table>
       </div>
 
-      {/* Pagination */}
+      {/* --------Pagination --------*/}
       {meta?.totalPage > 1 && (
         <div className="flex justify-center items-center gap-4 mt-6">
           <Button

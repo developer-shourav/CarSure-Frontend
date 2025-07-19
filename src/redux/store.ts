@@ -15,13 +15,13 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-// Persist config for auth
+// --------Persist config for auth
 const persistAuthConfig = {
     key: 'auth',
     storage,
 };
 
-// Persist config for cart
+// --------Persist config for cart
 const persistCartConfig = {
     key: 'cart',
     storage,

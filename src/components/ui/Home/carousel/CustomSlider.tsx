@@ -92,7 +92,7 @@ export default function CustomSlider() {
       onTouchEnd={handleTouchEnd}
       ref={containerRef}
     >
-      {/* Background images with gradient */}
+      {/* --------Background images with gradient-------- */}
       {carDetails.map((car, index) => (
         <div
           key={car.title + "bg"}
@@ -110,9 +110,9 @@ export default function CustomSlider() {
         </div>
       ))}
 
-      {/* Content Wrapper */}
+      {/* ----------------Content Wrapper ----------------*/}
       <div className="relative max-w-[1233px] w-full mx-auto h-full px-4 md:px-6 lg:px-0">
-        {/* Left Side Content */}
+        {/* --------Left Side Content--------*/}
         <div className="absolute top-[5%] md:top-[10%] w-full z-20">
           {carDetails.map((car, index) => (
             <div
@@ -142,9 +142,9 @@ export default function CustomSlider() {
           ))}
         </div>
 
-        {/* Right Side Content */}
+        {/* ----------------Right Side Content----------------*/}
         <div className="absolute bottom-6 right-2 md:right-6 flex items-end gap-4 lg:gap-36 z-20">
-          {/* Slider Buttons */}
+          {/* --------Slider Buttons--------*/}
           <div className="hidden md:flex gap-3 md:gap-6 items-center">
             <button
               onClick={goToPrev}

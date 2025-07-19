@@ -33,7 +33,7 @@ export type TQueryParam = {
 
 
 export interface TUserData {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // --------eslint-disable-next-line @typescript-eslint/no-explicit-any
   _id?: any;
   name: string;
   email: string;

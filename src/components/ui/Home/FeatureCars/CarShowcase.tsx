@@ -60,7 +60,7 @@ export default function CarShowcase() {
                     key={car._id}
                     className="relative bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow hover:shadow-xl transition group"
                   >
-                    {/* Heart Icon */}
+                    {/* --------Heart Icon-------- */}
                     <button title="Add to favorite" className="absolute top-3 right-3 z-10 p-1 hidden group-hover:block bg-white  rounded-full">
                       <Heart className="size-6 text-black  hover:text-pink-600" />
                     </button>

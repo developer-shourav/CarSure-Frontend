@@ -31,7 +31,7 @@ const UserDashboard = () => {
     <DashboardBodyWrapper>
       <DashboardHeading title="Welcome to Your Dashboard" />
 
-      {/* Section 1: Cards */}
+      {/* --------Section 1: Cards --------*/}
       <div className=" grid grid-cols-3 gap-4 mb-6">
         <Card className="">
           <CardContent className="p-4">
@@ -53,7 +53,7 @@ const UserDashboard = () => {
         </Card>
       </div>
 
-      {/* Section 2: Chart */}
+      {/*--------Section 2: Chart --------*/}
       <div className="mb-6">
         <Card className="w-full lg:w-8/12">
           <CardContent className="p-4">
@@ -75,7 +75,7 @@ const UserDashboard = () => {
         </Card>
       </div>
 
-      {/* Section 3: Table */}
+      {/* --------Section 3: Table-------- */}
       <div>
         <Card>
           <CardContent className="p-4">

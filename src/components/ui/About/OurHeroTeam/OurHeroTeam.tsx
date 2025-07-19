@@ -66,7 +66,7 @@ const mechanics = [
   },
 ];
 const OurHeroTeam = () => {
-  // Animation variants
+  // --------Animation variants
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -135,7 +135,7 @@ const OurHeroTeam = () => {
                 </div>
               </div>
 
-              {/* Decorative elements */}
+              {/* --------Decorative elements-------- */}
               <div className="absolute top-0 right-0 size-16 md:size-20 -mt-4 -mr-4 bg-rose-400 rounded-full opacity-20 group-hover:opacity-30 transition-opacity"></div>
               <div className="absolute bottom-0 left-0 size-16 md:size-20 -mb-4 -ml-4 bg-red-500  rounded-full opacity-30 group-hover:opacity-50 transition-opacity"></div>
             </motion.div>

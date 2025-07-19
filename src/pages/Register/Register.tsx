@@ -66,7 +66,7 @@ const Register = () => {
 
           toast.error(errorMessage);
 
-          // Optional: conditional logic
+          // --------Optional: conditional logic--------
           if (status === 500) {
             console.error("Server error: ", errorMessage);
           }

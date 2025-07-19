@@ -34,7 +34,7 @@ const features = [
 export default function FeatureSection() {
   return (
     <section className="w-full py-12 lg:py-16 xl:py-20 relative overflow-hidden">
-      {/* Decorative background elements */}
+      {/* --------Decorative background elements --------*/}
       <div className="absolute -top-[500px] -left-[200px] w-[800px] h-[800px] rounded-full bg-red-600/5 dark:bg-red-600/10 blur-[100px] z-0"></div>
       <div className="absolute -bottom-[300px] -right-[200px] w-[600px] h-[600px] rounded-full bg-red-600/5 dark:bg-red-600/10 blur-[100px] z-0"></div>
 
@@ -50,10 +50,10 @@ export default function FeatureSection() {
                 key={index}
                 className="group relative bg-gradient-to-b from-white to-zinc-50 dark:from-zinc-900 dark:to-zinc-950 p-8 rounded-3xl shadow-xl border border-zinc-200 dark:border-zinc-800 hover:border-red-300 dark:hover:border-red-900 transition-all duration-300 hover:-translate-y-3"
               >
-                {/* Animated hover element */}
+                {/* --------Animated hover element-------- */}
                 <div className="absolute inset-0 bg-gradient-to-br from-red-600 to-red-800 opacity-0 group-hover:opacity-5 dark:group-hover:opacity-10 rounded-3xl transition-opacity duration-500"></div>
 
-                {/* Icon container with animated border */}
+                {/* --------Icon container with animated border --------*/}
                 <div className="relative mb-6">
                   <div className="absolute -inset-3 bg-red-600/10 dark:bg-red-900/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"></div>
                   <div className="relative w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
@@ -73,7 +73,7 @@ export default function FeatureSection() {
             ))}
           </div>
 
-          {/* Stats section below features */}
+          {/* --------Stats section below features--------*/}
           <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-zinc-200 dark:border-zinc-800 pt-10">
             {[
               { value: "10K+", label: "Happy Customers" },

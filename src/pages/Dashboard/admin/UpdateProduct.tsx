@@ -74,7 +74,7 @@ export default function UpdateProduct() {
 
   const [updateProduct, { isSuccess, isError }] = useUpdateProductMutation();
 
-  // Populate form with existing car data
+  // --------Populate form with existing car data
   const carData = carRawData?.data;
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function UpdateProduct() {
     }
   }, [carData, carRawData, reset]);
 
-  // Handle image uploads (append to existing images)
+  // --------Handle image uploads (append to existing images)
   const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
     if (!files.length) return;
@@ -123,7 +123,7 @@ export default function UpdateProduct() {
     }
   };
 
-  // Handle form submission
+  // --------Handle form submission
   const onSubmit = async (data: TCar) => {
     if (!uploadedUrls.length) {
       return toast.error("Please upload at least one image.");
@@ -148,7 +148,7 @@ export default function UpdateProduct() {
     }
   };
 
-  // Handle quantity and inStock logic
+  // --------Handle quantity and inStock logic
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value);
     setValue("quantity", val);
@@ -163,7 +163,7 @@ export default function UpdateProduct() {
     else if (quantity === 0) setValue("quantity", 1);
   };
 
-  // Handle success/error toasts
+  // --------Handle success/error toasts
   useEffect(() => {
     if (isSuccess) {
       toast.success("Product updated successfully!", successTheme);

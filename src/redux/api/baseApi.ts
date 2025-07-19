@@ -40,7 +40,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     }
 
     if (result?.error?.status === 401) {
-        //* Send Refresh
+        //* --------Send Refresh
 
         const res = await fetch('https://car-sure-backend.vercel.app/api/auth/refresh-token', {
             method: 'POST',

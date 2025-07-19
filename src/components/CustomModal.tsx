@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@/lib/utils"; // optional utility function for merging classes
+import { cn } from "@/lib/utils"; 
 
 type CustomModalProps = {
   open: boolean;

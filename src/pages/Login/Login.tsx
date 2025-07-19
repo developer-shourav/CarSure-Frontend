@@ -138,7 +138,7 @@ const Login = () => {
               </button>
             </div>
 
-            {/* Register Link */}
+            {/* --------Register Link --------*/}
             <div className="text-sm">
               New at CarSuer?{" "}
               <Link
@@ -149,7 +149,7 @@ const Login = () => {
               </Link>
             </div>
 
-            {/* Submit Button */}
+            {/* --------Submit Button --------*/}
             <Button
               type="submit"
               className="w-full cursor-pointer mt-2 dark:text-white dark:bg-red-500"

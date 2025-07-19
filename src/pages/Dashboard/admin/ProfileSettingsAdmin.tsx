@@ -84,7 +84,7 @@ export default function UserProfilePage() {
 
   const profileImgFile = watch("profileImg");
 
-  // Populate default values when data is loaded
+  // --------Populate default values when data is loaded
   useEffect(() => {
     if (currentUserData) {
       reset({
@@ -111,7 +111,7 @@ export default function UserProfilePage() {
     }
   }, [currentUserData, reset]);
 
-  // Preview selected image
+  // --------Preview selected image
   useEffect(() => {
     if (profileImgFile && profileImgFile.length > 0) {
       const file = profileImgFile[0];
@@ -234,11 +234,11 @@ export default function UserProfilePage() {
       </div>
 
       {editMode ? (
-        // EDIT MODE FORM
+        // --------EDIT MODE FORM--------
         <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-6 max-w-4xl mx-auto">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             <div className="flex flex-col md:flex-row gap-8">
-              {/* Left Column - Profile Image */}
+              {/* --------Left Column - Profile Image --------*/}
               <div className="md:w-1/3 flex flex-col items-center">
                 <div className="relative mb-4">
                   {preview ? (
@@ -270,7 +270,7 @@ export default function UserProfilePage() {
                 </p>
               </div>
 
-              {/* Right Column - Form Fields */}
+              {/* --------Right Column - Form Fields --------*/}
               <div className="md:w-2/3 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -457,9 +457,9 @@ export default function UserProfilePage() {
           </form>
         </div>
       ) : (
-        // VIEW MODE
+        // --------VIEW MODE--------
         <div className="max-w-5xl mx-auto">
-          {/* Profile Header */}
+          {/* --------Profile Header --------*/}
           <div className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl shadow-xl overflow-hidden">
             <div className="p-8 flex flex-col md:flex-row items-center">
               <div className="relative mb-6 md:mb-0 md:mr-8">
@@ -528,11 +528,11 @@ export default function UserProfilePage() {
             </div>
           </div>
 
-          {/* Main Profile Content */}
+          {/* --------Main Profile Content --------*/}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-            {/* Left Column */}
+            {/* --------Left Column-------- */}
             <div className="lg:col-span-2 space-y-6">
-              {/* About Card */}
+              {/* --------About Card --------*/}
               <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold text-gray-800 dark:text-white">
@@ -551,7 +551,7 @@ export default function UserProfilePage() {
                 )}
               </div>
 
-              {/* Personal Info Card */}
+              {/* --------Personal Info Card --------*/}
               <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg p-6">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-6">
                   Personal Information
@@ -586,9 +586,9 @@ export default function UserProfilePage() {
               </div>
             </div>
 
-            {/* Right Column */}
+            {/* --------Right Column --------*/}
             <div className="space-y-6">
-              {/* Professional Card */}
+              {/* --------Professional Card-------- */}
               <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg p-6">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-6">
                   Professional
@@ -607,7 +607,7 @@ export default function UserProfilePage() {
                 </div>
               </div>
 
-              {/* Address Card */}
+              {/* --------Address Card-------- */}
               <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold text-gray-800 dark:text-white">
@@ -645,7 +645,7 @@ export default function UserProfilePage() {
                 </div>
               </div>
 
-              {/* Social Card */}
+              {/* --------Social Card --------*/}
               <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg p-6">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
                   Social Connections

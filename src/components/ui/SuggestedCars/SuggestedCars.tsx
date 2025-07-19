@@ -61,7 +61,7 @@ export default function SuggestedCars({suggestion}: { suggestion: string }) {
                 key={car._id}
                 className="relative bg-white dark:bg-zinc-900 rounded-lg overflow-hidden shadow hover:shadow-xl transition group"
               >
-                {/* Heart Icon */}
+                {/* --------Heart Icon-------- */}
                 <button
                   title="Add to favorite"
                   className="absolute top-3 right-3 z-10 p-1 hidden group-hover:block bg-white  rounded-full"

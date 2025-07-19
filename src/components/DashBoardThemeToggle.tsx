@@ -13,7 +13,7 @@ export function DashBoardThemeToggle() {
   const { setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // next-themes requires mounted check to avoid hydration mismatch
+  // --------next-themes requires mounted check to avoid hydration mismatch
   useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;

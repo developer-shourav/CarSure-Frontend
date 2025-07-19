@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "@/App";
 
-// Pages
+// --------Pages--------
 import Home from "@/pages/home/Home";
 import AllProducts from "@/pages/AllProducts/AllProducts";
 import ProductDetails from "@/pages/ProductDetails/ProductDetails";
@@ -12,18 +12,18 @@ import CartPage from "@/pages/CartPage/CartPage";
 import CheckoutPage from "@/pages/CheckoutPage/CheckoutPage";
 import VerifyPayment from "@/pages/VerifyPayment/VerifyPayment";
 
-// Auth and Dashboard Layouts
+// --------Auth and Dashboard Layouts--------
 import ProtectedRoutes from "@/components/layout/ProtectedRoutes";
 import RoleBasedRoute from "@/components/layout/RoleBasedRoute";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 
-// Admin Dashboard Pages
+// --------Admin Dashboard Pages--------
 import AdminDashboard from "@/pages/Dashboard/AdminDashboard/AdminDashboard";
 import ManageUsers from "@/pages/Dashboard/admin/ManageUsers";
 import ManageProducts from "@/pages/Dashboard/admin/ManageProducts";
 import ManageOrders from "@/pages/Dashboard/admin/ManageOrders";
 
-// User Dashboard Pages
+// --------User Dashboard Pages--------
 import UserDashboard from "@/pages/Dashboard/UserDashboard/UserDashboard";
 import MyOrders from "@/pages/Dashboard/user/MyOrders";
 import ProfileSettings from "@/pages/Dashboard/user/ProfileSettings";
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
 
-      // Protected Routes
+      // --------Protected Routes--------
       {
         path: "cart",
         element: <ProtectedRoutes />,
@@ -89,7 +89,7 @@ const router = createBrowserRouter([
                   { path: "profile", element: <ProfileSettingsAdmin /> },
                 ],
               },
-              // User Routes
+              // --------User Routes--------
               {
                 path: "user",
                 element: <RoleBasedRoute allowedRoles={["user"]} />,

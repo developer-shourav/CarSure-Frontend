@@ -44,7 +44,7 @@ const AdminDashboard = () => {
     <DashboardBodyWrapper>
       <DashboardHeading title="Admin Dashboard" />
 
-      {/* Section 1: Cards */}
+      {/* --------Section 1: Cards --------*/}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <Card>
           <CardContent className="p-4">
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
         </Card>
       </div>
 
-      {/* Section 2: Charts */}
+      {/* --------Section 2: Charts --------*/}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <Card>
           <CardContent className="p-4">
@@ -112,7 +112,7 @@ const AdminDashboard = () => {
         </Card>
       </div>
 
-      {/* Section 3: Tables */}
+      {/* --------Section 3: Tables-------- */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardContent className="p-4">

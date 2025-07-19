@@ -63,7 +63,7 @@ export default function ChangePassword() {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5 max-w-xl mt-6"
       >
-        {/* Current Password */}
+        {/* --------Current Password --------*/}
         <div className="space-y-1 relative">
           <Label htmlFor="currentPassword">Current Password</Label>
           <Input
@@ -87,7 +87,7 @@ export default function ChangePassword() {
           )}
         </div>
 
-        {/* New Password */}
+        {/* --------New Password --------*/}
         <div className="space-y-1 relative">
           <Label htmlFor="newPassword">New Password</Label>
           <Input
@@ -109,7 +109,7 @@ export default function ChangePassword() {
           )}
         </div>
 
-        {/* Confirm Password */}
+        {/* --------Confirm Password --------*/}
         <div className="space-y-1 relative">
           <Label htmlFor="confirmPassword">Re-enter New Password</Label>
           <Input

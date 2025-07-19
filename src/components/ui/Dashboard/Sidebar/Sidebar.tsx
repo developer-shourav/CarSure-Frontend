@@ -51,7 +51,7 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Sidebar Button */}
+      {/* --------Mobile Sidebar Button--------*/}
       <div className=" lg:hidden absolute top-4 left-4 z-50 ">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
@@ -117,7 +117,7 @@ const Sidebar = () => {
         </Sheet>
       </div>
 
-      {/* Desktop Sidebar */}
+      {/* --------Desktop Sidebar-------- */}
       <aside className="hidden lg:flex md:flex-col w-64 h-screen p-6 border-r border-border bg-background">
         <Link to="/" className="flex items-center gap-2 mb-6">
           <img src={navLogo} alt="Logo" className="h-12 w-12" />

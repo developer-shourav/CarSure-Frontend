@@ -25,7 +25,7 @@ export default function ProductShareInfo({
 }: ProductShareInfoProps) {
   return (
     <div className="mt-5 space-y-4">
-      {/* Shipping, Delivery, Money Back */}
+      {/* --------Shipping, Delivery, Money Back --------*/}
       <div className="space-y-2">
         <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200 text-sm">
           <Truck className="w-5 h-5 text-gray-500 dark:text-gray-300" />
@@ -41,7 +41,7 @@ export default function ProductShareInfo({
         </div>
       </div>
 
-      {/* Share Buttons */}
+      {/* --------Share Buttons --------*/}
       <div>
         <div className="font-semibold mb-2 lg:text-lg text-gray-700 dark:text-gray-200">
           Share this product:
