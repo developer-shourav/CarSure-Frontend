@@ -13,6 +13,7 @@ import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import { successTheme } from "@/styles/toastThemes";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import PublicPageWrapper from "@/components/ui/wrapper/PublicPageWrapper";
 
 type RegisterFormInputs = {
   name: string;
@@ -78,8 +79,8 @@ const Register = () => {
   };
 
   return (
-    <SectionWrapper>
-      <div className="mt-[82px] lg:mt-[136px]">
+    <PublicPageWrapper>
+      <SectionWrapper>
         <WebsiteHeading title="Register" />
         <div className="w-full -mt-3 lg:-mt-7 max-w-md mx-auto space-y-6 p-6 bg-white dark:bg-zinc-900 card-custom-shadow rounded-2xl dark:border ">
           {/* --------Logo --------*/}
@@ -169,8 +170,8 @@ const Register = () => {
             </Button>
           </form>
         </div>
-      </div>
-    </SectionWrapper>
+      </SectionWrapper>
+    </PublicPageWrapper>
   );
 };
 

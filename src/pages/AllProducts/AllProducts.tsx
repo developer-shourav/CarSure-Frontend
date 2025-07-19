@@ -17,6 +17,7 @@ import { TCar, TMeta, TQueryParam } from "@/types";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, StarHalf, Heart } from "lucide-react";
+import PublicPageWrapper from "@/components/ui/wrapper/PublicPageWrapper";
 
 export default function AllProducts() {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -120,7 +121,7 @@ export default function AllProducts() {
   const metaData = carResponse?.meta as TMeta;
 
   return (
-    <section className="w-full min-h-[90vh]  bg-zinc-50 dark:bg-zinc-950 mb-12 lg:mb-20 mt-[62px]">
+    <PublicPageWrapper>
       <SectionWrapper>
         <WebsiteHeading title="All Cars" />
 
@@ -454,6 +455,6 @@ export default function AllProducts() {
           </div>
         </div>
       </SectionWrapper>
-    </section>
+    </PublicPageWrapper>
   );
 }

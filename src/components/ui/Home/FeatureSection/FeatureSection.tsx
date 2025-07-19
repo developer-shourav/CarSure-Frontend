@@ -35,7 +35,7 @@ export default function FeatureSection() {
   return (
     <div className="w-full  relative overflow-hidden">
       {/* --------Decorative background elements --------*/}
-      <div className="absolute -top-[500px] -left-[200px] w-[800px] h-[800px] rounded-full bg-red-600/5 dark:bg-red-600/20 blur-[100px] z-0"></div>
+      <div className="absolute -top-[500px] -left-[200px] w-[800px] h-[800px] rounded-full bg-red-600/5 dark:bg-red-600/15 blur-[100px] z-0"></div>
       <div className="absolute -bottom-[300px] -right-[200px] w-[600px] h-[600px] rounded-full bg-red-600/5 dark:bg-red-600/10 blur-[100px] z-0"></div>
       <SectionWrapper>
         <div className="relative z-10">
