@@ -60,7 +60,7 @@ export function Navbar() {
         <Link to="/">
           <span className="flex items-center gap-2">
             <img src={navLogo} alt="Logo" className="h-10 w-10" />
-            <span className="text-xl font-bold text-primary">
+            <span className="text-2xl font-bold text-primary">
               Car<span className="text-red-500">Sure</span>
             </span>
           </span>
@@ -111,7 +111,10 @@ export function Navbar() {
         {!loggedInUser && (
           <div className="hidden lg:flex items-center gap-4 ">
             <Link to="/login">
-              <Button variant="outline" className="uppercase"> <LogIn/> Login</Button>
+              <Button variant="outline" className="uppercase">
+                {" "}
+                <LogIn /> Login
+              </Button>
             </Link>
           </div>
         )}
@@ -141,7 +144,7 @@ export function Navbar() {
           )}
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
             <SheetTrigger asChild>
-              <Menu className="h-6 w-6" />
+              <Menu className="h-8 w-8" />
             </SheetTrigger>
             <SheetContent side="left" className="w-64 pt-8">
               {/* ----------------Header inside drawer---------------- */}
@@ -156,7 +159,7 @@ export function Navbar() {
               </div>
 
               {/* ----------------Mobile Nav---------------- */}
-              <nav className="flex flex-col gap-4 px-4">
+              <nav className="flex flex-col gap-4 px-4 uppercase">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
@@ -171,6 +174,19 @@ export function Navbar() {
                     {link.label}
                   </Link>
                 ))}
+                {!loggedInUser && (
+                  <Link
+                    to="/register"
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-sm font-medium transition-colors ${
+                      isActive("/register")
+                        ? "text-red-600 font-semibold"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Register
+                  </Link>
+                )}
                 {loggedInUser && (
                   <Link
                     to={getDashboardPath()}
@@ -187,12 +203,9 @@ export function Navbar() {
                 {!loggedInUser && (
                   <div className="mt-6 flex flex-col gap-3">
                     <Link to="/login" onClick={() => setMenuOpen(false)}>
-                      <Button variant="outline" className="w-full">
+                      <Button variant="outline" className="w-full uppercase">
                         Login
                       </Button>
-                    </Link>
-                    <Link to="/register" onClick={() => setMenuOpen(false)}>
-                      <Button className="w-full">Register</Button>
                     </Link>
                   </div>
                 )}

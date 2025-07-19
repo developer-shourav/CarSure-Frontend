@@ -1,5 +1,6 @@
 import { WebsiteHeading } from "@/components/ui/WebsiteHeading/WebsiteHeading";
 import SectionWrapper from "@/components/ui/wrapper/SectionWrapper";
+import { Award, Trophy } from "lucide-react";
 
 const achievements = [
   {
@@ -76,7 +77,13 @@ const OurAchievements = () => {
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-end text-center p-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-full group-hover:translate-y-0">
+              <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-end text-center p-4 lg:p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-full group-hover:translate-y-0">
+                {item.shape === "rectangular" ? (
+                  <Trophy className="size-10 lg:size-16 text-yellow-600 mb-2" />
+                ) : (
+                  <Award className="size-10 lg:size-16 text-yellow-600 mb-2" />
+                )}
+
                 <h4 className="text-lg font-semibold text-white mb-2">
                   {item.title}
                 </h4>
