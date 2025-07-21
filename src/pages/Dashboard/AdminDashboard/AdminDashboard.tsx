@@ -1,7 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { DashboardHeading } from "@/components/ui/WebsiteHeading/DashboardHeading";
 import DashboardBodyWrapper from "@/components/ui/wrapper/DashboardBodyWrapper";
-import { useGetAdminDashboardDataQuery } from "@/redux/features/admin/adminApi";
+import {
+  useGetAdminDashboardDataQuery,
+  useRefreshAdminDashboardMutation,
+} from "@/redux/features/admin/adminApi";
 import {
   BarChart,
   Bar,
@@ -26,14 +29,22 @@ import {
   TLatestUser,
   TMonthlyUserGrowth,
 } from "@/types/dashboard.type";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { RefreshCcw } from "lucide-react";
 
 const COLORS = ["#00A300", "#facc15", "#ef4444", "#7ec8e3"];
 
 const AdminDashboard = () => {
   const { data: dashboardData, isLoading } =
     useGetAdminDashboardDataQuery(undefined);
+  const [refreshAdminDashboard, { isLoading: isRefreshing }] =
+    useRefreshAdminDashboardMutation();
   const dashboardInfo = dashboardData?.data;
+
+  const handleRefresh = async () => {
+    await refreshAdminDashboard(undefined);
+  };
 
   const pieData = [
     { name: "Delivered", value: dashboardInfo?.totalDeliveredOrders || 0 },
@@ -43,7 +54,15 @@ const AdminDashboard = () => {
   ];
   return (
     <DashboardBodyWrapper>
-      <DashboardHeading title="Admin Dashboard" />
+      <div className="flex justify-between items-center">
+        <DashboardHeading title="Admin Dashboard" />
+        <Button onClick={handleRefresh} disabled={isRefreshing}>
+          <RefreshCcw
+            className={`mr-2 h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
+          />
+          {isRefreshing ? "Refreshing..." : "Refresh"}
+        </Button>
+      </div>
 
       {/* --------Section 1: Cards --------*/}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">

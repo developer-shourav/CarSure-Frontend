@@ -9,6 +9,13 @@ const adminApi = baseApi.injectEndpoints({
             }),
             providesTags: ["Users", "Orders", "Products"],
         }),
+        refreshAdminDashboard: builder.mutation({
+            query: () => ({
+                url: "/admin/dashboard/refresh",
+                method: "POST",
+            }),
+            invalidatesTags: ["Users", "Orders", "Products"],
+        }),
         userAccountDeactivation: builder.mutation({
             query: (userId) => ({
                 url: `/admin/users/${userId}/block`,
@@ -23,5 +30,7 @@ const adminApi = baseApi.injectEndpoints({
 
 export const {
     useUserAccountDeactivationMutation,
-    useGetAdminDashboardDataQuery
+    useGetAdminDashboardDataQuery,
+    useRefreshAdminDashboardMutation,
+    useLazyGetAdminDashboardDataQuery
 } = adminApi;
