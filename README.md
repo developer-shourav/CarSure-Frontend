@@ -47,7 +47,7 @@
   - Register with name, email, and password
   - Login with JWT stored in `localStorage`
   - Logout clears session
-  - Default role: `user` 
+  - Default role: `user`
 
 - **Checkout**
 
@@ -180,6 +180,3 @@ Special thanks to mentors, instructors, and the web dev community of Programming
 **Developer:** Shourav Rajbongshi  
 **Email:** [developer.shourav1@gmail.com]  
 **LinkedIn:** [linkedin.com/in/developer-shourav](https://linkedin.com/in/developer-shourav)
-
-
-
