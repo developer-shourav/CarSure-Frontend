@@ -19,8 +19,8 @@ import { useDispatch } from "react-redux";
 import { successTheme } from "@/styles/toastThemes";
 import toast from "react-hot-toast";
 import { selectCartTotalQuantity } from "@/redux/features/cart/cartSlice";
-import { selectWhitelistItems } from "@/redux/features/whitelist/whitelistSlice";
 import { megaMenuItems } from "@/constant";
+import useWhitelist from "@/hooks/useWhitelist";
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,9 +31,7 @@ export function Navbar() {
   const cartQuantity = useAppSelector(
     selectCartTotalQuantity(loggedInUser?.userId || "")
   );
-  const whitelistItems = useAppSelector(
-    selectWhitelistItems(loggedInUser?.userId || "")
-  );
+  const { whitelist: whitelistItems } = useWhitelist();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -112,53 +110,49 @@ export function Navbar() {
         </nav>
 
         {/*---------------- Desktop Actions ----------------*/}
-        {!loggedInUser && (
-          <div className="hidden lg:flex items-center gap-4 ">
-            <Link to="/login">
-              <Button variant="outline" className="uppercase">
-                {" "}
-                <LogIn /> Login
-              </Button>
-            </Link>
-          </div>
-        )}
-        {loggedInUser && (
-          <div className="hidden lg:flex items-center gap-4">
-            <Link to="/whitelist" className="relative">
-              <LucideHeart className="w-6 h-6 text-primary" />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                {whitelistItems.length}
-              </span>
-            </Link>
+        <div className="hidden lg:flex items-center gap-4">
+          <Link to="/whitelist" className="relative">
+            <LucideHeart className="w-6 h-6 text-primary" />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {whitelistItems.length}
+            </span>
+          </Link>
+          {loggedInUser && (
             <Link to="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 text-primary" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {cartQuantity}
               </span>
             </Link>
+          )}
+          {!loggedInUser ? (
+            <Link to="/login">
+              <Button variant="outline" className="uppercase">
+                <LogIn /> Login
+              </Button>
+            </Link>
+          ) : (
             <Button onClick={handleLogout} variant="outline">
               <LogOut /> Logout
             </Button>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* ----------------Medium and Mobile Menu---------------- */}
         <div className="flex items-center gap-4 lg:hidden">
+          <Link to="/whitelist" className="relative">
+            <LucideHeart className="w-5 h-5 text-primary" />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+              {whitelistItems.length}
+            </span>
+          </Link>
           {loggedInUser && (
-            <>
-              <Link to="/whitelist" className="relative">
-                <LucideHeart className="w-5 h-5 text-primary" />
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                  {whitelistItems.length}
-                </span>
-              </Link>
-              <Link to="/cart" className="relative">
-                <ShoppingCart className="w-5 h-5 text-primary" />
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                  {cartQuantity}
-                </span>
-              </Link>
-            </>
+            <Link to="/cart" className="relative">
+              <ShoppingCart className="w-5 h-5 text-primary" />
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                {cartQuantity}
+              </span>
+            </Link>
           )}
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
             <SheetTrigger asChild>
@@ -284,7 +278,8 @@ export function Navbar() {
                           {item.description}
                         </p>
                       </Link>
-                    ))}
+                    ))
+                  }
                   </div>
                 </div>
               </div>
@@ -298,6 +293,9 @@ export function Navbar() {
                 className="text-gray-100 dark:text-gray-300 hover:text-red-500 transition-colors relative"
               >
                 <LucideHeart className="size-4 xl:size-6" />
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {whitelistItems.length}
+                </span>
               </Link>
               {loggedInUser ? (
                 <Link

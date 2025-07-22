@@ -1,50 +1,42 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
+
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../store';
 
 export interface WhitelistItem {
-    id: string;
-    name: string;
-    price: number;
-    image: string;
+  id: string;
+  name: string;
+  price: number;
+  image: string;
 }
 
 interface WhitelistState {
-    userWhitelists: {
-        [userId: string]: WhitelistItem[];
-    };
+  items: WhitelistItem[];
 }
 
 const initialState: WhitelistState = {
-    userWhitelists: {},
+  items: JSON.parse(localStorage.getItem('whitelist') || '[]'),
 };
 
 const whitelistSlice = createSlice({
-    name: "whitelist",
-    initialState,
-    reducers: {
-        addToWhitelist: (state, action: PayloadAction<{ userId: string; item: WhitelistItem }>) => {
-            const { userId, item } = action.payload;
-            if (!state.userWhitelists[userId]) {
-                state.userWhitelists[userId] = [];
-            }
-
-            const existing = state.userWhitelists[userId].find(i => i.id === item.id);
-            if (!existing) {
-                state.userWhitelists[userId].push(item);
-            }
-        },
-        removeFromWhitelist: (state, action: PayloadAction<{ userId: string; id: string }>) => {
-            const { userId, id } = action.payload;
-            if (state.userWhitelists[userId]) {
-                state.userWhitelists[userId] = state.userWhitelists[userId].filter(i => i.id !== id);
-            }
-        },
+  name: 'whitelist',
+  initialState,
+  reducers: {
+    addToWhitelist: (state, action: PayloadAction<WhitelistItem>) => {
+      const existingItem = state.items.find(item => item.id === action.payload.id);
+      if (!existingItem) {
+        state.items.push(action.payload);
+        localStorage.setItem('whitelist', JSON.stringify(state.items));
+      }
     },
+    removeFromWhitelist: (state, action: PayloadAction<string>) => {
+      state.items = state.items.filter(item => item.id !== action.payload);
+      localStorage.setItem('whitelist', JSON.stringify(state.items));
+    },
+  },
 });
 
 export const { addToWhitelist, removeFromWhitelist } = whitelistSlice.actions;
 
-export const selectWhitelistItems = (userId: string) => (state: RootState) =>
-    state.whitelist.userWhitelists[userId] || [];
+export const selectWhitelist = (state: RootState) => state.whitelist.items;
 
 export default whitelistSlice.reducer;

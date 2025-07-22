@@ -4,12 +4,9 @@ import { WebsiteHeading } from "../../WebsiteHeading/WebsiteHeading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addToWhitelist, removeFromWhitelist, selectWhitelistItems } from "@/redux/features/whitelist/whitelistSlice";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-
 import { Star, StarHalf, Heart } from "lucide-react";
 import toast from "react-hot-toast";
+import useWhitelist from "@/hooks/useWhitelist";
 
 export default function CarShowcase() {
   const {
@@ -23,26 +20,21 @@ export default function CarShowcase() {
 
   const isLoadingState = isLoading || isFetching;
   const cars = carResponse?.data;
-  const dispatch = useAppDispatch();
-  const loggedInUser = useAppSelector(selectCurrentUser);
-  const userId = loggedInUser?.userId;
-  const whitelistItems = useAppSelector(selectWhitelistItems(userId || ""));
+  const { whitelist, addToWhitelist, removeFromWhitelist } = useWhitelist();
 
   const handleWhitelistClick = (car: any) => {
-    if (userId) {
-      const isWhitelisted = whitelistItems.some((item) => item.id === car._id);
-      if (isWhitelisted) {
-        dispatch(removeFromWhitelist({ userId, id: car._id }));
-        toast.success("Removed from whitelist");
-      } else {
-        dispatch(
-          addToWhitelist({
-            userId,
-            item: { id: car._id, name: car.carName, price: car.price, image: car.productImg[0] },
-          })
-        );
-        toast.success("Added to whitelist");
-      }
+    const isWhitelisted = whitelist.some((item) => item.id === car._id);
+    if (isWhitelisted) {
+      removeFromWhitelist(car._id);
+      toast.success("Removed from whitelist");
+    } else {
+      addToWhitelist({
+        id: car._id,
+        name: car.carName,
+        price: car.price,
+        image: car.productImg[0],
+      });
+      toast.success("Added to whitelist");
     }
   };
 
@@ -94,7 +86,7 @@ export default function CarShowcase() {
                   >
                     <Heart
                       className={`size-6 text-black  hover:text-pink-600 ${
-                        whitelistItems.some((item) => item.id === car._id) ? "fill-current text-pink-600" : ""
+                        whitelist.some((item) => item.id === car._id) ? "fill-current text-pink-600" : ""
                       }`}
                     />
                   </button>

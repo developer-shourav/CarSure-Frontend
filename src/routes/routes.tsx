@@ -55,8 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: "whitelist",
-        element: <ProtectedRoutes />,
-        children: [{ index: true, element: <WhitelistPage /> }],
+        element: <WhitelistPage />,
       },
       {
         path: "checkout",

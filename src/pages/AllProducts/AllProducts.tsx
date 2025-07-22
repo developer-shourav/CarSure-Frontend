@@ -18,10 +18,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, StarHalf, Heart } from "lucide-react";
 import PublicPageWrapper from "@/components/ui/wrapper/PublicPageWrapper";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addToWhitelist, removeFromWhitelist, selectWhitelistItems } from "@/redux/features/whitelist/whitelistSlice";
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import toast from "react-hot-toast";
+import useWhitelist from "@/hooks/useWhitelist";
 
 export default function AllProducts() {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -123,26 +121,21 @@ export default function AllProducts() {
   const isLoadingState = isLoading || isFetching;
   const cars = carResponse?.data as TCar[];
   const metaData = carResponse?.meta as TMeta;
-  const dispatch = useAppDispatch();
-  const loggedInUser = useAppSelector(selectCurrentUser);
-  const userId = loggedInUser?.userId;
-  const whitelistItems = useAppSelector(selectWhitelistItems(userId || ""));
+  const { whitelist, addToWhitelist, removeFromWhitelist } = useWhitelist();
 
   const handleWhitelistClick = (car: any) => {
-    if (userId) {
-      const isWhitelisted = whitelistItems.some((item) => item.id === car._id);
-      if (isWhitelisted) {
-        dispatch(removeFromWhitelist({ userId, id: car._id }));
-        toast.success("Removed from whitelist");
-      } else {
-        dispatch(
-          addToWhitelist({
-            userId,
-            item: { id: car._id, name: car.carName, price: car.price, image: car.productImg[0] },
-          })
-        );
-        toast.success("Added to whitelist");
-      }
+    const isWhitelisted = whitelist.some((item) => item.id === car._id);
+    if (isWhitelisted) {
+      removeFromWhitelist(car._id);
+      toast.success("Removed from whitelist");
+    } else {
+      addToWhitelist({
+        id: car._id,
+        name: car.carName,
+        price: car.price,
+        image: car.productImg[0],
+      });
+      toast.success("Added to whitelist");
     }
   };
 
@@ -377,7 +370,7 @@ export default function AllProducts() {
                         >
                           <Heart
                             className={`size-5 text-black  hover:text-pink-600 ${
-                              whitelistItems.some((item) => item.id === car._id)
+                              whitelist.some((item) => item.id === car._id)
                                 ? "fill-current text-pink-600"
                                 : ""
                             }`}

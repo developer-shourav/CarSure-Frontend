@@ -1,44 +1,40 @@
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { removeFromWhitelist } from "@/redux/features/whitelist/whitelistSlice";
 import { Button } from "@/components/ui/button";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import toast from "react-hot-toast";
+import useWhitelist from "@/hooks/useWhitelist";
 
 export default function WhitelistPage() {
   const dispatch = useAppDispatch();
   const loggedInUser = useAppSelector(selectCurrentUser);
   const userId = loggedInUser?.userId;
 
-  const userWhitelist = useAppSelector((state) =>
-    userId ? state.whitelist.userWhitelists[userId] || [] : []
-  );
+  const { whitelist, removeFromWhitelist } = useWhitelist();
 
   const handleAddToCart = (item: any) => {
     if (userId) {
       dispatch(addToCart({ userId, item: { ...item, quantity: 1 } }));
       toast.success("Added to cart");
+    } else {
+      toast.error("Please login to add to cart");
     }
   };
 
   const handleRemoveFromWhitelist = (id: string) => {
-    if (userId) {
-      dispatch(removeFromWhitelist({ userId, id }));
-      toast.success("Removed from whitelist");
-    }
+    removeFromWhitelist(id);
+    toast.success("Removed from whitelist");
   };
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-4 mt-[62px] lg:mt-[116px]">
       <h2 className="text-3xl font-bold mb-6">Your Whitelist</h2>
 
-      {!userId ? (
-        <p className="text-red-500">Please login to view your whitelist.</p>
-      ) : userWhitelist.length === 0 ? (
+      {whitelist.length === 0 ? (
         <p>Your whitelist is empty.</p>
       ) : (
         <div className="space-y-6">
-          {userWhitelist.map((item) => (
+          {whitelist.map((item) => (
             <div key={item.id} className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <img

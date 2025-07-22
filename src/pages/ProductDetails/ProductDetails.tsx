@@ -12,10 +12,8 @@ import toast from "react-hot-toast";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import ProductImageGallery from "@/components/ui/ProductImageGallery/ProductImageGallery";
-import { Star, StarHalf, Heart } from "lucide-react";
+import { Star, StarHalf } from "lucide-react";
 import ProductShareInfo from "@/components/ui/ProductShareInfo/ProductShareInfo";
-import { addToWhitelist, removeFromWhitelist, selectWhitelistItems } from "@/redux/features/whitelist/whitelistSlice";
-import { successTheme } from "@/styles/toastThemes";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -24,26 +22,6 @@ export default function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const loggedInUser = useAppSelector(selectCurrentUser);
   const dispatch = useDispatch();
-  const userId = loggedInUser?.userId;
-  const whitelistItems = useAppSelector(selectWhitelistItems(userId || ""));
-
-  const handleWhitelistClick = (car: any) => {
-    if (userId) {
-      const isWhitelisted = whitelistItems.some((item) => item.id === car._id);
-      if (isWhitelisted) {
-        dispatch(removeFromWhitelist({ userId, id: car._id }));
-        toast.success("Removed from whitelist", successTheme);
-      } else {
-        dispatch(
-          addToWhitelist({
-            userId,
-            item: { id: car._id, name: car.carName, price: car.price, image: car.productImg[0] },
-          })
-        );
-        toast.success("Added to whitelist", successTheme);
-      }
-    }
-  };
 
   useEffect(() => {
     if (product?.quantity < quantity) {
@@ -208,22 +186,6 @@ export default function ProductDetails() {
                   ) : (
                     "Add to Cart"
                   )}
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => handleWhitelistClick(product)}
-                >
-                  <Heart
-                    className={`size-5 mr-2 ${
-                      whitelistItems.some((item) => item.id === product._id)
-                        ? "fill-current text-pink-600"
-                        : "text-black"
-                    }`}
-                  />
-                  {whitelistItems.some((item) => item.id === product._id)
-                    ? "Remove from Whitelist"
-                    : "Add to Whitelist"}
                 </Button>
               </div>
             </div>

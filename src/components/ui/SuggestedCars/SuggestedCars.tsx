@@ -3,14 +3,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Heart, Star, StarHalf } from "lucide-react";
+import useWhitelist from "@/hooks/useWhitelist";
+import toast from "react-hot-toast";
+import { successTheme } from "@/styles/toastThemes";
 
-export default function SuggestedCars({suggestion}: { suggestion: string }) {
-  console.log(suggestion);
-  const {
-    data: carResponse,
-    isLoading,
-    isFetching,
-  } = useGetAllProductsQuery(
+export default function SuggestedCars({ suggestion }: { suggestion: string }) {
+  const { data: carResponse, isLoading, isFetching } = useGetAllProductsQuery(
     [
       { name: "limit", value: "10" },
       { name: "category", value: suggestion },
@@ -20,6 +18,23 @@ export default function SuggestedCars({suggestion}: { suggestion: string }) {
       refetchOnReconnect: true,
     }
   );
+  const { whitelist, addToWhitelist, removeFromWhitelist } = useWhitelist();
+
+  const handleWhitelistClick = (car: any) => {
+    const isWhitelisted = whitelist.some((item) => item.id === car._id);
+    if (isWhitelisted) {
+      removeFromWhitelist(car._id);
+      toast.success("Removed from whitelist", successTheme);
+    } else {
+      addToWhitelist({
+        id: car._id,
+        name: car.carName,
+        price: car.price,
+        image: car.productImg[0],
+      });
+      toast.success("Added to whitelist", successTheme);
+    }
+  };
 
   const isLoadingState = isLoading || isFetching;
   const cars = carResponse?.data;
@@ -63,10 +78,13 @@ export default function SuggestedCars({suggestion}: { suggestion: string }) {
               >
                 {/* --------Heart Icon-------- */}
                 <button
+                  onClick={() => handleWhitelistClick(car)}
                   title="Add to favorite"
                   className="absolute top-3 right-3 z-10 p-1 hidden group-hover:block bg-white  rounded-full"
                 >
-                  <Heart className="size-6 text-black  hover:text-pink-600" />
+                  <Heart
+                    className={`size-6 ${whitelist.some((item) => item.id === car._id) ? "text-pink-600 fill-current" : "text-black"}  hover:text-pink-600`}
+                  />
                 </button>
 
                 <img
@@ -99,11 +117,11 @@ export default function SuggestedCars({suggestion}: { suggestion: string }) {
                       )
                     )}
                   </div>
-         
+
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     Model: <span className="font-medium">{car.model}</span>
                   </p>
-                 
+
                   <p className="text-red-600 font-bold">
                     ${car.price.toLocaleString()}
                   </p>
