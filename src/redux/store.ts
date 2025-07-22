@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from './features/auth/authSlice';
 import cartReducer from './features/cart/cartSlice';
+import whitelistReducer from './features/whitelist/whitelistSlice'; // Import the whitelist reducer
 import { baseApi } from "./api/baseApi";
 
 import {
@@ -27,14 +28,22 @@ const persistCartConfig = {
     storage,
 };
 
+// --------Persist config for whitelist
+const persistWhitelistConfig = {
+    key: 'whitelist',
+    storage,
+};
+
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
 const persistedCartReducer = persistReducer(persistCartConfig, cartReducer);
+const persistedWhitelistReducer = persistReducer(persistWhitelistConfig, whitelistReducer); // Create a persisted reducer for the whitelist
 
 export const store = configureStore({
     reducer: {
         [baseApi.reducerPath]: baseApi.reducer,
         auth: persistedAuthReducer,
-        cart: persistedCartReducer, 
+        cart: persistedCartReducer,
+        whitelist: persistedWhitelistReducer, // Add the whitelist reducer to the store
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

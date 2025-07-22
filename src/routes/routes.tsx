@@ -31,6 +31,7 @@ import ChangePassword from "@/pages/Dashboard/user/ChangePassword";
 import AddNewProduct from "@/pages/Dashboard/admin/AddNewProduct";
 import UpdateProduct from "@/pages/Dashboard/admin/UpdateProduct";
 import ProfileSettingsAdmin from "@/pages/Dashboard/admin/ProfileSettingsAdmin";
+import WhitelistPage from "@/pages/Whitelist/Whitelist";
 import NotFound from "@/pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
         path: "cart",
         element: <ProtectedRoutes />,
         children: [{ index: true, element: <CartPage /> }],
+      },
+      {
+        path: "whitelist",
+        element: <ProtectedRoutes />,
+        children: [{ index: true, element: <WhitelistPage /> }],
       },
       {
         path: "checkout",

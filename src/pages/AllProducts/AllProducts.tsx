@@ -18,6 +18,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, StarHalf, Heart } from "lucide-react";
 import PublicPageWrapper from "@/components/ui/wrapper/PublicPageWrapper";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { addToWhitelist, removeFromWhitelist, selectWhitelistItems } from "@/redux/features/whitelist/whitelistSlice";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import toast from "react-hot-toast";
 
 export default function AllProducts() {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -119,6 +123,28 @@ export default function AllProducts() {
   const isLoadingState = isLoading || isFetching;
   const cars = carResponse?.data as TCar[];
   const metaData = carResponse?.meta as TMeta;
+  const dispatch = useAppDispatch();
+  const loggedInUser = useAppSelector(selectCurrentUser);
+  const userId = loggedInUser?.userId;
+  const whitelistItems = useAppSelector(selectWhitelistItems(userId || ""));
+
+  const handleWhitelistClick = (car: any) => {
+    if (userId) {
+      const isWhitelisted = whitelistItems.some((item) => item.id === car._id);
+      if (isWhitelisted) {
+        dispatch(removeFromWhitelist({ userId, id: car._id }));
+        toast.success("Removed from whitelist");
+      } else {
+        dispatch(
+          addToWhitelist({
+            userId,
+            item: { id: car._id, name: car.carName, price: car.price, image: car.productImg[0] },
+          })
+        );
+        toast.success("Added to whitelist");
+      }
+    }
+  };
 
   return (
     <PublicPageWrapper>
@@ -346,9 +372,16 @@ export default function AllProducts() {
                         {/* --------Heart Icon --------*/}
                         <button
                           title="Add to favorite"
+                          onClick={() => handleWhitelistClick(car)}
                           className="absolute top-2 right-3 z-10 p-1 hidden group-hover:block bg-white  rounded-full"
                         >
-                          <Heart className="size-5 text-black  hover:text-pink-600" />
+                          <Heart
+                            className={`size-5 text-black  hover:text-pink-600 ${
+                              whitelistItems.some((item) => item.id === car._id)
+                                ? "fill-current text-pink-600"
+                                : ""
+                            }`}
+                          />
                         </button>
                         <div className="flex flex-col justify-between h-full">
                           <div>
