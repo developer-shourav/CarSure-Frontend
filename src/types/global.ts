@@ -33,8 +33,8 @@ export type TQueryParam = {
 
 
 export interface TUserData {
-  // --------eslint-disable-next-line @typescript-eslint/no-explicit-any
-  _id?: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  _id?: string | any;
   name: string;
   email: string;
   password: string;
@@ -105,3 +105,11 @@ export type Testimonial = {
   designation: string;
   rating: number;
 };
+
+
+ export type TWhiteListCar = {
+    _id: string;
+    carName: string;
+    price: number;
+    productImg: string[];
+  };

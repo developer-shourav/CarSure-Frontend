@@ -123,6 +123,7 @@ export default function AllProducts() {
   const metaData = carResponse?.meta as TMeta;
   const { whitelist, addToWhitelist, removeFromWhitelist } = useWhitelist();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleWhitelistClick = (car: any) => {
     const isWhitelisted = whitelist.some((item) => item.id === car._id);
     if (isWhitelisted) {

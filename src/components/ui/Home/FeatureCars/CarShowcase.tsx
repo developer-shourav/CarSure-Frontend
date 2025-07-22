@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Star, StarHalf, Heart } from "lucide-react";
 import toast from "react-hot-toast";
 import useWhitelist from "@/hooks/useWhitelist";
+import { TWhiteListCar } from "@/types";
 
 export default function CarShowcase() {
   const {
@@ -22,7 +23,7 @@ export default function CarShowcase() {
   const cars = carResponse?.data;
   const { whitelist, addToWhitelist, removeFromWhitelist } = useWhitelist();
 
-  const handleWhitelistClick = (car: any) => {
+  const handleWhitelistClick = (car: TWhiteListCar) => {
     const isWhitelisted = whitelist.some((item) => item.id === car._id);
     if (isWhitelisted) {
       removeFromWhitelist(car._id);
@@ -81,7 +82,16 @@ export default function CarShowcase() {
                   {/* --------Heart Icon-------- */}
                   <button
                     title="Add to favorite"
-                    onClick={() => handleWhitelistClick(car)}
+                    onClick={() =>
+                      handleWhitelistClick({
+                        _id: car._id,
+                        carName: car.carName,
+                        price: car.price,
+                        productImg: Array.isArray(car.productImg)
+                          ? car.productImg
+                          : [car.productImg],
+                      })
+                    }
                     className="absolute top-3 right-3 z-10 p-1 hidden group-hover:block bg-white  rounded-full"
                   >
                     <Heart

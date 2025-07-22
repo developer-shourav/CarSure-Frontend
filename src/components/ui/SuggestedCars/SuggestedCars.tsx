@@ -20,6 +20,7 @@ export default function SuggestedCars({ suggestion }: { suggestion: string }) {
   );
   const { whitelist, addToWhitelist, removeFromWhitelist } = useWhitelist();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleWhitelistClick = (car: any) => {
     const isWhitelisted = whitelist.some((item) => item.id === car._id);
     if (isWhitelisted) {

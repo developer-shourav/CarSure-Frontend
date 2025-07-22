@@ -12,6 +12,7 @@ export default function WhitelistPage() {
 
   const { whitelist, removeFromWhitelist } = useWhitelist();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleAddToCart = (item: any) => {
     if (userId) {
       dispatch(addToCart({ userId, item: { ...item, quantity: 1 } }));
@@ -50,7 +51,7 @@ export default function WhitelistPage() {
               <div>
                 <Button
                   onClick={() => handleAddToCart(item)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white me-2"
+                  className=" me-2"
                   size="sm"
                 >
                   Add to Cart

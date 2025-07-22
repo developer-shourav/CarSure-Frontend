@@ -12,8 +12,11 @@ import toast from "react-hot-toast";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import ProductImageGallery from "@/components/ui/ProductImageGallery/ProductImageGallery";
-import { Star, StarHalf } from "lucide-react";
+import { Star, StarHalf, Heart, ShoppingCart } from "lucide-react";
 import ProductShareInfo from "@/components/ui/ProductShareInfo/ProductShareInfo";
+import { successTheme } from "@/styles/toastThemes";
+import useWhitelist from "@/hooks/useWhitelist";
+import { TWhiteListCar } from "@/types";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -22,6 +25,23 @@ export default function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const loggedInUser = useAppSelector(selectCurrentUser);
   const dispatch = useDispatch();
+  const { whitelist, addToWhitelist, removeFromWhitelist } = useWhitelist();
+
+  const handleWhitelistClick = (car: TWhiteListCar) => {
+    const isWhitelisted = whitelist.some((item) => item.id === car._id);
+    if (isWhitelisted) {
+      removeFromWhitelist(car._id);
+      toast.success("Removed from whitelist", successTheme);
+    } else {
+      addToWhitelist({
+        id: car._id,
+        name: car.carName,
+        price: car.price,
+        image: car.productImg[0],
+      });
+      toast.success("Added to whitelist", successTheme);
+    }
+  };
 
   useEffect(() => {
     if (product?.quantity < quantity) {
@@ -152,7 +172,7 @@ export default function ProductDetails() {
                 </button>
               </div>
               {/* --------Action Buttons --------*/}
-              <div className="flex flex-col sm:flex-row gap-3 w-12/12 md:w-9/12 ">
+              <div className="flex flex-col sm:flex-row gap-1 w-12/12 md:w-9/12 ">
                 <Button
                   disabled={
                     product?.quantity === 0 || product?.quantity < quantity
@@ -179,13 +199,32 @@ export default function ProductDetails() {
                       toast.success("Added to cart!");
                     }
                   }}
-                  className="bg-red-600 hover:bg-red-700 text-white w-full block"
+                  className="bg-red-600 hover:bg-red-700 text-white w-full md:w-8/12 block"
                 >
                   {product?.quantity === 0 ? (
                     <span className="line-through">Out of Stock</span>
                   ) : (
-                    "Add to Cart"
+                    <span className="flex items-center justify-center gap-2">
+                      <ShoppingCart size="4" className="font-bold" />  Add to Cart
+                    </span>
                   )}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full md:w-4/12 flex justify-center items-center"
+                  onClick={() => handleWhitelistClick(product)}
+                  title={``}
+                >
+                  <Heart
+                    className={`size-4 ${
+                      whitelist.some((item) => item.id === product._id)
+                        ? "fill-current text-pink-600"
+                        : "text-black"
+                    }`}
+                  />
+                  {whitelist.some((item) => item.id === product._id)
+                    ? "Favorite"
+                    : "Add Whitelist"}
                 </Button>
               </div>
             </div>
