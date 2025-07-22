@@ -4,6 +4,7 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import toast from "react-hot-toast";
 import useWhitelist from "@/hooks/useWhitelist";
+import { Link } from "react-router-dom";
 
 export default function WhitelistPage() {
   const dispatch = useAppDispatch();
@@ -50,7 +51,8 @@ export default function WhitelistPage() {
                   <p className="font-semibold text-base sm:text-lg">
                     {item.name}
                   </p>
-                  <p className="text-sm text-gray-600">${item.price}</p>
+                  <p className="text-sm font-semibold">${item.price}</p>
+                  <Link className="text-xs font-semibold hover:underline text-blue-600" to={`/cars/${item.id}`}>View Details</Link>
                 </div>
               </div>
 
