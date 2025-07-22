@@ -40,9 +40,9 @@ export function Navbar() {
 
   const getDashboardPath = () => {
     if (loggedInUser?.role === "admin" || loggedInUser?.role === "superAdmin") {
-      return "/dashboard/admin";
+      return "/dashboard/admin/profile";
     }
-    return "/dashboard/user";
+    return "/dashboard/user/profile";
   };
 
   const navLinks = [
@@ -111,12 +111,7 @@ export function Navbar() {
 
         {/*---------------- Desktop Actions ----------------*/}
         <div className="hidden lg:flex items-center gap-4">
-          <Link to="/whitelist" className="relative">
-            <LucideHeart className="w-6 h-6 text-primary" />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              {whitelistItems.length}
-            </span>
-          </Link>
+
           {loggedInUser && (
             <Link to="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 text-primary" />
